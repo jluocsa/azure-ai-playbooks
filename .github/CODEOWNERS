@@ -1,0 +1,11 @@
+# Core site configuration, sanitization gate & white-paper build pipeline
+*                                           @jluocsa
+/docs/.vitepress/                           @jluocsa
+/scripts/                                   @jluocsa
+/docs/operating-model/                      @jluocsa
+
+# Playbook Track Owners (add co-author GitHub handles as tracks are staffed)
+/docs/playbooks/prompt-caching/             @jluocsa
+/papers-src/                                @jluocsa
+# /docs/playbooks/apim-genai-gateway/       @jluocsa @<apim-track-lead>
+# /docs/playbooks/foundry-bcp-resiliency/   @jluocsa @<bcp-track-lead>
