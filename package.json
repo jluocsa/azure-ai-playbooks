@@ -9,6 +9,7 @@
     "docs:preview": "vitepress preview docs",
     "check:sanitized": "node scripts/check-sanitized.mjs",
     "build:pdfs": "node scripts/build-pdfs.mjs",
+    "deploy:pages": "node scripts/deploy-gh-pages.mjs",
     "verify": "npm run check:sanitized && npm run docs:build"
   },
   "devDependencies": {
