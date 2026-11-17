@@ -56,3 +56,26 @@
 .dark .ev-val {
   color: #c4b5fd;
 }
+
+.arch-diagram {
+  margin: 16px 0 20px;
+  padding: 12px 14px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  background: #fcfdff;
+  overflow-x: auto;
+}
+.arch-diagram svg {
+  display: block;
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+}
+.arch-caption {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: #526c80;
+}
+.dark .arch-diagram {
+  background: #f8fafc;
+}

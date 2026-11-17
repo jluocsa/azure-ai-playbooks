@@ -8,7 +8,7 @@ outline: [2, 3]
 
 Because GPT-5.6, GPT-6, and GPT-6.1 introduce explicit cache-write billing (including `12h` write billing effective November 1, 2026) and normalized PTU weights <span class="ev-badge ev-m">[M]</span>, architecture teams must verify that cached prefixes are read enough times within their TTL to amortize the initial write premium.
 
-## Mathematical Break-Even Formula <span class="ev-badge ev-m">[M]</span>
+## Mathematical Break-Even Formula `[M]`
 
 For a reusable prefix of `P >= 1,024` tokens written once at short-context (`<=272K`) normalized weight `w_write = 1.25` and read `k` subsequent times within its TTL at weight `w_read` (`0.10` on GPT-6, `0.05` on `gpt-6.1-sol`), the effective normalized weight per prefix token across `k + 1` total requests is:
 

@@ -12,7 +12,7 @@ import { withBase } from 'vitepress'
 
 Production agent telemetry flows through OpenTelemetry into workspace-based Azure Monitor Application Insights and Log Analytics, anchored on the entry request span and correlated across internal agent nodes by `thread_id` <span class="ev-badge ev-arch">[Arch]</span>.
 
-## 1. Required Span Attributes & Privacy Guardrails <span class="ev-badge ev-arch">[Arch]</span>
+## 1. Required Span Attributes & Privacy Guardrails `[Arch]`
 
 | Span Attribute (`Properties`) | Example / Requirement | Governance Purpose |
 | :--- | :--- | :--- |

@@ -8,7 +8,7 @@ outline: [2, 3]
 
 Enterprise production workloads commonly pair **Provisioned Throughput (PTU-M)** base capacity with **Standard (Pay-As-You-Go)** spillover. Available caching parameters and PTU utilization formulas differ sharply between **GPT-5.6** and **GPT-6 / GPT-6.1** <span class="ev-badge ev-m">[M]</span>.
 
-## 1. Standard vs. PTU-M Control Matrix <span class="ev-badge ev-m">[M]</span>
+## 1. Standard vs. PTU-M Control Matrix `[M]`
 
 | Dimension | Standard (PAYG) on GPT-5.6+ | Provisioned (PTU-M) on GPT-5.6 | Provisioned (PTU-M) on GPT-6 & GPT-6.1 |
 | :--- | :--- | :--- | :--- |
@@ -18,7 +18,7 @@ Enterprise production workloads commonly pair **Provisioned Throughput (PTU-M)**
 | **Impact of miss / rewrite** | Full input price + cache-write fee + higher TPM draw. | Full prompt counted against PTU budget; risk of HTTP `429` at peak. | Uncached input at `1.0x` + cache write at **`1.25x`** (short) / **`2.5x`** (long). |
 | **Primary engineering levers** | Prompt structure + `prompt_cache_key` + breakpoints + TTL. | **Prompt structure + `prompt_cache_key` + key sharding** (`>15 RPM`). | Prompt structure + `prompt_cache_key` + breakpoints + write minimization. |
 
-## 2. Official Microsoft Learn PTU Sizing Parameters <span class="ev-badge ev-m">[M]</span>
+## 2. Official Microsoft Learn PTU Sizing Parameters `[M]`
 
 | Model & Version | Input TPM / PTU | Min PTU (Global/DZ \| Reg) | Scale Increment | PTU Capacity Formula & Cache Accounting Rule <span class="ev-badge ev-m">[M]</span> |
 | :--- | :--- | :--- | :--- | :--- |

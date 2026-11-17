@@ -7,7 +7,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SELF = path.resolve(fileURLToPath(import.meta.url))
 
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'cache'])
-const TEXT_EXTS = new Set(['.md', '.vue', '.mts', '.ts', '.js', '.mjs', '.html', '.kql', '.yml', '.yaml', '.json'])
+const TEXT_EXTS = new Set(['.md', '.vue', '.mts', '.ts', '.js', '.mjs', '.py', '.html', '.kql', '.yml', '.yaml', '.json'])
 
 // Forbidden customer, stakeholder, internal-org, confidentiality, email, GUID & active-IDF patterns
 const FORBIDDEN_RULES = [

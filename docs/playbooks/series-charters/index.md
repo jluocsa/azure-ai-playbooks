@@ -8,14 +8,26 @@ outline: [2, 3]
 
 This hub is structured as a **three-part Enterprise Foundry Architecture Series**, where each playbook owns one layer of production readiness and is led by named specialist co-authors.
 
-```mermaid
-flowchart TB
-    P1["Playbook 01 (LIVE v1.0)\nPrompt Caching, Prefix Architecture & PTU Economics (GPT-5.6 / 6 / 6.1)\nTrack Lead: John Luo (@jluocsa)"]
-    P2["Playbook 02 (CHARTERED — Co-Author Lead Open)\nMulti-Backend Foundry APIM Gateway, Circuit-Breaker Failover & Token Governance"]
-    P3["Playbook 03 (CHARTERED — Co-Author Lead Open)\nMulti-Region Foundry Business Continuity (BCP), Quota Strategy & Failover Drills"]
-    P2 -->|"SKU-aware routing & 429 spillover"| P1
-    P3 -->|"Regional stamp resiliency & RTO/RPO"| P2
-```
+<div class="arch-diagram">
+  <svg viewBox="0 0 700 162" role="img" aria-labelledby="ser-title ser-desc">
+    <title id="ser-title">Three-Part Enterprise Foundry Architecture Playbook Series</title>
+    <desc id="ser-desc">Shows Playbook 03 Multi-Region Foundry BCP feeding regional stamp resiliency into Playbook 02 Multi-Backend APIM Gateway, which feeds SKU-aware routing and 429 spillover into Playbook 01 Prompt Caching and PTU Economics.</desc>
+    <defs><marker id="arr-ser" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
+    <rect x="12" y="10" width="676" height="40" rx="6" fill="#eaf7f5" stroke="#0f766e" stroke-width="1.6"/>
+    <text x="24" y="27" font-size="9.8" font-weight="700" fill="#115e59">Playbook 01 (LIVE v1.0) &middot; Prompt Caching, Prefix Architecture &amp; Two-Regime PTU Economics (GPT-5.6 / 6 / 6.1)</text>
+    <text x="24" y="41" font-size="8.4" fill="#334e68">Track Lead: John Luo (@jluocsa) &bull; Assets: 15-chapter playbook, 16-page PDF, PTU/shard calculator, pcr_lint.py, KQL gate</text>
+    <path d="M350 66 V52" stroke="#0f766e" stroke-width="1.8" marker-end="url(#arr-ser)"/>
+    <text x="360" y="62" font-size="8.1" font-weight="700" fill="#0f766e">SKU-aware breakpoint stripping &amp; 429 spillover</text>
+    <rect x="12" y="68" width="676" height="38" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="24" y="84" font-size="9.6" font-weight="700" fill="#183e62">Playbook 02 (CHARTERED) &middot; Multi-Backend Foundry APIM Gateway, Circuit-Breaker Failover &amp; Token Governance</text>
+    <text x="24" y="98" font-size="8.4" fill="#334e68">Co-Author Track Lead: Open for CSA Nomination &bull; Assets: Bicep gateway policies, Retry-After breakers, SSE streaming guards</text>
+    <path d="M350 122 V108" stroke="#0f766e" stroke-width="1.8" marker-end="url(#arr-ser)"/>
+    <text x="360" y="118" font-size="8.1" font-weight="700" fill="#183e62">Regional stamp resiliency &amp; active-passive RTO/RPO</text>
+    <rect x="12" y="124" width="676" height="34" rx="6" fill="#fff7eb" stroke="#d97706" stroke-width="1.4"/>
+    <text x="24" y="139" font-size="9.5" font-weight="700" fill="#92400e">Playbook 03 (CHARTERED) &middot; Multi-Region Foundry Business Continuity (BCP), Quota Strategy &amp; Failover Drills</text>
+    <text x="24" y="151" font-size="8.3" fill="#92400e">Co-Author Track Lead: Open for CSA Nomination &bull; Assets: Data Zone vs. Regional PTU matrix, game-day failover runbook</text>
+  </svg>
+</div>
 
 ## Series Overview & Ownership Matrix
 

@@ -4,11 +4,17 @@ description: Automated CI static scanner rules (PCR001–PCR006) and illustrativ
 outline: [2, 3]
 ---
 
+<script setup>
+import { withBase } from 'vitepress'
+</script>
+
 # 12 · Automated CI Scanner (`PCR001–006`) & DeepEval Gate
 
 Prevent un-cached code from promoting by enforcing two automated checks in pull-request CI: **(1)** static AST/regex linting (`PCR001–PCR006`) in Layer 1, and **(2)** a 2-pass DeepEval quality + cache-hit contract test in Layer 2 <span class="ev-badge ev-arch">[Arch]</span>.
 
 ## 1. Layer 1: Static Codebase Scanner Rule Catalog (`PCR001–PCR006`)
+
+Download runnable zero-dependency CLI scanner: <a :href="withBase('/kits/pcr_lint.py')" download target="_blank" rel="noopener"><code>pcr_lint.py</code></a> (`python pcr_lint.py ./src`)
 
 | Rule ID | Defect Flagged | AST / Regex Detection Specification (Python, C#, TypeScript) | Readiness Item |
 | :--- | :--- | :--- | :--- |

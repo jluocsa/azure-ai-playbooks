@@ -34,7 +34,7 @@ Adopt criteria **`C1`–`C15`** as a standing release gate across the 7-layer pi
 
 *Scope legend:* `ALL` = all GPT-5.6+ deployments; `STD / 6+` = Standard 5.6+ and PTU-M GPT-6+; `PTU 5.6` = Provisioned Throughput on GPT-5.6.
 
-## Four-Stage Standing Governance Lifecycle <span class="ev-badge ev-arch">[Arch]</span>
+## Four-Stage Standing Governance Lifecycle `[Arch]`
 
 1. **Stage I — Design & Lint:** Map every prompt family to Pos 1–6 and enforce `PCR001–006` in PR CI.
 2. **Stage II — Shadow Eval:** Execute the 2-pass DeepEval quality + cache contract suite on candidate models.

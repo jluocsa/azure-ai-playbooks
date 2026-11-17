@@ -8,7 +8,7 @@ outline: [2, 3]
 
 A single dynamic byte inside the first 1,024 tokens forces `cached_tokens = 0` and, on GPT-5.6+ Standard or GPT-6+ PTU-M, writes a new unamortized cache entry <span class="ev-badge ev-m">[M]</span>. Below are the six prefix-breaking patterns most frequently uncovered during codebase audits.
 
-## Six Middleware & Tooling Anti-Patterns <span class="ev-badge ev-arch">[Arch]</span>
+## Six Middleware & Tooling Anti-Patterns `[Arch]`
 
 | Anti-Pattern | Why It Breaks Caching in the Agent Runtime | Required Engineering Fix |
 | :--- | :--- | :--- |

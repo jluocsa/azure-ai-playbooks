@@ -16,34 +16,53 @@ Each turn hydrates three context tiers and transmits the full prompt over the wi
 
 ## Per-Turn Hydration vs. Azure OpenAI KV Prefix Cache
 
-```mermaid
-flowchart LR
-    subgraph Stores["Durable Context Stores"]
-      T0["T0 Static Layer (RO)\nSkills, tools, domain rules"]
-      DB["Session & Scope DB\nL2 Workspace Card,\nL1 Persona & Checkpoints"]
-      RAG["Live RAG & MCP Tools\nAI Search, Enterprise APIs"]
-    end
+<div class="arch-diagram">
+  <svg viewBox="0 0 700 186" role="img" aria-labelledby="hydrate-title hydrate-desc">
+    <title id="hydrate-title">Model 2 Stateless Enterprise Agent Runtime per-turn hydration vs. Azure OpenAI KV prefix cache</title>
+    <desc id="hydrate-desc">Shows how each HTTP turn constructs a fresh stateless agent instance, hydrates T0 static skills/schemas and L1/L2 session stores through a Composite Context Loader and Session Context Middleware, and relies on the Azure OpenAI KV Prefix Cache to avoid reprocessing static tokens on every turn.</desc>
+    <defs><marker id="arr02" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#16858a"/></marker></defs>
+    <rect x="6" y="10" width="132" height="156" rx="6" fill="#edf3fb" stroke="#93adc7"/>
+    <text x="16" y="29" font-size="10.5" font-weight="700" fill="#183e62">Durable Context Stores</text>
+    <rect x="14" y="38" width="116" height="34" rx="4" fill="#fff" stroke="#b0c4de"/>
+    <text x="20" y="52" font-size="9.0" font-weight="700" fill="#143d65">T0 Static Layer (RO)</text>
+    <text x="20" y="65" font-size="8.2" fill="#526c80">Skills, tools, domain rules</text>
+    <rect x="14" y="78" width="116" height="40" rx="4" fill="#fff" stroke="#b0c4de"/>
+    <text x="20" y="92" font-size="9.0" font-weight="700" fill="#143d65">Session &amp; Context DB</text>
+    <text x="20" y="104" font-size="8.2" fill="#526c80">L2 Workspace Card, L1</text>
+    <text x="20" y="114" font-size="8.2" fill="#526c80">Persona &amp; Checkpoints</text>
+    <rect x="14" y="124" width="116" height="34" rx="4" fill="#fff7eb" stroke="#d99b52"/>
+    <text x="20" y="138" font-size="9.0" font-weight="700" fill="#8a4b0f">Live RAG &amp; MCP Tools</text>
+    <text x="20" y="150" font-size="8.2" fill="#8a4b0f">AI Search, Enterprise APIs</text>
+    <path d="M138 55 H164" stroke="#16858a" stroke-width="1.8" marker-end="url(#arr02)"/>
+    <path d="M138 98 H164" stroke="#16858a" stroke-width="1.8" marker-end="url(#arr02)"/>
+    <path d="M138 141 H164" stroke="#16858a" stroke-width="1.8" marker-end="url(#arr02)"/>
+    <rect x="168" y="10" width="246" height="156" rx="6" fill="#f8fafc" stroke="#93adc7"/>
+    <text x="178" y="29" font-size="10.2" font-weight="700" fill="#183e62">Stateless Agent Turn (Per-Request Lifecycle)</text>
+    <rect x="178" y="38" width="226" height="36" rx="4" fill="#eaf4f5" stroke="#6ca9a8"/>
+    <text x="185" y="53" font-size="9.2" font-weight="700" fill="#115e63">Composite Context Loader</text>
+    <text x="185" y="66" font-size="8.3" fill="#355d65">Loads static T0 rules, L2 scope, L1 persona</text>
+    <rect x="178" y="80" width="226" height="38" rx="4" fill="#eaf4f5" stroke="#6ca9a8"/>
+    <text x="185" y="95" font-size="9.2" font-weight="700" fill="#115e63">Session Context Middleware</text>
+    <text x="185" y="108" font-size="8.3" fill="#355d65">Assembles ordered prefix + canonical tool JSON</text>
+    <rect x="178" y="124" width="226" height="34" rx="4" fill="#edf3fb" stroke="#93adc7"/>
+    <text x="185" y="138" font-size="9.2" font-weight="700" fill="#183e62">API Wire Payload (Responses / Chat API)</text>
+    <text x="185" y="150" font-size="8.3" fill="#35556f">Sends full hydrated prompt prefix every turn</text>
+    <path d="M414 88 H442" stroke="#16858a" stroke-width="2.2" marker-end="url(#arr02)"/>
+    <rect x="446" y="10" width="248" height="156" rx="6" fill="#eaf7f5" stroke="#16858a" stroke-width="1.5"/>
+    <text x="456" y="29" font-size="10.5" font-weight="700" fill="#115e63">Azure OpenAI / Foundry Model KV Cache</text>
+    <rect x="456" y="38" width="228" height="54" rx="4" fill="#fff" stroke="#16858a"/>
+    <text x="463" y="53" font-size="9.2" font-weight="700" fill="#0e7279">Cached Prefix Hit (cached_tokens &ge; 1,024)</text>
+    <text x="463" y="66" font-size="8.3" fill="#355d65">Reuses KV tensors for T0 skills/tools/ontology &amp; L2.</text>
+    <text x="463" y="79" font-size="8.3" font-weight="700" fill="#0e7279">PTU 5.6: 0% capacity draw | Std: discounted read</text>
+    <rect x="456" y="98" width="228" height="58" rx="4" fill="#fdecea" stroke="#d9534f"/>
+    <text x="463" y="113" font-size="9.2" font-weight="700" fill="#a93226">If Prefix Mutates Early (e.g. timestamp at Pos 1)</text>
+    <text x="463" y="126" font-size="8.3" fill="#a93226">Recomputes all 4k–12k hydrated tokens every turn;</text>
+    <text x="463" y="139" font-size="8.3" font-weight="700" fill="#a93226">100% PTU/TPM draw + unamortized cache-write fee</text>
+    <text x="8" y="180" font-size="8.8" fill="#526c80">Reference stateless enterprise agent pattern: per-turn context hydration paired with Azure OpenAI KV prefix caching.</text>
+  </svg>
+</div>
 
-    subgraph Runtime["Stateless Agent Turn (Per-HTTP Request)"]
-      Loader["Composite Context Loader\nHydrates T0, L2, L1"]
-      MW["Session Context Middleware\nOrders Pos 1–6 + canonical tool JSON"]
-      Wire["Wire Payload (/v1/responses or /chat)\nResends full hydrated prefix every call"]
-      Loader --> MW --> Wire
-    end
-
-    subgraph KV["Azure OpenAI / Foundry KV Cache"]
-      Hit["Cached Prefix Hit (>= 1,024 tok)\nReuses KV tensors for T0 & L2\n5.6 PTU-M: 0% draw | Std: discounted"]
-      Miss["Early Prefix Mutation (e.g. Pos 1 timestamp)\nRecomputes all 4k–12k tokens every call\n100% PTU draw + unamortized write fee"]
-    end
-
-    T0 --> Loader
-    DB --> Loader
-    RAG --> MW
-    Wire --> Hit
-    Wire -.->|"If Pos 1–3 mutates"| Miss
-```
-
-## Model 1 (Stateful Local CLI) vs. Model 2 (Stateless Enterprise Backend) <span class="ev-badge ev-arch">[Arch]</span>
+## Model 1 (Stateful Local CLI) vs. Model 2 (Stateless Enterprise Backend) `[Arch]`
 
 | Runtime Property | Model 1 — Stateful Local Agent (CLI) | Model 2 — Stateless Enterprise Backend (Container Service) |
 | :--- | :--- | :--- |

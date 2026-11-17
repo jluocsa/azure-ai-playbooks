@@ -8,7 +8,7 @@ outline: [2, 3]
 
 Enterprise agent workloads on Azure OpenAI in Microsoft Foundry call both the **Responses API (`/openai/v1/responses`)** and the **Chat Completions API (`/openai/v1/chat/completions`)**. Both APIs support `prompt_cache_key`, `prompt_cache_options`, and `prompt_cache_breakpoint` on GPT-5.6+ <span class="ev-badge ev-m">[M]</span> (note: to combine function tools with active reasoning on `gpt-5.6`, use `/openai/v1/responses` <span class="ev-badge ev-m">[M]</span>).
 
-## 1. `prompt_cache_key` Taxonomy & `>15 RPM` Sharding <span class="ev-badge ev-m">[M]</span>
+## 1. `prompt_cache_key` Taxonomy & `>15 RPM` Sharding `[M]`
 
 Azure OpenAI routes requests sharing a `prompt_cache_key` to the same cache partition. Per Microsoft Learn, if traffic for one prefix + key combination exceeds **~15 requests per minute (RPM)**, overflow requests can miss the cache <span class="ev-badge ev-m">[M]</span>.
 
@@ -22,7 +22,7 @@ Use a deterministic four-part key format <span class="ev-badge ev-arch">[Arch]</
 - Route deterministically by `shard = hash(thread_id) % N` so all turns of a conversation hit the same shard.
 - **Never** embed `user_id`, `request_id`, or `uuid4()` in `prompt_cache_key` unless the prefix itself is user-unique.
 
-## 2. Breakpoint Budgets & Minimum TTL Rules <span class="ev-badge ev-m">[M]</span>
+## 2. Breakpoint Budgets & Minimum TTL Rules `[M]`
 
 - **Write budget:** Maximum **4 new cache writes** per request.
   - In `implicit` mode (default), the automatic breakpoint on the latest message consumes `1` write slot, leaving up to **3 explicit breakpoints**.
@@ -30,7 +30,7 @@ Use a deterministic four-part key format <span class="ev-badge ev-arch">[Arch]</
 - **Read budget:** Azure OpenAI evaluates up to the latest **50 breakpoints** in the conversation; breakpoints from earlier turns are read-only.
 - **Minimum TTL (`prompt_cache_options.ttl`):** `"30m"` (default on both APIs) or `"12h"` (supported on Responses API; `12h` cache-write billing applies from **November 1, 2026**). Legacy `prompt_cache_retention` is deprecated on GPT-5.6+.
 
-## 3. Production Wire Payloads <span class="ev-badge ev-m">[M]</span>
+## 3. Production Wire Payloads `[M]`
 
 ### A. Responses API (`/openai/v1/responses`) — `implicit` Mode + `T0` & `L2` Breakpoints
 

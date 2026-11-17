@@ -8,7 +8,7 @@ outline: [2, 3]
 
 Multi-node enterprise AI platforms (such as rubric-scoring evaluators, compliance reviewers, and multi-agent RAG orchestrators) combine distinct LLM node archetypes with different prefix sizes, RPM profiles, and SKU controls <span class="ev-badge ev-arch">[Arch]</span>.
 
-## Archetype Classification & Caching Prescription Matrix <span class="ev-badge ev-arch">[Arch]</span>
+## Archetype Classification & Caching Prescription Matrix `[Arch]`
 
 | Agent Node Archetype | Typical Prefix (Pos 1–4) | Primary Cache-Miss Risk on Migration | Target Cached Share <span class="ev-badge ev-agree">[Agree]</span> | GPT-5.6+ Caching Prescription |
 | :--- | :--- | :--- | :--- | :--- |

@@ -5,7 +5,7 @@ const base = process.env.VITEPRESS_BASE || '/azure-ai-playbooks/'
 
 export default withMermaid(
   defineConfig({
-    title: 'Enterprise Azure AI Playbooks',
+    title: 'Azure AI Playbooks',
     description:
       'Customer-Zero validated architecture playbooks, readiness gates, PTU sizing economics, and repeatable delivery kits for Microsoft Foundry and Azure AI.',
     lang: 'en-US',
@@ -50,9 +50,8 @@ export default withMermaid(
             },
           ],
         },
-        { text: 'Delivery Scoping', link: '/operating-model/delivery-scoping' },
-        { text: 'White Papers & Kits', link: '/papers/' },
-        { text: 'Sources', link: '/playbooks/prompt-caching/sources' },
+        { text: 'Scoping', link: '/operating-model/delivery-scoping' },
+        { text: 'Papers & Kits', link: '/papers/' },
       ],
 
       sidebar: {

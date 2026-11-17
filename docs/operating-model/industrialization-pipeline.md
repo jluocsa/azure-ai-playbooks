@@ -22,17 +22,50 @@ This hub provides the **Solution Industrialization mechanism** that converts bes
 
 ## The Five-Stage Industrialization Factory
 
-```mermaid
-flowchart LR
-    S1["1. Customer-Zero\nValidation\n(Real workload & metrics)"] --> S2["2. Automated\nSanitization Gate\n(Zero customer/GUID leaks)"]
-    S2 --> S3["3. Architecture\nReview (ARB)\n([M]/[Arch] verification)"]
-    S3 --> S4{"4. Channel & IP\nDisposition"}
-    S4 -->|"Novel mechanism"| P1["Path A: Patent / IDF\nReview (Hold public)"]
-    S4 -->|"Product gap / doc seam"| P2["Path B: Product Group &\nArchitecture Center PR"]
-    S4 -->|"Repeatable field pattern"| P3["Path C: Industrialized\nPlaybook + Delivery Kit"]
-    P2 --> S5["5. Field Reuse &\nOutcome Tracking"]
-    P3 --> S5
-```
+<div class="arch-diagram">
+  <svg viewBox="0 0 720 182" role="img" aria-labelledby="ind-title ind-desc">
+    <title id="ind-title">Five-Stage Solution Industrialization Factory</title>
+    <desc id="ind-desc">Shows Stage 1 Customer-Zero Validation flowing to Stage 2 Automated Sanitization Gate, Stage 3 Peer Architecture Review, Stage 4 Channel and IP Disposition branching into Path A Patent Hold, Path B Product Group and Learn PR, and Path C Industrialized Playbook and Delivery Kit, converging on Stage 5 Multi-Account Reuse and Outcome Tracking.</desc>
+    <defs><marker id="arr-ind" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
+    <rect x="6" y="42" width="118" height="78" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.4"/>
+    <text x="13" y="60" font-size="9.5" font-weight="700" fill="#115e59">1. Customer-Zero</text>
+    <text x="13" y="75" font-size="8.4" fill="#334e68">Real production</text>
+    <text x="13" y="88" font-size="8.4" fill="#334e68">workload &amp; metrics</text>
+    <text x="13" y="106" font-size="7.8" font-weight="700" fill="#0f766e">[Proven Baseline]</text>
+    <path d="M124 81 H142" stroke="#0f766e" stroke-width="1.8" marker-end="url(#arr-ind)"/>
+    <rect x="146" y="42" width="118" height="78" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="153" y="60" font-size="9.5" font-weight="700" fill="#183e62">2. Sanitization</text>
+    <text x="153" y="75" font-size="8.4" fill="#334e68">Strip customer IDs,</text>
+    <text x="153" y="88" font-size="8.4" fill="#334e68">emails &amp; GUIDs</text>
+    <text x="153" y="106" font-size="7.8" font-weight="700" fill="#1d4ed8">[Automated CI Gate]</text>
+    <path d="M264 81 H282" stroke="#0f766e" stroke-width="1.8" marker-end="url(#arr-ind)"/>
+    <rect x="286" y="42" width="118" height="78" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="293" y="60" font-size="9.5" font-weight="700" fill="#183e62">3. Arch Review</text>
+    <text x="293" y="75" font-size="8.4" fill="#334e68">Verify [M] Learn</text>
+    <text x="293" y="88" font-size="8.4" fill="#334e68">&amp; [Arch] boundaries</text>
+    <text x="293" y="106" font-size="7.8" font-weight="700" fill="#1d4ed8">[Peer ARB Check]</text>
+    <path d="M404 60 H434 V28 H446" stroke="#0f766e" stroke-width="1.6" fill="none" marker-end="url(#arr-ind)"/>
+    <path d="M404 81 H446" stroke="#0f766e" stroke-width="1.6" fill="none" marker-end="url(#arr-ind)"/>
+    <path d="M404 102 H434 V136 H446" stroke="#0f766e" stroke-width="1.6" fill="none" marker-end="url(#arr-ind)"/>
+    <rect x="450" y="6" width="132" height="44" rx="5" fill="#fff7eb" stroke="#d97706"/>
+    <text x="457" y="23" font-size="8.8" font-weight="700" fill="#92400e">4A. Patent / IDF Hold</text>
+    <text x="457" y="37" font-size="8.0" fill="#92400e">Confidential IP review</text>
+    <rect x="450" y="59" width="132" height="44" rx="5" fill="#edf3fb" stroke="#5b87b2"/>
+    <text x="457" y="76" font-size="8.8" font-weight="700" fill="#183e62">4B. PG &amp; Learn PR</text>
+    <text x="457" y="90" font-size="8.0" fill="#334e68">Upstream doc/product</text>
+    <rect x="450" y="112" width="132" height="46" rx="5" fill="#eaf7f5" stroke="#0f766e" stroke-width="1.5"/>
+    <text x="457" y="129" font-size="8.8" font-weight="700" fill="#115e59">4C. Field Playbook</text>
+    <text x="457" y="143" font-size="8.0" fill="#334e68">Web + PDF + CI/KQL kit</text>
+    <path d="M582 81 H602" stroke="#0f766e" stroke-width="1.8" marker-end="url(#arr-ind)"/>
+    <path d="M582 135 H593 V96 H602" stroke="#0f766e" stroke-width="1.6" fill="none" marker-end="url(#arr-ind)"/>
+    <rect x="606" y="46" width="108" height="74" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.4"/>
+    <text x="613" y="64" font-size="9.3" font-weight="700" fill="#115e59">5. 1:N Reuse</text>
+    <text x="613" y="79" font-size="8.2" fill="#334e68">ADS, 3-wk scopes</text>
+    <text x="613" y="92" font-size="8.2" fill="#334e68">&amp; outcome metrics</text>
+    <text x="613" y="108" font-size="7.7" font-weight="700" fill="#0f766e">[Field Impact]</text>
+    <text x="8" y="174" font-size="8.4" fill="#526c80">Governed five-stage factory converting 1:1 Customer-Zero engagements into sanitized, peer-reviewed 1:N assets.</text>
+  </svg>
+</div>
 
 ### Stage-by-Stage Operating Rules
 

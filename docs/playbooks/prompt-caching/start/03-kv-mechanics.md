@@ -8,7 +8,7 @@ outline: [2, 3]
 
 Prompt caching retains precomputed key-value (KV) attention tensors for identical leading input tokens. It never alters model output determinism or quality—only time-to-first-token (TTFT), input billing, and PTU capacity utilization <span class="ev-badge ev-m">[M]</span>.
 
-## 1. Exact Wire Elements & Prefix Thresholds <span class="ev-badge ev-m">[M]</span>
+## 1. Exact Wire Elements & Prefix Thresholds `[M]`
 
 Azure OpenAI evaluates the rendered prefix in strict wire order:
 
@@ -23,7 +23,7 @@ Key platform rules verified in Microsoft Learn <span class="ev-badge ev-m">[M]</
 - **128-token rounding removed on GPT-5.6+:** On `gpt-5.5` and earlier, hits beyond 1,024 tokens occur in 128-token increments; **this rounding no longer applies on GPT-5.6 and later**.
 - **`reasoning.context` default shift:** **`gpt-5.6` and `gpt-6` default `reasoning.context` to `"all_turns"`** (whereas `gpt-5.4` and `gpt-5.5` default to `"current_turn"`), rendering earlier turns' reasoning items into context and increasing multi-turn input tokens unless explicitly set to `"current_turn"`.
 
-## 2. Generation-by-Generation Capability Matrix <span class="ev-badge ev-m">[M]</span>
+## 2. Generation-by-Generation Capability Matrix `[M]`
 
 | Capability | Before GPT-5.6 (`gpt-4.1`–`5.5`, `o3-mini`) | GPT-5.6 Family (`gpt-5.6-sol/terra/luna`) | GPT-6 & Newer (`gpt-6-astra/sol/luna`, `6.1-sol/terra`) |
 | :--- | :--- | :--- | :--- |
