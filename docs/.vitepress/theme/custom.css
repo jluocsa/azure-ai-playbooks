@@ -68,7 +68,6 @@
 .arch-diagram svg {
   display: block;
   width: 100%;
-  min-width: 620px;
   height: auto;
 }
 .arch-caption {
