@@ -4,13 +4,9 @@ description: Recommended 15-point production readiness standard mapped across th
 outline: [2, 3]
 ---
 
-<script setup>
-import { withBase } from 'vitepress'
-</script>
-
 # 14 · 15-Point Migration Readiness Standard (`C1–C15`)
 
-Download raw PR checklist template: <a :href="withBase('/kits/migration-readiness-pr-checklist.md')" download target="_blank" rel="noopener"><code>migration-readiness-pr-checklist.md</code></a>
+Open the copy-ready PR / release-gate template subpage: [`C1–C15` Migration Readiness PR Checklist →](/papers/migration-readiness-checklist)
 
 Adopt criteria **`C1`–`C15`** as a standing release gate across the 7-layer pipeline before cutting over any production agent workload to **GPT-5.6, GPT-6, or GPT-6.1** <span class="ev-badge ev-agree">[Agree]</span>:
 

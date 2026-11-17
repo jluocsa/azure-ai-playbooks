@@ -13,7 +13,8 @@ outline: [2, 3]
   owners="John Luo (@jluocsa) · Co-Authors Welcome"
   verified="2026-11-16"
   status="Live v1.0"
-  pdfHref="/papers/foundry-prompt-caching-gpt56-whitepaper-v1.0.pdf"
+  paperHref="/papers/foundry-prompt-caching-gpt56-whitepaper"
+  paperLabel="Single-Page White Paper →"
 />
 
 Multi-tenant knowledge-work platforms—spanning **statutory audit and assurance, tax and regulatory advisory, legal matter and M&A diligence, financial risk/control testing, and GxP compliance review**—share four operational constraints that generic enterprise chatbots never encounter:

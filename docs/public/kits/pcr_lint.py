@@ -23,7 +23,7 @@ SKIP_DIRS = {".git", ".venv", "venv", "node_modules", "__pycache__", "dist", "bu
 TARGET_EXTS = {".py", ".ts", ".js", ".cs"}
 
 VOLATILE_TOKENS_RE = re.compile(
-    r"\b(datetime\.now|datetime\.utcnow|DateTime\.UtcNow|Date\.now|time\.time|uuid4|request_timestamp)\b"
+    r"\b(datetime\.now|datetime\.utcnow|DateTime\.UtcNow|Date\.now|time\.time|uuid4|request_timestamp|req_ctx|request_ctx)\b"
 )
 DYNAMIC_KEY_RE = re.compile(
     r"(user_id|request_id|uuid4|trace_id|engagement_id|engagement_code|matter_id|client_id|cost_center)",
@@ -91,10 +91,10 @@ def scan_python_ast(path: Path, source: str) -> list[Finding]:
                     )
                 )
 
-        # PCR003: json.dumps on schema / card / tool objects without sort_keys=True
+        # PCR003: json.dumps on schema / card / tool / context objects without sort_keys=True
         if func_src == "json.dumps" and node.args:
             arg0 = ast.unparse(node.args[0]) if hasattr(ast, "unparse") else ""
-            if re.search(r"(tool|schema|card|context|rubric)", arg0, re.IGNORECASE):
+            if re.search(r"(tool|schema|card|context|ctx|rubric|taxonomy)", arg0, re.IGNORECASE):
                 sort_kw = kw_names.get("sort_keys")
                 is_sorted = isinstance(sort_kw, ast.Constant) and sort_kw.value is True
                 if not is_sorted:
@@ -151,15 +151,19 @@ def scan_text_patterns(path: Path, source: str) -> list[Finding]:
                 )
             )
 
-    # PCR006: Logs prompt_tokens without reading cached_tokens anywhere in the wrapper module
-    if "prompt_tokens" in source and "cached_tokens" not in source:
-        line_no = next((i for i, l in enumerate(lines, 1) if "prompt_tokens" in l), 1)
+    # PCR006: Logs prompt_tokens or usage.input_tokens without reading cached_tokens anywhere in the wrapper module
+    has_usage_tokens = "prompt_tokens" in source or bool(re.search(r"\busage\.input_tokens\b", source))
+    if has_usage_tokens and "cached_tokens" not in source:
+        line_no = next(
+            (i for i, l in enumerate(lines, 1) if "prompt_tokens" in l or "input_tokens" in l),
+            1,
+        )
         findings.append(
             Finding(
                 "PCR006",
                 rel,
                 line_no,
-                "Module reads prompt_tokens without extracting prompt_tokens_details.cached_tokens.",
+                "Module reads usage token counts without extracting input_tokens_details/prompt_tokens_details.cached_tokens.",
             )
         )
 

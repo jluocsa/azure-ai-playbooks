@@ -15,7 +15,7 @@ This hub is structured as a **three-part Enterprise Foundry Architecture Series*
     <defs><marker id="arr-ser" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
     <rect x="12" y="10" width="676" height="40" rx="6" fill="#eaf7f5" stroke="#0f766e" stroke-width="1.6"/>
     <text x="24" y="27" font-size="9.8" font-weight="700" fill="#115e59">Playbook 01 (LIVE v1.0) &middot; Prompt Caching, Prefix Architecture &amp; Two-Regime PTU Economics (GPT-5.6 / 6 / 6.1)</text>
-    <text x="24" y="41" font-size="8.4" fill="#334e68">Track Lead: John Luo (@jluocsa) &bull; Assets: 15-chapter playbook, 16-page PDF, PTU/shard calculator, pcr_lint.py, KQL gate</text>
+    <text x="24" y="41" font-size="8.4" fill="#334e68">Track Lead: John Luo (@jluocsa) &bull; Assets: 15-chapter playbook, printable white paper, PTU calculator, pcr_lint.py, KQL gate</text>
     <path d="M350 66 V52" stroke="#0f766e" stroke-width="1.8" marker-end="url(#arr-ser)"/>
     <text x="360" y="62" font-size="8.1" font-weight="700" fill="#0f766e">SKU-aware breakpoint stripping &amp; 429 spillover</text>
     <rect x="12" y="68" width="676" height="38" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
@@ -33,7 +33,7 @@ This hub is structured as a **three-part Enterprise Foundry Architecture Series*
 
 | Playbook | Status | Customer-Zero Provenance (Sanitized) | Track Lead / Co-Authors | Companion Assets |
 | :--- | :--- | :--- | :--- | :--- |
-| **[01 · Prompt Caching & PTU Readiness on GPT-5.6+](/playbooks/prompt-caching/start/01-executive-thesis)** | **Live `v1.0`** | Enterprise stateless multi-node document review & rubric-scoring platform | **Lead:** John Luo (`@jluocsa`)<br>*Open to domain co-authors* | 16-page PDF white paper, interactive PTU/shard calculator, `PCR001–006` rules, KQL gate |
+| **[01 · Prompt Caching & PTU Readiness on GPT-5.6+](/playbooks/prompt-caching/start/01-executive-thesis)** | **Live `v1.0`** | Enterprise stateless multi-node document review & rubric-scoring platform | **Lead:** John Luo (`@jluocsa`)<br>*Open to domain co-authors* | Single-page printable white paper, PTU/shard calculator, `PCR001–006` CLI linter, KQL gate |
 | **02 · Multi-Backend Foundry APIM Gateway & Spillover** | **Chartered (`v0.1` intake)** | Multi-region enterprise GenAI gateway fronting pooled Foundry accounts & PTU/PAYG tiers | **Co-Author Track Lead: Open for CSA Nomination**<br>*(Advisor: `@jluocsa`)* | Bicep gateway patterns, native `Retry-After` circuit-breaker policies, SSE streaming guards |
 | **03 · Multi-Region Foundry BCP & Failover Drills** | **Chartered (`v0.1` intake)** | Regulated enterprise business-continuity architecture across paired & non-paired regions | **Co-Author Track Lead: Open for CSA Nomination**<br>*(Advisor: `@jluocsa`)* | Data Zone vs. Regional PTU matrix, failover runbook, synthetic health probes |
 

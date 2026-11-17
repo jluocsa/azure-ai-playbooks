@@ -31,7 +31,7 @@ Every Pull Request into `main` enforces three gates via `.github/pull_request_te
 
 Playbooks are owned by **named Track Leads and Co-Authors**, not anonymous wiki edits:
 
-- **Visible Bylines:** Every playbook displays its Track Owners, Customer-Zero provenance category, governance status, and `Last verified` date in the `<PlaybookMeta />` header banner and on the companion PDF cover.
+- **Visible Bylines:** Every playbook displays its Track Owners, Customer-Zero provenance category, governance status, and `Last verified` date in the `<PlaybookMeta />` header banner across both chapter pages and consolidated white-paper subpages.
 - **Scoped Directory Ownership:** `.github/CODEOWNERS` routes PRs in `/docs/playbooks/<track>/` directly to that track's co-authors while keeping root sanitization rules gated centrally.
 - **Low-Friction Peer Contribution:** Specialists can either co-own a full playbook ([see open Series Charters](/playbooks/series-charters/)) or contribute a single node archetype / KQL query via Pull Request.
 

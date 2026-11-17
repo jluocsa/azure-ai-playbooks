@@ -26,6 +26,7 @@ Enterprise production workloads commonly pair **Provisioned Throughput (PTU-M)**
 | `gpt-5.6-terra` (2026-07-09) | **3,000** | `15` \| `15` | `5` \| `5` | Output ratio `6x`; cached input deducted **100%** (`0` PTU draw). |
 | `gpt-5.6-sol` (2026-07-09) | **1,200** | `15` \| `15` | `5` \| `5` | Output ratio `6x`; cached input deducted **100%** (`0` PTU draw). |
 | `gpt-5.4` / `5.4-mini` | **2,400** / **7,900** | `15` \| `50` / `25` | `5` \| `50` / `25` | Output ratio `6x`; cached input deducted **100%** (common baseline). |
+| `gpt-6-astra` (2026-09-03) | **600** | `15` \| `25` | `5` \| `25` | Normalized weights: input `1.0`, cached read `0.1`, write `1.25`, output `5.0`. |
 | `gpt-6-luna` (2026-09-22) | **59,400** | `15` \| `15` | `5` \| `5` | Normalized weights: input `1.0`, cached read `0.1`, write `1.25`, output `5.0`. |
 | `gpt-6-sol` (2026-09-22) | **3,000** | `15` \| `15` | `5` \| `5` | Normalized weights: input `1.0`, cached read `0.1`, write `1.25`, output `5.0`. |
 | `gpt-6.1-sol` (2026-09-29) | **3,000** | `15` \| `25` | `5` \| `25` | Normalized weights: input `1.0`, **cached read `0.05`**, write `1.25`, output `5.0`. |

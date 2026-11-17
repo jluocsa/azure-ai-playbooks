@@ -31,7 +31,7 @@ def build_messages_broken(req_ctx: dict, static_policy: str, domain_methodology:
     return [{"role": "system", "content": sys_text}, {"role": "user", "content": f"{rag_chunks}\n{query}"}]
 
 
-# ✅ CACHE-READY PATTERN: Strict T0 -> L2 -> L1 -> Volatile Tail ordering with SKU-aware breakpoints
+# ✅ CACHE-READY PATTERN: Keep system + tools[] 100% Global T0 (Pos 1-3); place L2/L1 after tools[] (Pos 4-5)
 def build_messages_cache_ready(
     static_policy: str,
     domain_methodology: str,
@@ -42,17 +42,18 @@ def build_messages_cache_ready(
     query: str,
     supports_explicit_breakpoints: bool,  # True on Standard 5.6+ & PTU-M GPT-6+; False on PTU-M GPT-5.6
 ):
-    t0_block = {"type": "text", "text": f"{static_policy}\n\n{domain_methodology}"}      # Pos 1 & 3 (>= 1,024 tokens)
+    t0_block = {"type": "text", "text": f"{static_policy}\n\n{domain_methodology}"}      # Pos 1 & 3 (Global T0 >= 1,024t)
     l2_block = {"type": "text", "text": json.dumps(l2_workspace_card, sort_keys=True)}   # Pos 4 (shared per scope_id)
-    l1_block = {"type": "text", "text": json.dumps(l1_persona_card, sort_keys=True)}     # Pos 5 (shared per user_id)
+    l1_block = {"type": "text", "text": json.dumps(l1_persona_card, sort_keys=True)}     # Pos 5a (shared per user_id)
 
     if supports_explicit_breakpoints:
-        t0_block["prompt_cache_breakpoint"] = {"mode": "explicit"}  # Breakpoint #1: global reuse across all users
-        l2_block["prompt_cache_breakpoint"] = {"mode": "explicit"}  # Breakpoint #2: workspace-wide reuse
+        t0_block["prompt_cache_breakpoint"] = {"mode": "explicit"}  # Breakpoint #1: global T0 + tools[] reuse
+        l2_block["prompt_cache_breakpoint"] = {"mode": "explicit"}  # Breakpoint #2: workspace-wide L2 reuse
 
     return [
-        {"role": "system", "content": [t0_block, l2_block, l1_block]},
-        *history,  # Pos 5b: append-only checkpointed turns
+        {"role": "system", "content": [t0_block]},       # Rendered with sorted tools[] ahead of conversation messages
+        {"role": "developer", "content": [l2_block, l1_block]},  # Pos 4-5a: scoped context after Global T0 + tools[]
+        *history,                                        # Pos 5b: append-only checkpointed turns
         {"role": "user", "content": f"<retrieved_grounding>\n{rag_chunks}\n</retrieved_grounding>\n\n{query}"},  # Pos 6
     ]
 ```

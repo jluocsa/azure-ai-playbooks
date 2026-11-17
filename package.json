@@ -8,14 +8,10 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "check:sanitized": "node scripts/check-sanitized.mjs",
-    "build:pdfs": "node scripts/build-pdfs.mjs",
     "deploy:pages": "node scripts/deploy-gh-pages.mjs",
     "verify": "npm run check:sanitized && npm run docs:build"
   },
   "devDependencies": {
-    "debug": "^4.4.0",
-    "mermaid": "^11.4.1",
-    "vitepress": "^1.6.4",
-    "vitepress-plugin-mermaid": "^2.0.17"
+    "vitepress": "^1.6.4"
   }
 }

@@ -2,7 +2,7 @@
 
 This repository uses dual licensing so both architecture documentation and engineering kits can be reused with clear attribution:
 
-- **Documentation, Architecture Diagrams & White Papers (`docs/**/*.md`, `papers-src/**`, `docs/public/papers/**`):** Licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+- **Documentation, Architecture Diagrams & White Papers (`docs/**/*.md`):** Licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 - **Code Snippets, KQL Queries, Linter Rules & Build Scripts (`scripts/**`, `docs/.vitepress/**`, `docs/public/kits/**`):** Licensed under the MIT License below.
 
 ---

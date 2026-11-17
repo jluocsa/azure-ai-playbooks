@@ -56,6 +56,19 @@ const MODELS: ModelSpec[] = [
     ptuBreakpoints: false,
   },
   {
+    id: 'gpt-6-astra',
+    label: 'gpt-6-astra (2026-09-03)',
+    regime: 'gpt6',
+    inputTpmPerPtu: 600,
+    minGlobalDz: 15,
+    minRegional: 25,
+    incGlobalDz: 5,
+    outputWeight: 5.0,
+    readWeight: 0.1,
+    writeWeight: 1.25,
+    ptuBreakpoints: true,
+  },
+  {
     id: 'gpt-6-sol',
     label: 'gpt-6-sol (2026-09-22)',
     regime: 'gpt6',
@@ -114,16 +127,20 @@ const calc = computed(() => {
   const m = spec.value
   const inputTpm = Math.max(0, peakRpm.value) * Math.max(0, avgInput.value)
   const outputTpm = Math.max(0, peakRpm.value) * Math.max(0, avgOutput.value)
-  const hitRate = Math.min(100, Math.max(0, cacheHitPct.value)) / 100
+  const rawHitRate = Math.min(100, Math.max(0, cacheHitPct.value)) / 100
+  const k = Math.max(0.1, rwRatio.value || 1)
+  const maxSteadyHitRate = m.regime === 'gpt6' ? k / (k + 1) : 1
+  const effectiveHitRate = Math.min(rawHitRate, maxSteadyHitRate)
+  const isCapped = m.regime === 'gpt6' && rawHitRate > maxSteadyHitRate + 1e-6
 
   let normCached = 0
   let normUncached = 0
   if (m.regime === 'pre6') {
-    normCached = inputTpm * (1 - hitRate) + m.outputWeight * outputTpm
+    normCached = inputTpm * (1 - effectiveHitRate) + m.outputWeight * outputTpm
     normUncached = inputTpm + m.outputWeight * outputTpm
   } else {
-    const cachedTok = inputTpm * hitRate
-    const writeTok = rwRatio.value > 0 ? cachedTok / rwRatio.value : 0
+    const cachedTok = inputTpm * effectiveHitRate
+    const writeTok = cachedTok / k
     const ordinaryInput = Math.max(0, inputTpm - cachedTok - writeTok)
     normCached =
       ordinaryInput * 1.0 +
@@ -141,6 +158,8 @@ const calc = computed(() => {
   const shards = Math.max(1, Math.ceil(Math.max(1, peakRpm.value) / 12))
 
   return {
+    effectiveHitPct: Math.round(effectiveHitRate * 1000) / 10,
+    isCapped,
     normCached: Math.round(normCached),
     normUncached: Math.round(normUncached),
     rawCached: rawCached.toFixed(1),
@@ -191,7 +210,7 @@ const calc = computed(() => {
 
     <div class="ptu-results">
       <div class="ptu-card highlight">
-        <span class="k">With {{ cacheHitPct }}% Cached Input</span>
+        <span class="k">With {{ calc.effectiveHitPct }}% Cached Input<template v-if="calc.isCapped"> (max @ {{ rwRatio }}:1 R/W)</template></span>
         <div class="v">{{ calc.depCached }} PTUs</div>
         <span class="sub">{{ calc.rawCached }} raw &rarr; {{ spec.incGlobalDz }}-PTU increment ({{ calc.normCached.toLocaleString() }} Norm TPM)</span>
       </div>

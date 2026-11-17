@@ -31,39 +31,8 @@ Production agent telemetry flows through OpenTelemetry into workspace-based Azur
 
 ## 2. Reference KQL Query: Two-Regime Peak-Minute PTU Sizing & Release Gate
 
-Download raw file: <a :href="withBase('/kits/ptu-cache-release-gate.kql')" download target="_blank" rel="noopener"><code>ptu-cache-release-gate.kql</code></a>
+Preview on [Copy-Ready Engineering Kits](/papers/engineering-kits#kql-release-gate) or download raw file: <a :href="withBase('/kits/ptu-cache-release-gate.kql')" download target="_blank" rel="noopener"><code>ptu-cache-release-gate.kql</code></a>
 
-```kusto
-// Application Insights KQL: Per-node cache efficiency + Two-Regime Peak 1-Min vs. Avg PTU Normalized TPM
-let BaseCalls = AppDependencies
-| where TimeGenerated > ago(24h) and Type == "AzureOpenAI"
-| extend cd = parse_json(Properties)
-| extend cache_key = tostring(cd["gen_ai.prompt_cache.key"]), node_name = tostring(cd["agent.node_name"]),
-         model_name = tostring(cd["gen_ai.request.model"]), sku = tostring(cd["azure.deployment.sku"]),
-         input_tok = tolong(cd["gen_ai.usage.input_tokens"]), output_tok = tolong(cd["gen_ai.usage.output_tokens"]),
-         cached_tok = tolong(coalesce(cd["gen_ai.usage.cached_tokens"], 0)),
-         write_tok = tolong(coalesce(cd["gen_ai.usage.cache_write_tokens"], 0)),
-         ttft_ms = todouble(cd["gen_ai.latency.ttft_ms"])
-| where isnotempty(cache_key) and input_tok >= 1024
-| extend uncached_tok = max_of(input_tok - cached_tok - write_tok, 0)
-| extend norm_tok = case(  // Ch. 04 <=272K weights; use 2x input/cache & 7.5x output if input_tok > 272000
-         model_name has "6.1", uncached_tok + 0.05 * cached_tok + 1.25 * write_tok + 5.0 * output_tok,
-         model_name has "gpt-6", uncached_tok + 0.10 * cached_tok + 1.25 * write_tok + 5.0 * output_tok,
-         (input_tok - cached_tok) + 6.0 * output_tok);  // Pre-GPT-6 (5.6 / 5.4): 0x cached, 6x output
-let PeakMinute = BaseCalls
-| summarize MinuteNormTPM = sum(norm_tok) by node_name, model_name, sku, cache_key, bin(TimeGenerated, 1m)
-| summarize PeakNormTPM = round(max(MinuteNormTPM), 0), P95NormTPM = round(percentile(MinuteNormTPM, 95), 0)
-         by node_name, model_name, sku, cache_key;
-BaseCalls
-| summarize Calls = count(), HitRatePct = round(100.0 * countif(cached_tok > 0) / count(), 1),
-            CachedSharePct = round(100.0 * sum(cached_tok) / max_of(sum(input_tok), 1), 1),
-            ReadWriteRatio = iff(sum(write_tok) == 0, real(null), round(todouble(sum(cached_tok)) / sum(write_tok), 1)),
-            TTFT_p95_ms = round(percentile(ttft_ms, 95), 0), AvgNormTPM = round(sum(norm_tok) / 1440.0, 0)
-         by node_name, model_name, sku, cache_key
-| join kind=inner PeakMinute on node_name, model_name, sku, cache_key
-| extend GateStatus = iff(HitRatePct >= 80.0 and CachedSharePct >= 60.0
-                          and (isnull(ReadWriteRatio) or ReadWriteRatio >= 10.0), "PASS", "FAIL")
-| project-away node_name1, model_name1, sku1, cache_key1 | order by GateStatus asc, PeakNormTPM desc
-```
+<<< @/public/kits/ptu-cache-release-gate.kql{kusto}
 
-> **Why both `PeakNormTPM` and `AvgNormTPM` are required:** PTU allocation and HTTP `429` throttling are governed by 1-minute burst demand (`PeakNormTPM` / `P95NormTPM`), whereas reservation cost amortization is governed by sustained 24-hour volume (`AvgNormTPM`).
+> **Why `DeployPeakNormTPM`, `ShardPeakNormTPM`, and `ShardAvgNormTPM` are separated:** `DeployPeakNormTPM` aggregates *all* calls hitting `(model_name, sku)` in the same 1-minute bucket—including `<1,024`-token routers and unkeyed calls—to size PTU headroom against HTTP `429` throttling, while `CacheCalls` evaluates per-shard cache efficiency (`HitRatePct`, `CachedSharePct`, `ReadWriteRatio`) and 24-hour sustained amortization (`ShardAvgNormTPM`).

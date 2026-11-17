@@ -16,7 +16,7 @@ Mapping those two axes onto **Prompt Positions 1–6** maximizes KV-cache reuse 
 ## Six-Position Prompt Prefix Pipeline `[Arch]`
 
 <div class="arch-diagram">
-  <svg viewBox="0 0 700 172" role="img" aria-labelledby="pipe-title pipe-desc">
+  <svg viewBox="0 0 714 172" role="img" aria-labelledby="pipe-title pipe-desc">
     <title id="pipe-title">Six-layer enterprise AI prompt prefix ordering mapped to enterprise context tiers</title>
     <desc id="pipe-desc">Shows Positions 1 to 3 (Global T0 static schema, system policy, skill catalog, sorted tool definitions, and domain methodology layer) terminating at Breakpoint #1, followed by Position 4 (Workspace L2 Context Card) terminating at Breakpoint #2, Position 5 (User L1 Persona and append-only checkpoint history), and Position 6 (Always-live RAG chunks, enterprise MCP outputs, and current user query).</desc>
     <rect x="6" y="8" width="114" height="66" rx="5" fill="#eaf4f5" stroke="#16858a" stroke-width="1.5"/>
@@ -50,11 +50,11 @@ Mapping those two axes onto **Prompt Positions 1–6** maximizes KV-cache reuse 
     <text x="486" y="39" font-size="8.4" fill="#35556f">Persona + session</text>
     <text x="486" y="51" font-size="8.4" fill="#35556f">append-only turns</text>
     <text x="486" y="65" font-size="8.0" font-weight="700" fill="#214f7a">[Scope: user + thread]</text>
-    <rect x="589" y="8" width="105" height="66" rx="5" fill="#fff7eb" stroke="#be7730" stroke-width="1.4"/>
+    <rect x="589" y="8" width="119" height="66" rx="5" fill="#fff7eb" stroke="#be7730" stroke-width="1.4"/>
     <text x="595" y="25" font-size="9.8" font-weight="700" fill="#8a4b0f">Pos 6: Volatile Tail</text>
     <text x="595" y="39" font-size="8.4" fill="#8a4b0f">RAG chunks, live MCP,</text>
     <text x="595" y="51" font-size="8.4" fill="#8a4b0f">timestamps &amp; query</text>
-    <text x="595" y="65" font-size="8.0" font-weight="700" fill="#985a18">[Always-Live | Uncached]</text>
+    <text x="595" y="65" font-size="7.9" font-weight="700" fill="#985a18">[Always-Live | Uncached]</text>
     <path d="M6 84 H354" stroke="#16858a" stroke-width="2"/>
     <text x="42" y="98" font-size="8.8" font-weight="700" fill="#115e63">Shared Across All Users &amp; Workspaces (100% Cache Reuse)</text>
     <path d="M364 84 H470" stroke="#214f7a" stroke-width="2"/>

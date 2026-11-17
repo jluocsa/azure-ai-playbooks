@@ -64,17 +64,95 @@
   border-radius: 10px;
   background: #fcfdff;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .arch-diagram svg {
   display: block;
   width: 100%;
+  min-width: 560px;
   height: auto;
 }
 .arch-caption {
   margin: 8px 0 0;
   font-size: 0.78rem;
-  color: #526c80;
+  color: var(--vp-c-text-2);
 }
 .dark .arch-diagram {
-  background: #f8fafc;
+  background: #f1f5f9;
+  border-color: #334155;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+}
+
+/* Prevent horizontal navbar overflow on 768px–1060px tablet/split-screen widths */
+@media (min-width: 768px) and (max-width: 1060px) {
+  .VPNavBar .VPNavBarTitle .title {
+    font-size: 0.88rem;
+  }
+  .VPNavBar .VPNavBarSearch {
+    padding-left: 10px;
+  }
+  .VPNavBar .DocSearch-Button {
+    padding: 0 8px;
+  }
+  .VPNavBar .DocSearch-Button-Keys {
+    display: none;
+  }
+  .VPNavBar .VPNavBarMenuLink,
+  .VPNavBar .VPFlyout .button {
+    padding: 0 7px;
+    font-size: 0.82rem;
+  }
+  .VPNavBar .VPNavBarAppearance,
+  .VPNavBar .VPNavBarSocialLinks {
+    margin-left: 4px;
+  }
+}
+
+/* Clean executive Print / Save-as-PDF layout for Markdown white papers & checklists */
+@media print {
+  .VPNav,
+  .VPLocalNav,
+  .VPSidebar,
+  .VPDocAside,
+  .VPFooter,
+  .VPDocFooter,
+  .VPSkipLink,
+  .no-print {
+    display: none !important;
+  }
+  .VPContent,
+  .VPDoc,
+  .VPDoc .container,
+  .VPDoc .content,
+  .VPDoc .content-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  body {
+    background: #fff !important;
+    color: #0f172a !important;
+    font-size: 10pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .arch-diagram {
+    overflow: visible !important;
+    break-inside: avoid;
+  }
+  .arch-diagram svg {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  table,
+  pre,
+  .custom-block,
+  .pb-meta {
+    break-inside: avoid;
+  }
+  h2,
+  h3 {
+    break-after: avoid;
+  }
 }

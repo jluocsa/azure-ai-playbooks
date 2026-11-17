@@ -28,7 +28,7 @@ outline: [2, 3]
   Standard discounted cached-input rates, short (`<=272K`) vs. long (`>272K`) context tiers, Provisioned minimum PTU table, and TTL cache-write charges (`12h` write billing effective Nov 1, 2026).
 - **R3 · Determine PTU sizing for a workload (`[M]`):** <https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/provisioned-throughput-sizing>  
   Per-model Input TPM per PTU and min/increment tables for `gpt-5.6-luna/terra/sol` (`15|15` min, `5|5` increment), `gpt-6-astra/sol/luna`, and `gpt-6.1-sol`; 100% cache deduction vs. normalized token weights.
-- **R4 · Foundry Models region & provisioned availability (`[M]`):** <https://learn.microsoft.com/en-us/azure/foundry-models/concepts/models-sold-directly-by-azure-region-availability?pivots=provisioned>  
+- **R4 · Foundry Models region & provisioned availability (`[M]`):** <https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure-region-availability?pivots=provisioned>  
   Regional availability matrix for Global Provisioned, Data Zone Provisioned, and Regional Provisioned (PTU-M) deployments.
 - **R5 · Azure OpenAI reasoning models (`[M]`):** <https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/reasoning#preserve-reasoning-across-calls>  
   Documents `reasoning.context` (`all_turns` default on `gpt-5.6` and `gpt-6` vs. `current_turn` on `5.4`/`5.5`) and Responses API requirement for combining tools with active reasoning on `gpt-5.6`; see also [Microsoft Q&A #5942997](https://learn.microsoft.com/en-us/answers/questions/5942997/gpt-5-6-implicit-prompt-caching-and-explicit-promp).

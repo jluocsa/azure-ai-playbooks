@@ -17,6 +17,7 @@ const FORBIDDEN_RULES = [
   { id: 'INTERNAL_ORG_JARGON', regex: /\b(US\s+PRO|Majors\s+ATU|\bATU\b|\bCSU\b|CONFIRM\s+WITH\s+PG)\b/g, reason: 'Internal org/sales/PG-queue acronym must be generalized' },
   { id: 'INTERNAL_EMAIL', regex: /[a-z0-9._%+-]+@(microsoft|deloitte)\.com\b/gi, reason: 'Internal/customer email address detected' },
   { id: 'RAW_GUID', regex: /\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/gi, reason: 'Raw tenant/subscription/object GUID detected' },
+  { id: 'INTERNAL_FEED', regex: /pkgs\.visualstudio\.com/gi, reason: 'Internal Azure Artifacts npm feed URL must not appear in lockfiles or docs' },
   { id: 'ACTIVE_IDF', regex: /\b(AuthorizationSeparableAgentMemory|AdaptiveTopologyControlPlane|96311)\b/gi, reason: 'Un-cleared invention-disclosure identifier detected' },
 ]
 
@@ -40,7 +41,13 @@ for (const file of files) {
   const ext = path.extname(file).toLowerCase()
   const rel = path.relative(ROOT, file)
 
-  if (TEXT_EXTS.has(ext) && path.basename(file) !== 'package-lock.json') {
+  if (path.basename(file) === 'package-lock.json') {
+    const content = fs.readFileSync(file, 'utf8')
+    const feedMatches = [...content.matchAll(/pkgs\.visualstudio\.com/gi)]
+    for (const m of feedMatches) {
+      violations.push(`${rel}: [INTERNAL_FEED] "${m[0]}" — Lockfile must resolve from public registry.npmjs.org`)
+    }
+  } else if (TEXT_EXTS.has(ext)) {
     scannedTextFiles++
     const content = fs.readFileSync(file, 'utf8')
     for (const rule of FORBIDDEN_RULES) {
@@ -50,25 +57,31 @@ for (const file of files) {
       }
     }
   } else if (ext === '.pdf') {
-    scannedPdfFiles++
-    try {
-      const pyOut = execFileSync(
-        'python',
-        [
-          '-c',
-          'import sys, pypdf; r = pypdf.PdfReader(sys.argv[1]); print("\\n".join(p.extract_text() or "" for p in r.pages)); print(str(dict(r.metadata or {})))',
-          file,
-        ],
-        { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } }
-      )
+    let pyOut = null
+    for (const pyBin of ['python3', 'python']) {
+      try {
+        pyOut = execFileSync(
+          pyBin,
+          [
+            '-c',
+            'import sys, pypdf; r = pypdf.PdfReader(sys.argv[1]); print("\\n".join(p.extract_text() or "" for p in r.pages)); print(str(dict(r.metadata or {})))',
+            file,
+          ],
+          { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } }
+        )
+        break
+      } catch {}
+    }
+    if (pyOut === null) {
+      violations.push(`${rel}: [UNVERIFIED_PDF] Could not extract PDF text (install python3 + pypdf or replace binary PDF with a Markdown subpage)`)
+    } else {
+      scannedPdfFiles++
       for (const rule of FORBIDDEN_RULES) {
         const matches = [...pyOut.matchAll(rule.regex)]
         for (const m of matches) {
           violations.push(`${rel} (PDF text/metadata): [${rule.id}] "${m[0]}" — ${rule.reason}`)
         }
       }
-    } catch {
-      // Python/pypdf optional in minimal CI; HTML source in papers-src/ is always scanned above
     }
   }
 }

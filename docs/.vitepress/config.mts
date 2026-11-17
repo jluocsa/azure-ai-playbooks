@@ -1,35 +1,17 @@
 import { defineConfig } from 'vitepress'
-import { withMermaid } from 'vitepress-plugin-mermaid'
 
 const base = process.env.VITEPRESS_BASE || '/azure-ai-playbooks/'
 
-export default withMermaid(
-  defineConfig({
-    title: 'Azure AI Playbooks',
-    description:
-      'Customer-Zero validated architecture playbooks, readiness gates, PTU sizing economics, and repeatable delivery kits for Microsoft Foundry and Azure AI.',
-    lang: 'en-US',
-    base,
-    cleanUrls: true,
-    lastUpdated: true,
+export default defineConfig({
+  title: 'Azure AI Playbooks',
+  description:
+    'Customer-Zero validated architecture playbooks, readiness gates, PTU sizing economics, and repeatable delivery kits for Microsoft Foundry and Azure AI.',
+  lang: 'en-US',
+  base,
+  cleanUrls: true,
+  lastUpdated: true,
 
-    vite: {
-      optimizeDeps: {
-        include: [
-          'mermaid',
-          'fastdom',
-          'dayjs',
-          'debug',
-          'cytoscape',
-          '@braintree/sanitize-url',
-        ],
-      },
-      ssr: {
-        noExternal: ['mermaid', 'vitepress-plugin-mermaid'],
-      },
-    },
-
-    themeConfig: {
+  themeConfig: {
       nav: [
         { text: 'Home', link: '/' },
         { text: 'Operating Model', link: '/operating-model/industrialization-pipeline' },
@@ -122,15 +104,32 @@ export default withMermaid(
 
         '/papers/': [
           {
-            text: 'Deliverables & Kits',
+            text: 'White Papers & Engineering Kits',
             items: [
-              { text: 'White Papers & Copy-Ready Kits', link: '/papers/' },
+              { text: 'Overview & Index', link: '/papers/' },
+              {
+                text: 'White Paper · Prompt Caching on GPT-5.6+',
+                link: '/papers/foundry-prompt-caching-gpt56-whitepaper',
+              },
+              {
+                text: 'Kits · PCR001–006 Linter & KQL Gate',
+                link: '/papers/engineering-kits',
+              },
+              {
+                text: 'Template · C1–C15 PR Readiness Checklist',
+                link: '/papers/migration-readiness-checklist',
+              },
+            ],
+          },
+          {
+            text: 'Related Playbooks & Scoping',
+            items: [
               {
                 text: 'Playbook 01 · Prompt Caching & PTU',
                 link: '/playbooks/prompt-caching/start/01-executive-thesis',
               },
               {
-                text: 'Repeatable Delivery Scope',
+                text: 'Repeatable 3-Week Delivery Scope',
                 link: '/operating-model/delivery-scoping',
               },
             ],
@@ -235,7 +234,7 @@ export default withMermaid(
                 link: '/operating-model/delivery-scoping',
               },
               {
-                text: 'Executive PDF & Copy-Ready Kits',
+                text: 'White Paper & Copy-Ready Kits',
                 link: '/papers/',
               },
             ],
@@ -260,5 +259,4 @@ export default withMermaid(
         copyright: 'CC BY 4.0 (Docs & White Papers) · MIT (Code, KQL & Lint Kits)',
       },
     },
-  })
-)
+})

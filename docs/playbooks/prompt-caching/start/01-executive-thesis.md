@@ -13,7 +13,8 @@ outline: [2, 3]
   owners="John Luo (@jluocsa) · Co-Authors Welcome"
   verified="2026-11-16"
   status="Live v1.0"
-  pdfHref="/papers/foundry-prompt-caching-gpt56-whitepaper-v1.0.pdf"
+  paperHref="/papers/foundry-prompt-caching-gpt56-whitepaper"
+  paperLabel="Single-Page White Paper →"
 />
 
 Enterprise AI applications—such as **rubric-scoring / control-evaluation agents** and multi-node document-review workflows—assemble multi-thousand-token prompts combining system policies, skill catalogs, tool schemas, workspace context cards, and retrieved grounding evidence.
