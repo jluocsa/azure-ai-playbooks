@@ -83,6 +83,23 @@
   box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06);
 }
 
+/* Prevent Hero CTA button overflow on narrow (<640px) mobile viewports */
+@media (max-width: 639px) {
+  .VPHero .actions {
+    width: 100%;
+  }
+  .VPHero .action {
+    max-width: 100%;
+  }
+  .VPHero .VPButton {
+    white-space: normal;
+    line-height: 1.35;
+    padding: 8px 16px;
+    height: auto;
+    text-align: center;
+  }
+}
+
 /* Prevent horizontal navbar overflow on 768px–1060px tablet/split-screen widths */
 @media (min-width: 768px) and (max-width: 1060px) {
   .VPNavBar .VPNavBarTitle .title {

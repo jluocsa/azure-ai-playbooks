@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
 
 const base = process.env.VITEPRESS_BASE || '/azure-ai-playbooks/'
+const siteOrigin = 'https://jluocsa.github.io'
+const siteUrl = `${siteOrigin}${base}`
 
 export default defineConfig({
   title: 'Azure AI Playbooks',
@@ -10,6 +12,48 @@ export default defineConfig({
   base,
   cleanUrls: true,
   lastUpdated: true,
+
+  sitemap: {
+    hostname: siteUrl,
+  },
+
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
+    ['link', { rel: 'icon', href: `${base}favicon.ico` }],
+    ['meta', { name: 'theme-color', content: '#0f766e' }],
+    ['meta', { property: 'og:site_name', content: 'Enterprise Azure AI Playbooks' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:locale', content: 'en_US' }],
+    ['meta', { property: 'og:image', content: `${siteUrl}og-card.png` }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:image:alt', content: 'Enterprise Azure AI Playbooks — Solution Industrialization Hub' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:image', content: `${siteUrl}og-card.png` }],
+  ],
+
+  transformHead({ pageData }) {
+    const relPath = pageData.relativePath
+      .replace(/index\.md$/, '')
+      .replace(/\.md$/, '')
+    const canonicalUrl = `${siteUrl}${relPath}`
+    const pageTitle = pageData.frontmatter.layout === 'home'
+      ? 'Enterprise Azure AI Playbooks | Solution Industrialization Hub'
+      : `${pageData.title} | Azure AI Playbooks`
+    const pageDesc =
+      pageData.description ||
+      pageData.frontmatter.description ||
+      'Customer-Zero validated architecture playbooks, readiness gates, PTU sizing economics, and repeatable delivery kits for Microsoft Foundry and Azure AI.'
+
+    return [
+      ['link', { rel: 'canonical', href: canonicalUrl }],
+      ['meta', { property: 'og:title', content: pageTitle }],
+      ['meta', { property: 'og:description', content: pageDesc }],
+      ['meta', { property: 'og:url', content: canonicalUrl }],
+      ['meta', { name: 'twitter:title', content: pageTitle }],
+      ['meta', { name: 'twitter:description', content: pageDesc }],
+    ]
+  },
 
   themeConfig: {
       nav: [

@@ -73,7 +73,7 @@ Multi-tenant knowledge-work platforms—spanning **statutory audit and assurance
 
 ---
 
-## 1. Ethical-Wall Cache Isolation & Zero Cross-Engagement Bleed
+## 1. Ethical-Wall Cache Isolation & Zero Cross-Engagement Bleed {#1-ethical-wall-cache-isolation-zero-cross-engagement-bleed}
 
 When engineering teams propose shared prompt caching to Information Security, Risk, or Independence reviewers, the first question raised is: *"If thousands of client engagements share a Foundry deployment, can Client A's cached context ever leak into Client B's response?"*
 
@@ -130,7 +130,7 @@ Because **GPT-5.6 on PTU-M** uses automatic prefix caching and does **not** supp
 
 ---
 
-## 2. Chargeback-vs-Cache-Key Separation (Preventing Cardinality Collapse)
+## 2. Chargeback-vs-Cache-Key Separation (Preventing Cardinality Collapse) {#2-chargeback-vs-cache-key-separation-preventing-cardinality-collapse}
 
 Multi-practice platforms typically allocate AI infrastructure spend back to individual client engagements (`engagement_code` / `matter_id` / `cost_center`).
 
@@ -176,7 +176,7 @@ AppDependencies
 
 ---
 
-## 3. Seasonal Filing-Cliff & Deal-Sprint PTU Economics
+## 3. Seasonal Filing-Cliff & Deal-Sprint PTU Economics {#3-seasonal-filing-cliff-deal-sprint-ptu-economics}
 
 Advisory, tax, audit, and regulatory platforms rarely exhibit flat annual concurrency. A typical practice runs a steady **10-month baseline** punctuated by a **2-month statutory filing or fiscal-close cliff** (`4×` peak concurrency). Provisioning annual PTU reservations for the 2-month peak leaves `75%` of reserved capacity idle for 10 months.
 
@@ -203,7 +203,7 @@ Reserve annual **Global / Data Zone PTU-M** for your **P90 off-peak monthly conc
 
 ---
 
-## 4. Workpaper-Grade Reproducibility Across Model Retirements
+## 4. Workpaper-Grade Reproducibility Across Model Retirements {#4-workpaper-grade-reproducibility-across-model-retirements}
 
 In regulated assurance, tax, legal, and compliance workflows, LLM outputs support workpapers subject to Second-Line Risk, peer partner review, or external regulator inspection. Model transitions (`gpt-4.1` / `o3-mini` / `gpt-5.4` &rarr; `gpt-5.6` / `gpt-6` / `gpt-6.1`) must preserve **evidentiary defensibility**, not just aggregate benchmark scores.
 
