@@ -25,7 +25,10 @@ TARGET_EXTS = {".py", ".ts", ".js", ".cs"}
 VOLATILE_TOKENS_RE = re.compile(
     r"\b(datetime\.now|datetime\.utcnow|DateTime\.UtcNow|Date\.now|time\.time|uuid4|request_timestamp)\b"
 )
-DYNAMIC_KEY_RE = re.compile(r"(user_id|request_id|uuid4|trace_id)", re.IGNORECASE)
+DYNAMIC_KEY_RE = re.compile(
+    r"(user_id|request_id|uuid4|trace_id|engagement_id|engagement_code|matter_id|client_id|cost_center)",
+    re.IGNORECASE,
+)
 GPT56_OR_6_RE = re.compile(r"gpt-(5\.6|6(\.1)?)", re.IGNORECASE)
 PTU_56_RE = re.compile(r"gpt-5[.-]6.*ptu|ptu.*gpt-5[.-]6", re.IGNORECASE)
 

@@ -78,5 +78,5 @@ Mapping those two axes onto **Prompt Positions 1–6** maximizes KV-cache reuse 
 | **6** | **Retrieved RAG chunks & live MCP outputs** | Azure AI Search, vector stores, live APIs | **High (Always-Live)** | Fetch live at use-time and place at the prompt tail alongside the current user question. **Never place a breakpoint after Pos 6.** |
 
 ::: tip Context Precedence Without Breaking the Prefix
-Declare static precedence instructions (*"Workspace scope `L2` governs domain constraints; User `L1` governs output formatting"*) in **Position 1**, while keeping the actual `L2` and `L1` payloads in **Positions 4 and 5**.
+Declare static precedence instructions (*"Workspace scope `L2` governs domain constraints; User `L1` governs output formatting"*) in **Position 1**, while keeping the actual `L2` and `L1` payloads in **Positions 4 and 5**. For strict client/matter ethical walls—including **Posture A Zero-Client-Cache Mode** (`explicit` mode with Breakpoint #1 on `T0` only, writing zero client tokens to KV cache)—see [Regulated Multi-Engagement & Compliance Platforms](/playbooks/prompt-caching/profiles/regulated-multi-engagement#1-ethical-wall-cache-isolation-zero-cross-engagement-bleed).
 :::

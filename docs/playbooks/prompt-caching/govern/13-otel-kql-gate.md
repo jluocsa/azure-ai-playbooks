@@ -21,6 +21,7 @@ Production agent telemetry flows through OpenTelemetry into workspace-based Azur
 | `gen_ai.usage.input_tokens` & `output_tokens` | Integer counters | Baseline prompt and generation volume. |
 | `gen_ai.usage.cached_tokens` & `cache_write_tokens` | Integer counters (`0` when absent) | Computes hit rate, cached share, and read/write amortization ratio. |
 | `gen_ai.latency.ttft_ms`, `thread_id`, `agent.node_name` | Numeric latency + correlation IDs | Correlates multi-node turns and tracks TTFT p95 gains. |
+| `finops.practice` & `finops.cost_center` *(optional)* | Pseudonymized practice / cost-center tags | Allocates normalized PTU-M & Standard spillover tokens per engagement without polluting `prompt_cache_key` ([Profile](/playbooks/prompt-caching/profiles/regulated-multi-engagement#2-chargeback-vs-cache-key-separation-preventing-cardinality-collapse)). |
 
 ::: info Metadata-Only Telemetry & Cardinality Guardrails
 - **Zero raw prompt logging by default:** Prompt-caching governance requires *only* numeric token counters and the static `prompt_cache_key`—never raw customer documents or prompt text.

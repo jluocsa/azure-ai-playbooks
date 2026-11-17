@@ -19,6 +19,7 @@ Capture **orders of magnitude and architectural boundaries** during a 30-minute 
 | **3. Deployment SKU Mix** | Will production run **Provisioned Throughput (PTU-M)**, **Standard (PAYG)**, or **PTU-M primary + Standard spillover** behind APIM? | On **GPT-5.6 PTU-M**, explicit breakpoints are unsupported—APIM must strip breakpoint fields on the PTU leg while preserving `prompt_cache_key`. |
 | **4. Prefix Size & Peak Concurrency** | Do static instructions + tool schemas exceed **1,024 tokens**, and does any prompt family exceed **~15 RPM** at peak? | Prefixes `<1,024` tokens cannot cache (disable writes on 5.6+); families `>15 RPM` require deterministic `prompt_cache_key` sharding (`N = ⌈RPM ÷ 12⌉`). |
 | **5. Existing CI & Telemetry Maturity** | Does the team already run automated prompt evaluations (`pytest` / DeepEval / Foundry Evals) and emit OpenTelemetry spans to Application Insights? | Determines effort needed to wire `PCR001–006` static linting, 2-pass cache assertions, and the Log Analytics KQL release gate. |
+| **6. Ethical Walls, Chargeback & Seasonal Cliffs** | Does the platform isolate concurrent client engagements/matters, bill tokens to `cost_center` codes, or face `3×–6×` filing/audit-close traffic surges? | Activates the [Regulated Multi-Engagement & Compliance Profile](/playbooks/prompt-caching/profiles/regulated-multi-engagement): `Posture A` zero-client-cache mode, out-of-band OTel chargeback, seasonal PTU + PAYG spillover math, and `C-WP1–C-WP4` workpaper parity gates. |
 
 ## 2. Phased 3-Week Delivery Blueprint
 

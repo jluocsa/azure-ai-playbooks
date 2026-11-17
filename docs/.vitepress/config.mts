@@ -41,6 +41,10 @@ export default withMermaid(
               link: '/playbooks/prompt-caching/start/01-executive-thesis',
             },
             {
+              text: 'Profile · Regulated Multi-Engagement & Compliance',
+              link: '/playbooks/prompt-caching/profiles/regulated-multi-engagement',
+            },
+            {
               text: '02 · Multi-Backend APIM Gateway & Spillover (Charter)',
               link: '/playbooks/series-charters/#playbook-02-multi-backend-foundry-apim-gateway-spillover',
             },
@@ -76,6 +80,10 @@ export default withMermaid(
           {
             text: 'Playbook Series & Ownership',
             items: [
+              {
+                text: 'Profile · Regulated Multi-Engagement',
+                link: '/playbooks/prompt-caching/profiles/regulated-multi-engagement',
+              },
               {
                 text: 'Series Roadmap & Co-Author Charters',
                 link: '/playbooks/series-charters/',
@@ -212,8 +220,12 @@ export default withMermaid(
             ],
           },
           {
-            text: 'Reference',
+            text: 'Workload Profiles & Reference',
             items: [
+              {
+                text: 'Profile · Regulated Multi-Engagement & Compliance',
+                link: '/playbooks/prompt-caching/profiles/regulated-multi-engagement',
+              },
               {
                 text: '15 · Verification Matrix & Sources',
                 link: '/playbooks/prompt-caching/sources',

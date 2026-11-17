@@ -20,7 +20,7 @@ Use a deterministic four-part key format <span class="ev-badge ev-arch">[Arch]</
 
 - Compute `N = max(1, ceil(Peak_RPM / 12))` (for example, `8` shards for a `90 RPM` node: `doc-review:summarizer:v12:shard-0` through `shard-7`).
 - Route deterministically by `shard = hash(thread_id) % N` so all turns of a conversation hit the same shard.
-- **Never** embed `user_id`, `request_id`, or `uuid4()` in `prompt_cache_key` unless the prefix itself is user-unique.
+- **Never** embed `user_id`, `request_id`, `uuid4()`, or internal chargeback IDs (`engagement_id`, `matter_id`, `client_id`, `cost_center`) in `prompt_cache_key`—pass chargeback metadata out-of-band via APIM headers and OpenTelemetry spans ([see Chargeback-vs-Cache-Key Separation](/playbooks/prompt-caching/profiles/regulated-multi-engagement#2-chargeback-vs-cache-key-separation-preventing-cardinality-collapse)).
 
 ## 2. Breakpoint Budgets & Minimum TTL Rules `[M]`
 

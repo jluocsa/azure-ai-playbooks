@@ -49,6 +49,7 @@ Official product documentation explains individual service features one page at 
 - **2.56× PTU capacity spike prevented:** Preserved an 80% prefix cache hit rate (`170 PTUs` required on `gpt-5.6-terra` at the 5-PTU increment vs. `435 PTUs` on an un-tuned `0%`-hit migration).
 - **6 middleware cache-miss defects eliminated pre-cutover:** Caught early Pos-1 live timestamps, non-deterministic `tools[]` serialization, per-request `response_format` mutations, unsharded `>15 RPM` cache keys, `5.6` PTU-M breakpoint mismatches, and unpinned `reasoning.context = "all_turns"` inflation across 8 agent archetypes.
 - **Executable 7-layer governance:** Packaged static AST/regex CI linting (`pcr_lint.py`), 2-pass DeepEval cache parity assertions, and two-regime Log Analytics KQL gates into a repeatable 3-week readiness kit.
+- **Cross-industry [Regulated Multi-Engagement & Compliance Profile](/playbooks/prompt-caching/profiles/regulated-multi-engagement):** Reference patterns for assurance, tax, legal, advisory, and financial compliance platforms—covering **ethical-wall cache isolation** (`Posture A` zero-client-cache vs. `Posture B` scoped `L2`), **chargeback-vs-cache-key separation**, **seasonal filing-cliff PTU math** (`71%` hybrid TCO savings), and **workpaper reproducibility (`C-WP1–C-WP4`)**.
 :::
 
 ## Five Quality Signals Built Into Every Playbook

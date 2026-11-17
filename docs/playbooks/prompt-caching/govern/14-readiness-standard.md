@@ -32,7 +32,7 @@ Adopt criteria **`C1`–`C15`** as a standing release gate across the 7-layer pi
 | **C14** | `ALL` | PTU / TPM capacity sizing updated using measured `PeakNormTPM` hit rate and Chapter 04 model-specific PTU formulas. | Right-sized PTU model | FinOps / Sizing |
 | **C15** | `ALL` | All validation and sizing artifacts recorded in the Model Migration Readiness Record for engineering and FinOps sign-off. | Readiness record | Release Gate |
 
-*Scope legend:* `ALL` = all GPT-5.6+ deployments; `STD / 6+` = Standard 5.6+ and PTU-M GPT-6+; `PTU 5.6` = Provisioned Throughput on GPT-5.6.
+*Scope legend:* `ALL` = all GPT-5.6+ deployments; `STD / 6+` = Standard 5.6+ and PTU-M GPT-6+; `PTU 5.6` = Provisioned Throughput on GPT-5.6. For regulated audit, tax, legal, and compliance workpapers, augment `C12` and `C15` with the four **Workpaper Defensibility Controls (`C-WP1–C-WP4`)** in [Regulated Multi-Engagement & Compliance Platforms](/playbooks/prompt-caching/profiles/regulated-multi-engagement#4-workpaper-grade-reproducibility-across-model-retirements).
 
 ## Four-Stage Standing Governance Lifecycle `[Arch]`
 

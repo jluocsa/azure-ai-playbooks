@@ -18,7 +18,7 @@ Download runnable zero-dependency CLI scanner: <a :href="withBase('/kits/pcr_lin
 
 | Rule ID | Defect Flagged | AST / Regex Detection Specification (Python, C#, TypeScript) | Readiness Item |
 | :--- | :--- | :--- | :--- |
-| `PCR001` | Missing or per-user/unsharded `prompt_cache_key` | Calls to `responses.create` / `chat.completions.create` on `gpt-5.6*` or `gpt-6*` missing `prompt_cache_key`, or interpolating `user_id`, `request_id`, or `uuid4()` into the key. | `C6`, `C7` |
+| `PCR001` | Missing or high-cardinality `prompt_cache_key` | Calls to `responses.create` / `chat.completions.create` on `gpt-5.6*` or `gpt-6*` missing `prompt_cache_key`, or interpolating `user_id`, `request_id`, `uuid4()`, `engagement_id`, `matter_id`, `client_id`, or `cost_center` into the key. | `C6`, `C7` |
 | `PCR002` | Dynamic values in Position 1 system/developer prompt | Interpolation of `datetime.now`, `DateTime.UtcNow`, `Date.now`, `timestamp`, `uuid`, or per-request headers inside the leading `system` / `developer` block. | `C2` |
 | `PCR003` | Non-deterministic `tools[]` or JSON schema order | Building `tools` from unsorted sets/dicts or serializing tool/context JSON in Positions 1–4 without `sort_keys=True` (or canonical C#/TS serializer settings). | `C3` |
 | `PCR004` | RAG chunks or live MCP data ahead of static prefix | Prompt builders placing `rag_chunks`, `search_results`, or live enterprise MCP outputs before static instructions, ontology blocks, or tool schemas. | `C4` |

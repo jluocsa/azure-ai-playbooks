@@ -47,3 +47,7 @@ Enterprise production workloads commonly pair **Provisioned Throughput (PTU-M)**
 ## 4. Live PTU & Cache-Shard Estimator
 
 <PtuCalculator />
+
+::: tip Seasonal Filing-Cliff & Deal-Sprint Workloads
+For advisory, assurance, tax, legal, and compliance platforms with `3×–6×` statutory filing or fiscal-close surges, avoid sizing 12-month PTU reservations for peak-month cliffs—see [Seasonal Filing-Cliff & Deal-Sprint PTU Economics](/playbooks/prompt-caching/profiles/regulated-multi-engagement#3-seasonal-filing-cliff-deal-sprint-ptu-economics) (`71%` hybrid PTU-M + Standard spillover savings).
+:::

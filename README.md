@@ -24,7 +24,7 @@ playbook-hub/
 │  │  └─ theme/                      # Executive styling, <PlaybookMeta /> & <PtuCalculator />
 │  ├─ operating-model/               # Industrialization pipeline, governance & 3-week delivery scope
 │  ├─ playbooks/
-│  │  ├─ prompt-caching/             # Playbook 01 (Live): GPT-5.6+ Prompt Caching & PTU Readiness
+│  │  ├─ prompt-caching/             # Playbook 01 (Live): GPT-5.6+ Prompt Caching, PTU & Regulated Multi-Engagement Profile
 │  │  └─ series-charters/            # Playbooks 02 & 03: Scoped charters open for co-author leads
 │  ├─ papers/                        # Executive White Paper & Copy-Ready Engineering Kits index
 │  └─ public/
