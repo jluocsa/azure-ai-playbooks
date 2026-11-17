@@ -21,6 +21,24 @@ const FORBIDDEN_RULES = [
   { id: 'ACTIVE_IDF', regex: /\b(AuthorizationSeparableAgentMemory|AdaptiveTopologyControlPlane|96311)\b/gi, reason: 'Un-cleared invention-disclosure identifier detected' },
 ]
 
+// Optional gitignored local-only term list (.sanitize-local.txt, one term per line)
+const localTermsPath = path.join(ROOT, '.sanitize-local.txt')
+if (fs.existsSync(localTermsPath)) {
+  const extra = fs
+    .readFileSync(localTermsPath, 'utf8')
+    .split(/\r?\n/)
+    .map(s => s.trim())
+    .filter(s => s && !s.startsWith('#'))
+    .map(s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  if (extra.length > 0) {
+    FORBIDDEN_RULES.push({
+      id: 'LOCAL_DENYLIST',
+      regex: new RegExp(`\\b(${extra.join('|')})\\b`, 'g'),
+      reason: 'Local denylist identifier must be stripped',
+    })
+  }
+}
+
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP_DIRS.has(entry.name)) continue
@@ -37,7 +55,7 @@ let scannedTextFiles = 0
 let scannedPdfFiles = 0
 
 for (const file of files) {
-  if (path.resolve(file) === SELF) continue
+  if (path.resolve(file) === SELF || path.resolve(file) === localTermsPath) continue
   const ext = path.extname(file).toLowerCase()
   const rel = path.relative(ROOT, file)
 
