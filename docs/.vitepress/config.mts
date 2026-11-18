@@ -300,8 +300,9 @@ export default defineConfig({
 
       footer: {
         message:
-          'Community Architecture Playbooks — Customer-Zero validated, sanitized, and grounded in public Microsoft Learn documentation.',
-        copyright: 'CC BY 4.0 (Docs & White Papers) · MIT (Code, KQL & Lint Kits)',
+          'Enterprise Azure AI Architecture Playbooks — Customer-Zero validated patterns grounded in public <a href="https://learn.microsoft.com/en-us/azure/foundry/" target="_blank" rel="noopener">Microsoft Learn</a> documentation.',
+        copyright:
+          '&copy; 2026 Contributors &middot; Documentation under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> &middot; Code &amp; Engineering Kits under <a href="https://github.com/jluocsa/azure-ai-playbooks/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>',
       },
     },
 })

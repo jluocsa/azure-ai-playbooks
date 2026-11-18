@@ -1067,6 +1067,23 @@
   border-top: 1px solid var(--vp-c-divider) !important;
 }
 
+.VPFooter .message,
+.VPFooter .copyright {
+  font-size: 0.82rem !important;
+  line-height: 1.65 !important;
+  color: var(--vp-c-text-2) !important;
+}
+
+.VPFooter a {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.VPFooter a:hover {
+  text-decoration: underline !important;
+}
+
 /* Prevent horizontal navbar overflow on 768px–1080px tablet/split-screen widths */
 @media (min-width: 768px) and (max-width: 1080px) {
   .VPNavBar .VPNavBarTitle .logo {
