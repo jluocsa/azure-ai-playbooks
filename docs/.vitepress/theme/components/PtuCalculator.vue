@@ -240,74 +240,94 @@ const calc = computed(() => {
 
 <style scoped>
 .ptu-calc {
-  margin: 18px 0;
-  padding: 16px;
+  margin: 20px 0;
+  padding: 18px 20px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 10px;
+  border-top: 3px solid var(--vp-c-brand-1);
+  border-radius: 8px;
   background: var(--vp-c-bg-soft);
+  box-shadow: 0 2px 8px rgba(0, 29, 61, 0.04);
 }
 .ptu-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 .ptu-inputs {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
-  gap: 10px 14px;
-  margin-bottom: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px 14px;
+  margin-bottom: 16px;
 }
 .ptu-inputs label {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 0.8rem;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--vp-c-text-2);
 }
 .ptu-inputs input,
 .ptu-inputs select {
-  padding: 6px 8px;
+  padding: 7px 10px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 6px;
+  border-radius: 5px;
   background: var(--vp-c-bg);
   color: var(--vp-c-text-1);
-  font-size: 0.88rem;
+  font-family: var(--vp-font-family-base);
+  font-size: 0.86rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.ptu-inputs input:focus,
+.ptu-inputs select:focus {
+  outline: none;
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 2px var(--vp-c-brand-soft);
 }
 .ptu-results {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 .ptu-card {
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 12px 14px;
+  border-radius: 6px;
   border: 1px solid var(--vp-c-divider);
+  border-top: 3px solid #64748b;
   background: var(--vp-c-bg);
 }
 .ptu-card.highlight {
-  border-left: 4px solid var(--vp-c-brand-1);
+  border-top-color: var(--vp-c-brand-1);
 }
 .ptu-card.warn {
-  border-left: 4px solid #d97706;
+  border-top-color: #d83b01;
 }
 .ptu-card .k {
   display: block;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   color: var(--vp-c-text-2);
 }
 .ptu-card .v {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  margin: 2px 0;
+  letter-spacing: -0.02em;
+  margin: 4px 0 3px;
+  color: var(--vp-c-text-1);
 }
 .ptu-card .sub {
   font-size: 0.75rem;
   color: var(--vp-c-text-2);
 }
 .ptu-note {
-  margin: 10px 0 0;
+  margin: 12px 0 0;
   font-size: 0.8rem;
   color: var(--vp-c-text-2);
 }

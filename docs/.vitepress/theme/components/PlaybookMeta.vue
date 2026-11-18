@@ -55,28 +55,31 @@ function printPage() {
 
 <style scoped>
 .pb-meta {
-  margin: 14px 0 20px;
-  padding: 12px 16px;
+  margin: 16px 0 24px;
+  padding: 14px 18px;
   border: 1px solid var(--vp-c-divider);
-  border-left: 4px solid var(--vp-c-brand-1);
+  border-top: 3px solid var(--vp-c-brand-1);
   border-radius: 8px;
   background: var(--vp-c-bg-soft);
-  font-size: 0.85rem;
+  box-shadow: 0 1px 3px rgba(0, 29, 61, 0.04);
+  font-size: 0.84rem;
 }
 .pb-meta-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px 16px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px 18px;
 }
 .pb-label {
   display: block;
-  font-size: 0.7rem;
+  margin-bottom: 2px;
+  font-size: 0.69rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--vp-c-text-2);
 }
 .pb-pdf a {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--vp-c-brand-1);
   text-decoration: none;
 }
@@ -84,16 +87,18 @@ function printPage() {
   text-decoration: underline;
 }
 .pb-print-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-top: 2px;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border: 1px solid var(--vp-c-brand-1);
   border-radius: 5px;
-  background: var(--vp-c-brand-soft);
+  background: var(--vp-c-bg);
   color: var(--vp-c-brand-1);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 .pb-print-btn:hover {
   background: var(--vp-c-brand-1);

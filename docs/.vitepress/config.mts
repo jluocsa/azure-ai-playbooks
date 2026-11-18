@@ -20,7 +20,7 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
     ['link', { rel: 'icon', href: `${base}favicon.ico` }],
-    ['meta', { name: 'theme-color', content: '#0f766e' }],
+      ['meta', { name: 'theme-color', content: '#0078d4' }],
     ['meta', { property: 'og:site_name', content: 'Enterprise Azure AI Playbooks' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
@@ -37,7 +37,7 @@ export default defineConfig({
       .replace(/index\.md$/, '')
       .replace(/\.md$/, '')
     const canonicalUrl = `${siteUrl}${relPath}`
-    const pageTitle = pageData.frontmatter.layout === 'home'
+      const pageTitle = pageData.relativePath === 'index.md'
       ? 'Enterprise Azure AI Playbooks | Solution Industrialization Hub'
       : `${pageData.title} | Azure AI Playbooks`
     const pageDesc =
@@ -56,6 +56,7 @@ export default defineConfig({
   },
 
   themeConfig: {
+      logo: '/favicon.svg',
       nav: [
         { text: 'Home', link: '/' },
         { text: 'Operating Model', link: '/operating-model/industrialization-pipeline' },
