@@ -11,7 +11,7 @@ import { withBase } from 'vitepress'
 
 <PageBrief
   stage="validate"
-  audience="CSAs & App/DevOps Engineers"
+  audience="Users & App/DevOps Engineers"
   readTime="3 min read"
   problem="Even after a clean migration, a routine pull request adding a timestamp to system instructions can silently break caching in production."
   takeaway="Block regressions in PR CI with two fast gates: zero-dependency static linting (pcr_lint.py) + a 2-pass DeepEval cache-hit assertion."

@@ -11,7 +11,7 @@ import { withBase } from 'vitepress'
 
 <PageBrief
   stage="govern"
-  audience="CSAs, SREs & FinOps"
+  audience="Users, SREs & FinOps"
   readTime="4 min read"
   problem="Security teams block raw prompt logging, while standard token dashboards miss per-shard cache hit rates and GPT-6 vs. GPT-5.6 PTU math."
   takeaway="Emit metadata-only OpenTelemetry counters (zero prompt text) and run the copy-ready KQL query below to track DeployPeakNormTPM and shard SLOs."

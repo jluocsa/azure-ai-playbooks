@@ -7,7 +7,7 @@ description: Evidence tagging standards, 3-gate pre-publication controls, multi-
 
 <PageBrief
   stepLabel="OPERATING MODEL · 02"
-  audience="All CSAs & Architecture Reviewers"
+  audience="All Users & Architecture Reviewers"
   readTime="3 min read"
   problem="Field wikis lose trust fast when opinions blur into product SLAs or customer identifiers slip into shared docs."
   takeaway="Every page enforces 4 explicit source tags ([M], [Arch], [Agree], [Validate]) and passes 3 automated PR gates before merge."

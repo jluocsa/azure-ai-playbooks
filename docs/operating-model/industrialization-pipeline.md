@@ -7,7 +7,7 @@ description: How Customer-Zero architecture engagements are sanitized, reviewed,
 
 <PageBrief
   stepLabel="OPERATING MODEL · 01"
-  audience="Leadership & All CSAs"
+  audience="Leadership & All Users"
   readTime="3 min read"
   problem="Flagship accounts solve hard Azure AI cutover problems 1:1, while peer teams hit the exact same bottlenecks weeks later."
   takeaway="A governed 5-stage factory turns one Customer-Zero win into sanitized, Learn-verified 1:N playbooks, 3-week scopes, and MIT kits."
@@ -79,7 +79,7 @@ This hub provides the **Solution Industrialization mechanism** that converts bes
 
 1. **Customer-Zero Validation:** A candidate pattern is eligible only after its math, wire payloads, and operational gates have been exercised against a real enterprise architecture (never drafted purely by paraphrasing documentation).
 2. **Automated Sanitization Gate (`npm run check:sanitized`):** Strips all customer identifiers, application names, stakeholder names, engagement dates, internal organization/sales acronyms, and tenant/subscription GUIDs across Markdown, HTML, KQL, and rendered PDFs.
-3. **Peer Architecture Review (ARB):** Verifies every product statement against published Microsoft Learn documentation (<span class="ev-badge ev-m">[M]</span>) and separates product facts from recommended CSA patterns (<span class="ev-badge ev-arch">[Arch]</span>) and proposed release SLOs (<span class="ev-badge ev-agree">[Agree]</span>).
+3. **Peer Architecture Review (ARB):** Verifies every product statement against published Microsoft Learn documentation (<span class="ev-badge ev-m">[M]</span>) and separates product facts from recommended user patterns (<span class="ev-badge ev-arch">[Arch]</span>) and proposed release SLOs (<span class="ev-badge ev-agree">[Agree]</span>).
 4. **Tri-Path IP & Channel Disposition:**
    - **Path A — Patent / Invention Disclosure Hold:** Novel algorithms or system mechanisms with non-obvious technical distinctions are routed confidentially for IP evaluation *before* any public commit (preventing accidental prior-art disclosure).
    - **Path B — Product Group & Official Docs Upstream:** Service-boundary gaps, telemetry seams, and cross-service reference architectures are packaged as concise Product Group engineering briefs or pull requests into Microsoft Learn / Azure Architecture Center.

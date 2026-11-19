@@ -33,7 +33,7 @@ const journey = [
       </div>
       <div v-else class="pb-brief-kicker">
         <span class="pb-brief-dot"></span>
-        <span>{{ props.stepLabel || 'EXECUTIVE & CSA BRIEF' }}</span>
+        <span>{{ props.stepLabel || 'EXECUTIVE & USER BRIEF' }}</span>
       </div>
 
       <div class="pb-brief-badges">
@@ -56,7 +56,7 @@ const journey = [
         <p>{{ props.takeaway }}</p>
       </div>
       <div class="pb-brief-col">
-        <span class="pb-col-label">How a CSA Uses This</span>
+        <span class="pb-col-label">How Users Use This</span>
         <p>{{ props.csaUse }}</p>
       </div>
     </div>

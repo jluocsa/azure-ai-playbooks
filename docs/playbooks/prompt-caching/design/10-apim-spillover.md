@@ -7,7 +7,7 @@ description: Reference topology pairing right-sized PTU-M base capacity with SKU
 
 <PageBrief
   stage="design"
-  audience="CSAs & Platform/Gateway Architects"
+  audience="Users & Platform/Gateway Architects"
   readTime="3 min read"
   problem="Forwarding identical JSON payloads across GPT-5.6 PTU-M and Standard PAYG fails when PTU-M rejects explicit breakpoints or drops cache keys on 429 failover."
   takeaway="Size base PTU-M for steady demand, strip breakpoint fields only on the GPT-5.6 PTU-M leg in APIM, and preserve prompt_cache_key on 429 spillover."

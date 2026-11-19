@@ -17,7 +17,7 @@ description: Copy-ready Pull Request and Azure DevOps cutover readiness template
 
 <PageBrief
   stepLabel="CUTOVER SIGN-OFF TEMPLATE"
-  audience="CSAs, Release Managers & FinOps"
+  audience="Users, Release Managers & FinOps"
   readTime="2 min setup"
   problem="Production model cutovers need a clear, auditable sign-off record across App Engineering, SRE, and FinOps."
   takeaway="Provides both a printable ARB sign-off checklist and a 1-click copyable Markdown template for GitHub PRs or Azure DevOps work items."

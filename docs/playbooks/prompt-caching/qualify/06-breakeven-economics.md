@@ -7,7 +7,7 @@ description: Mathematical break-even analysis balancing 1.25x cache-write weight
 
 <PageBrief
   stage="qualify"
-  audience="CSAs & FinOps Reviewers"
+  audience="Users & FinOps Reviewers"
   readTime="3 min read"
   problem="FinOps teams worry that GPT-5.6+ cache-write fees (1.25× weight) could make prompt caching more expensive than uncached calls."
   takeaway="Just ONE subsequent cache read (1:1 ratio) already cuts effective prefix cost by 32.5%–35%; at our 10:1 target gate, cost drops by 80%–84%."

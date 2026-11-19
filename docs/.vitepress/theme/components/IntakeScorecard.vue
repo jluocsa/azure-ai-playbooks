@@ -93,7 +93,7 @@ async function copyScopeSummary() {
   <div class="isc-card no-print">
     <div class="isc-head">
       <div>
-        <span class="isc-kicker">INTERACTIVE CSA DISCOVERY TOOL &middot; 30-MINUTE TRIAGE</span>
+        <span class="isc-kicker">INTERACTIVE USER DISCOVERY TOOL &middot; 30-MINUTE TRIAGE</span>
         <strong class="isc-title">Live Customer Intake Qualification Scorecard</strong>
       </div>
       <button type="button" class="isc-copy-btn" @click="copyScopeSummary">

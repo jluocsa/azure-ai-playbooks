@@ -7,7 +7,7 @@ description: Why Model 2 stateless enterprise web backends depend on Azure OpenA
 
 <PageBrief
   stage="start"
-  audience="CSAs & App Architects"
+  audience="Users & App Architects"
   readTime="3 min read"
   problem="Cloud container backends forget everything between HTTP requests—resending 4,000–12,000 instruction and tool tokens on every single turn."
   takeaway="In a stateless web service (Model 2), Azure OpenAI prompt caching is your cross-turn memory; breaking the prefix pays full cost 3–8× per user turn."

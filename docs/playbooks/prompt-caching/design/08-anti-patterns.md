@@ -7,7 +7,7 @@ description: Six concrete code-level causes of cache misses in agent harnesses a
 
 <PageBrief
   stage="design"
-  audience="CSAs & App Engineers"
+  audience="Users & App Engineers"
   readTime="4 min read"
   problem="One dynamic character—like a timestamp or unsorted JSON key—in the first 1,024 tokens silently forces 0% cache hits across all calls."
   takeaway="Strip timestamps and user IDs from Pos 1–3, sort tools[] and JSON keys deterministically, keep response_format static, and push RAG chunks to Pos 6."

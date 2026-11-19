@@ -1134,7 +1134,7 @@
 }
 
 /* ==========================================================================
-   PageBrief.vue & IntakeScorecard.vue — CSA Subpage Visual System
+   PageBrief.vue & IntakeScorecard.vue — User Subpage Visual System
    ========================================================================== */
 
 .pb-brief {
@@ -1628,7 +1628,7 @@
   color: var(--vp-c-text-3);
 }
 
-/* Interactive 4-Tab CSA Field Workbench */
+/* Interactive 4-Tab Field Workbench */
 .eo-workbench {
   border-radius: 10px;
   border: 1px solid var(--ms-border-subtle);

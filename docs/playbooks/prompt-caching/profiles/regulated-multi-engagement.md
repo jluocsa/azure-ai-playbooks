@@ -18,7 +18,7 @@ description: Reference architecture for multi-engagement advisory, assurance, ta
 
 <PageBrief
   stepLabel="WORKLOAD PROFILE · REGULATED PLATFORMS"
-  audience="CSAs, CISOs & Regulated Practice Leads"
+  audience="Users, CISOs & Regulated Practice Leads"
   readTime="5 min read"
   problem="Audit, tax, legal, and financial platforms fear cross-client cache bleed, break cache keys with cost-center IDs, and overspend on 4× seasonal filing cliffs."
   takeaway="Combine Posture A/B ethical walls, out-of-band FinOps headers, 110-PTU base + PAYG filing-cliff spillover (71% TCO saved), and C-WP1–C-WP4 workpaper parity."

@@ -7,7 +7,7 @@ description: Embedding GPT-5.6+ prompt caching and PTU gates directly into the 7
 
 <PageBrief
   stage="validate"
-  audience="CSAs, QA & Release Leads"
+  audience="Users, QA & Release Leads"
   readTime="4 min read"
   problem="Teams verify model accuracy in staging but never test prompt caching under concurrency—discovering 0% hits and 429 storms only after cutover."
   takeaway="Embed caching checks directly into your existing unit, eval, load, and observability pipeline using the 7-step pre-cutover validation protocol."

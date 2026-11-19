@@ -7,7 +7,7 @@ description: Exact wire elements in the cached prefix, 1,024-token threshold, re
 
 <PageBrief
   stage="start"
-  audience="CSAs & Platform Engineers"
+  audience="Users & Platform Engineers"
   readTime="4 min read"
   problem="Teams assume GPT-5.6+ caches prompts the exact same way GPT-4o did—missing new write fees, reasoning token replay, and PTU breakpoint rules."
   takeaway="First 1,024 wire tokens must match character-for-character (starting with response_format), reasoning.context defaults to all_turns on 5.6/6, and cache writes can be billed."

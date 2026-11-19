@@ -7,7 +7,7 @@ description: Wire-level configuration for Responses API and Chat Completions API
 
 <PageBrief
   stage="design"
-  audience="CSAs & App/API Engineers"
+  audience="Users & App/API Engineers"
   readTime="4 min read"
   problem="High-traffic prompts (>15 RPM) overflow a single cache bucket, while putting user_id or cost_center in prompt_cache_key destroys reuse."
   takeaway="Use {app}:{node}:{ver}:shard-{0..N-1} where N = ceil(Peak_RPM / 12), route by hash(thread_id) % N, and copy the exact JSON payloads below."

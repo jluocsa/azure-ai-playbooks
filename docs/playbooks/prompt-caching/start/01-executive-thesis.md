@@ -18,18 +18,18 @@ description: Architectural thesis and verified engineering answers for migrating
 
 <PageBrief
   stage="start"
-  audience="All Levels · Executive & CSA"
+  audience="All Levels · Executive & Users"
   readTime="3 min read"
   problem="Upgrading apps from GPT-4 / o3-mini to GPT-5.6, GPT-6, and GPT-6.1 without prompt discipline causes a 2.56× jump in PTU capacity and slower responses."
   takeaway="Keep static instructions and sorted tools first, shard cache keys above 15 RPM, match controls to SKU, and enforce automated CI + KQL gates."
   csaUse="Start customer migration conversations here—walk through the 5-box diagram below, then pick the matching intake, ADS, or CI kit row."
 />
 
-## At a Glance: What Problem This Solves & How Another CSA Uses It
+## At a Glance: What Problem This Solves & How Users Use It
 
 When enterprise AI applications—such as **document-review, compliance, and multi-step agent platforms**—upgrade from `gpt-4.x` or `o3-mini` to **GPT-5.6, GPT-6, and GPT-6.1**, dynamic fields placed near the top of prompts (timestamps, user IDs, or unsorted tool lists) silently break Azure’s prompt cache. Without prefix discipline, teams hit a **2.56× spike in required PTU capacity** (`2.60×` raw TPM), slower time-to-first-token (TTFT), and unamortized cache-write charges.
 
-This playbook was produced through the hub’s [Five-Stage Industrialization Factory](/operating-model/industrialization-pipeline)—taking a proven **Customer-Zero** fix, stripping all customer identifiers, verifying every product boundary against Microsoft Learn, and packaging a repeatable architecture and automation kit for every peer CSA.
+This playbook was produced through the hub’s [Five-Stage Industrialization Factory](/operating-model/industrialization-pipeline)—taking a proven **Customer-Zero** fix, stripping all customer identifiers, verifying every product boundary against Microsoft Learn, and packaging a repeatable architecture and automation kit for all users.
 
 <div class="arch-diagram">
   <svg viewBox="0 0 760 154" role="img" aria-labelledby="pb1-glance-title pb1-glance-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
@@ -74,7 +74,7 @@ This playbook was produced through the hub’s [Five-Stage Industrialization Fac
   </svg>
 </div>
 
-| How Another CSA Uses This Playbook | Where to Start |
+| How Users Use This Playbook | Where to Start |
 | :--- | :--- |
 | **1. Qualify an Account in 30 Minutes** — Score retiring models, stateless turn hydration, PTU vs. PAYG mix, `>15 RPM` concurrency, and client-isolation requirements. | [3-Week Delivery Scope & Intake Scorecard](/operating-model/delivery-scoping) · [Hub Visual Overview](/) |
 | **2. Lead an Architecture Design Session (ADS)** — Walk customer architects and FinOps through prefix ordering, right-sized PTU math, APIM spillover, or ethical-wall isolation. | [04 · PTU Calculator](../qualify/04-ptu-sizing-math) · [07 · Prefix Order](../design/07-prefix-taxonomy) · [10 · APIM Spillover](../design/10-apim-spillover) · [Regulated Profile](../profiles/regulated-multi-engagement) |

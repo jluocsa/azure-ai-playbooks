@@ -24,9 +24,9 @@ Before opening or merging a Pull Request, verify all three gates:
 
 ## 3. Page Structure Standard (Readable Across All Audience Levels)
 
-Every chapter and subpage follows a **progressive-disclosure pattern** so leadership, account CSAs, and deep engineers can all use the same page:
+Every chapter and subpage follows a **progressive-disclosure pattern** so leadership, practitioners, and users across roles can all use the same page:
 
-1. **Top `<PageBrief />` Card:** Concise 3-column summary (*Why It Matters*, *Key Takeaway*, *How a CSA Uses This*) with journey stage indicator and read time.
+1. **Top `<PageBrief />` Card:** Concise 3-column summary (*Why It Matters*, *Key Takeaway*, *How Users Use This*) with journey stage indicator and read time.
 2. **Visual Mental Model:** Clean horizontal SVG architecture/flow diagram (using `.arch-diagram`) before any wide specification tables.
 3. **Verified Engineering Detail:** Evidence-tagged (`[M]`, `[Arch]`, `[Agree]`, `[Validate]`) matrices, formulas, and copy-ready code/KQL snippets.
 
@@ -37,7 +37,7 @@ Every chapter and subpage follows a **progressive-disclosure pattern** so leader
   readTime="3 min read"
   problem="Concise customer problem solved on this page."
   takeaway="Single-sentence architectural rule or bottom-line conclusion."
-  csaUse="How a peer CSA uses this page in a customer ADS or delivery sprint."
+  csaUse="How users apply this page in an architecture review or delivery sprint."
 />
 ```
 

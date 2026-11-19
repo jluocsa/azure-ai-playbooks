@@ -264,7 +264,7 @@ async function copyEstimate() {
   <div class="ptu-calc">
     <div class="ptu-header">
       <div>
-        <span class="ptu-kicker">INTERACTIVE CSA SIZING TOOL &middot; LIVE CUSTOMER ESTIMATOR</span>
+        <span class="ptu-kicker">INTERACTIVE USER SIZING TOOL &middot; LIVE CUSTOMER ESTIMATOR</span>
         <strong class="ptu-title">Two-Regime PTU &amp; Cache-Shard Calculator (Global / Data Zone)</strong>
       </div>
       <div class="ptu-header-right">

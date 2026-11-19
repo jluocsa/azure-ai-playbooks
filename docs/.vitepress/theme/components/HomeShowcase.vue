@@ -105,7 +105,7 @@ const catalog = [
     badgeTone: 'scope',
     title: '3-Week Readiness Engagement Scope & Intake Scorecard',
     summary:
-      'Turnkey 5-dimension intake qualification scorecard and Week 1–3 delivery blueprint with named CSA, App Lead, SRE, and FinOps responsibilities and exit deliverables.',
+      'Turnkey 5-dimension intake qualification scorecard and Week 1–3 delivery blueprint with named user, App Lead, SRE, and FinOps responsibilities and exit deliverables.',
     tags: ['30-Min Intake', '3-Week Scope', 'RACI'],
     href: '/operating-model/delivery-scoping',
     cta: 'View Delivery Blueprint',
@@ -159,7 +159,7 @@ const signals = [
   {
     code: '[M] [Arch] [Agree] [Validate]',
     title: '1. Four-Tier Source Discipline',
-    body: 'Every technical statement separates published Microsoft Learn specs from CSA reference patterns, target gate SLOs, and subscription-level probes.',
+    body: 'Every technical statement separates published Microsoft Learn specs from reference architecture patterns, target gate SLOs, and subscription-level probes.',
   },
   {
     code: 'Customer-Zero Validated',

@@ -11,7 +11,7 @@ import { withBase } from 'vitepress'
 
 <PageBrief
   stepLabel="EXECUTABLE MIT KITS"
-  audience="CSAs, App Engineers & SREs"
+  audience="Users, App Engineers & SREs"
   readTime="2 min setup"
   problem="Writing static AST linters and normalized PTU KQL queries from scratch slows down every customer engagement."
   takeaway="Zero-dependency pcr_lint.py scans Python/TS/JS/C# repos in seconds, and ptu-cache-release-gate.kql computes two-regime PTU & shard SLOs."

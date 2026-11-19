@@ -7,7 +7,7 @@ description: Turnkey intake qualification scorecard and 3-week structured delive
 
 <PageBrief
   stepLabel="PROACTIVE DELIVERY · 03"
-  audience="CSAs, Delivery Leads & Account Teams"
+  audience="Users, Delivery Leads & Account Teams"
   readTime="4 min read"
   problem="Proactive customer readiness work stalls when teams lack a fast qualification filter or a bounded week-by-week delivery plan."
   takeaway="Qualify exposure in 30 minutes using 6 boundary questions, then execute a structured 3-week engagement with concrete exit artifacts."

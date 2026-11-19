@@ -146,7 +146,7 @@ const playbookOneBox = [
             <span>Active v1.0 &middot; Last Verified: <strong>2026-11-18 21:21 PST</strong></span>
           </span>
           <span class="eo-live-sep" aria-hidden="true">&middot;</span>
-          <span class="eo-live-meta">100% Sanitized &middot; Grounded in Published Microsoft Learn &middot; Open for CSA Co-Authors</span>
+          <span class="eo-live-meta">100% Sanitized &middot; Grounded in Published Microsoft Learn &middot; Open for User Co-Authors</span>
         </div>
 
         <div class="eo-kpi-strip">

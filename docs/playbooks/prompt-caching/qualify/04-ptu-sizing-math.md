@@ -7,7 +7,7 @@ description: Standard vs. PTU-M breakpoint rules, official Microsoft Learn PTU s
 
 <PageBrief
   stage="qualify"
-  audience="CSAs, FinOps & Capacity Leads"
+  audience="Users, FinOps & Capacity Leads"
   readTime="4 min read"
   problem="Sizing PTU reservations using old GPT-4o formulas—or assuming GPT-5.6 PTU-M supports breakpoints—leads to 2.56× capacity shortfalls or HTTP 400 errors."
   takeaway="GPT-5.6 deducts cached tokens 100% from PTU draw (no breakpoints on PTU-M), while GPT-6/6.1 support PTU-M breakpoints with 0.1x/0.05x read and 1.25x write weights."

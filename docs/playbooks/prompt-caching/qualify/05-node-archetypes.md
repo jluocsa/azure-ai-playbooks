@@ -7,7 +7,7 @@ description: Eight recurring enterprise LLM node archetypes with prefix sizes, p
 
 <PageBrief
   stage="qualify"
-  audience="CSAs & Solution Architects"
+  audience="Users & Solution Architects"
   readTime="3 min read"
   problem="Multi-agent workflows often contain 6–12 LLM nodes, and teams waste weeks refactoring low-traffic nodes or paying write fees on tiny prompts."
   takeaway="Rank all nodes by Peak RPM × Prefix Tokens, refactor the top 3 high-volume nodes first (75–85% of spend), and disable cache writes below 1,024 tokens."
