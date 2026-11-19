@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { withBase } from 'vitepress'
 
 const copiedPitch = ref(false)
-const selectedPersonaId = ref('account-csa')
 
 function printOverview() {
   if (typeof window !== 'undefined') window.print()
@@ -100,130 +99,6 @@ const playbookOneBox = [
     cta: 'Inspect White Paper & Kits',
   },
 ]
-
-interface CsaPersona {
-  id: string
-  tab: string
-  badge: string
-  headline: string
-  intro: string
-  steps: { title: string; detail: string }[]
-  primaryLabel: string
-  primaryHref: string
-  secondaryLabel: string
-  secondaryHref: string
-}
-
-const csaPersonas: CsaPersona[] = [
-  {
-    id: 'account-csa',
-    tab: 'Account & Delivery CSAs',
-    badge: 'DISCOVERY & 3-WEEK SCOPING',
-    headline: 'Qualify Customer Risk in 30 Minutes & Scope a Turnkey 3-Week Delivery',
-    intro:
-      'Built for account CSAs and delivery leads preparing for model retirement conversations or capacity planning calls—no deep compiler or KQL background required.',
-    steps: [
-      {
-        title: '1. Run the Live 6-Question Intake Scorecard',
-        detail: 'Toggle the customer’s target models, traffic, and SKU mix live on the call and 1-click copy the scope summary.',
-      },
-      {
-        title: '2. Estimate Right-Sized PTUs in Seconds',
-        detail: 'Select a preset in the interactive calculator to show exact PTUs saved vs. an un-tuned 0%-hit migration.',
-      },
-      {
-        title: '3. Propose the Bounded 3-Week Blueprint',
-        detail: 'Walk through clear Week 1–3 deliverables and CSA / App / SRE / FinOps responsibilities.',
-      },
-    ],
-    primaryLabel: 'Open Live Intake Scorecard',
-    primaryHref: '/operating-model/delivery-scoping',
-    secondaryLabel: 'Open Live PTU Calculator',
-    secondaryHref: '/playbooks/prompt-caching/qualify/04-ptu-sizing-math',
-  },
-  {
-    id: 'principal-csa',
-    tab: 'Specialist & Principal CSAs',
-    badge: 'ADS, CISO & ARCHITECTURE REVIEWS',
-    headline: 'Lead High-Trust Architecture Design Sessions & Regulated CISO Reviews',
-    intro:
-      'Designed for senior and principal architects guiding cross-service enterprise designs, Review Boards, and strict client-confidentiality boundaries.',
-    steps: [
-      {
-        title: '1. Walk Through Pos 1–6 Prefix & Gateway Seams',
-        detail: 'Align static T0 instructions, sorted tools[], scoped L2/L1 context, and SKU-aware APIM 429 spillover.',
-      },
-      {
-        title: '2. Clear CISO & FinOps Objections Quickly',
-        detail: 'Present Posture A zero-client-cache isolation, out-of-band chargeback headers, and 71% filing-cliff TCO math.',
-      },
-      {
-        title: '3. Hand Over the Printable ARB White Paper',
-        detail: 'Export the consolidated single-page architecture edition with R1–R6 Microsoft Learn citations.',
-      },
-    ],
-    primaryLabel: 'Read Single-Page White Paper',
-    primaryHref: '/papers/foundry-prompt-caching-gpt56-whitepaper',
-    secondaryLabel: 'Explore Regulated Profile',
-    secondaryHref: '/playbooks/prompt-caching/profiles/regulated-multi-engagement',
-  },
-  {
-    id: 'hands-on-csa',
-    tab: 'Hands-On App & Infra CSAs',
-    badge: 'CODE, GATEWAY & TELEMETRY SPRINT',
-    headline: 'Drop Zero-Dependency Linters, Wire Payloads & KQL Gates Straight into CI/CD',
-    intro:
-      'Ready-to-run MIT engineering kits for CSAs pairing directly with customer Python, TypeScript, C#, APIM, and SRE teams.',
-    steps: [
-      {
-        title: '1. Scan Customer Code in Under 2 Seconds',
-        detail: 'Run python3 pcr_lint.py ./src to flag early timestamps, unsorted JSON schemas, and unsharded cache keys.',
-      },
-      {
-        title: '2. Copy Verified Responses & Chat JSON Payloads',
-        detail: 'Apply exact Pos 1–6 middleware refactoring, >15 RPM key sharding, and 2-pass DeepEval cache assertions.',
-      },
-      {
-        title: '3. Deploy the Two-Regime App Insights KQL Gate',
-        detail: 'Track DeployPeakNormTPM and per-shard hit rates using metadata-only OpenTelemetry counters.',
-      },
-    ],
-    primaryLabel: 'Grab Python & KQL Kits',
-    primaryHref: '/papers/engineering-kits',
-    secondaryLabel: 'Copy C1–C15 PR Template',
-    secondaryHref: '/papers/migration-readiness-checklist',
-  },
-  {
-    id: 'practice-lead',
-    tab: 'Practice Leads & Co-Authors',
-    badge: '1:N PORTFOLIO LEVERAGE & CO-AUTHORING',
-    headline: 'Scale Field Breakthroughs Across Teams & Co-Author Upcoming Playbooks',
-    intro:
-      'Structured so practice leaders track real engineering outcomes (not vanity clicks) and domain specialists get full Track Lead attribution.',
-    steps: [
-      {
-        title: '1. Standardize on Outcome-Driven Adoption Signals',
-        detail: 'Track ADS accelerated, pre-cutover regressions caught, and repeatable 3-week engagements scoped.',
-      },
-      {
-        title: '2. Protect Confidentiality & Patentable IP Automatically',
-        detail: 'Every PR passes automated sanitization (check-sanitized.mjs), peer ARB review, and tri-path IP screening.',
-      },
-      {
-        title: '3. Nominate Co-Authors for Playbooks 02 & 03',
-        detail: 'Open Track Lead charters for Multi-Backend APIM Gateway (02) and Multi-Region Foundry BCP (03).',
-      },
-    ],
-    primaryLabel: 'View Co-Author Series Charters',
-    primaryHref: '/playbooks/series-charters/',
-    secondaryLabel: 'Read Governance & Quality Model',
-    secondaryHref: '/operating-model/governance-and-quality',
-  },
-]
-
-const activePersona = computed(
-  () => csaPersonas.find(p => p.id === selectedPersonaId.value) || csaPersonas[0]
-)
 </script>
 
 <template>
@@ -719,61 +594,6 @@ const activePersona = computed(
               Clear roles across Solution Architect, Customer App Lead, Platform/SRE, and FinOps keep engagements bounded to 3 weeks.
             </text>
           </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- Closing: Interactive CSA Field Workbench by Role & Level -->
-    <section class="eo-section eo-section-alt no-print">
-      <div class="ms-container">
-        <div class="eo-step-header">
-          <span class="eo-step-badge">BUILT FOR EVERY CSA LEVEL &amp; ROLE</span>
-          <h2 class="eo-h2">Pick Your Role: Your 3-Step Field Runbook</h2>
-          <p class="eo-sub">
-            Whether you are qualifying an account in 30 minutes, leading an Architecture Review Board, pairing on code,
-            or scaling 1:N practice impact—select your role below for the exact starting kit.
-          </p>
-        </div>
-
-        <div class="eo-workbench">
-          <div class="eo-wb-tabs" role="tablist" aria-label="Select CSA role">
-            <button
-              v-for="p in csaPersonas"
-              :key="p.id"
-              type="button"
-              role="tab"
-              :aria-selected="selectedPersonaId === p.id"
-              :class="['eo-wb-tab', { 'is-active': selectedPersonaId === p.id }]"
-              @click="selectedPersonaId = p.id"
-            >
-              {{ p.tab }}
-            </button>
-          </div>
-
-          <div class="eo-wb-panel" role="tabpanel">
-            <div class="eo-wb-top">
-              <div>
-                <span class="eo-box-tag">{{ activePersona.badge }}</span>
-                <h3 class="eo-wb-headline">{{ activePersona.headline }}</h3>
-                <p class="eo-wb-intro">{{ activePersona.intro }}</p>
-              </div>
-              <div class="eo-wb-actions">
-                <a class="ms-btn ms-btn-primary" :href="withBase(activePersona.primaryHref)">
-                  {{ activePersona.primaryLabel }} &rarr;
-                </a>
-                <a class="ms-btn ms-btn-secondary" :href="withBase(activePersona.secondaryHref)">
-                  {{ activePersona.secondaryLabel }} &rarr;
-                </a>
-              </div>
-            </div>
-
-            <div class="eo-wb-steps">
-              <div v-for="st in activePersona.steps" :key="st.title" class="eo-wb-step">
-                <strong>{{ st.title }}</strong>
-                <p>{{ st.detail }}</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
