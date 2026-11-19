@@ -72,7 +72,7 @@ const catalog = [
     badgeTone: 'profile',
     title: 'Regulated Multi-Engagement & Compliance Platforms',
     summary:
-      'CISO-approvable ethical-wall postures (Posture A zero-client-cache vs. Posture B scoped L2), out-of-band FinOps chargeback headers, seasonal filing-cliff math, and workpaper reproducibility.',
+      'Security-verified ethical-wall postures (Posture A zero-client-cache vs. Posture B scoped L2), out-of-band chargeback headers, seasonal filing-cliff math, and workpaper reproducibility.',
     tags: ['Ethical Walls', 'FinOps KQL', 'Audit / Tax / Legal', 'C-WP1–C-WP4'],
     href: '/playbooks/prompt-caching/profiles/regulated-multi-engagement',
     cta: 'Explore Workload Profile',
@@ -83,8 +83,8 @@ const catalog = [
     badgeTone: 'paper',
     title: 'Consolidated Architecture White Paper (Print-Ready)',
     summary:
-      'Executive and Architecture Review Board single-page reader consolidating core thesis, prefix diagrams, PTU formulas, break-even tables, and verified Microsoft Learn citations with Save-as-PDF layout.',
-    tags: ['ARB Sign-Off', 'Print / PDF Ready', 'Role Guide'],
+      'Single-page architecture reference consolidating core thesis, prefix diagrams, PTU formulas, break-even tables, and verified Microsoft Learn citations with Save-as-PDF layout.',
+    tags: ['ARB Sign-Off', 'Print / PDF Ready', 'Section Guide'],
     href: '/papers/foundry-prompt-caching-gpt56-whitepaper',
     cta: 'Read White Paper',
     icon: 'doc',
@@ -105,8 +105,8 @@ const catalog = [
     badgeTone: 'scope',
     title: '3-Week Readiness Engagement Scope & Intake Scorecard',
     summary:
-      'Turnkey 5-dimension intake qualification scorecard and Week 1–3 delivery blueprint with named user, App Lead, SRE, and FinOps responsibilities and exit deliverables.',
-    tags: ['30-Min Intake', '3-Week Scope', 'RACI'],
+      'Turnkey 6-dimension intake qualification scorecard and Week 1–3 delivery blueprint with clear workstream boundaries and concrete exit deliverables.',
+    tags: ['30-Min Intake', '3-Week Scope', 'Workstreams'],
     href: '/operating-model/delivery-scoping',
     cta: 'View Delivery Blueprint',
     icon: 'compass',
@@ -181,7 +181,7 @@ const signals = [
 
 <template>
   <div class="ms-landing">
-    <!-- Practitioner Deep-Dive Hero + Reference Stack -->
+    <!-- Architecture Catalog Hero + Reference Stack -->
     <section class="ms-hero">
       <div class="ms-hero-bg" aria-hidden="true"></div>
       <div class="ms-container ms-hero-grid">
@@ -189,7 +189,7 @@ const signals = [
           <a :href="withBase('/')" class="th-back-link no-print">&larr; Back to Hub Overview</a>
           <div class="ms-eyebrow">
             <span class="ms-eyebrow-dot"></span>
-            <span>PRACTITIONER DEEP DIVE &middot; FULL TECHNICAL HUB</span>
+            <span>ARCHITECTURE CATALOG &middot; FULL TECHNICAL HUB</span>
           </div>
           <h1 class="ms-hero-title">
             Architecture Catalog &amp;
@@ -273,8 +273,7 @@ const signals = [
             <h2 class="ms-section-title">Playbooks, Workload Profiles &amp; Executable Kits</h2>
           </div>
           <p class="ms-section-sub">
-            Structured for Principal Architects, Application Engineers, SREs, and FinOps reviewers—from
-            30-minute intake scoping to automated pull-request gates.
+            End-to-end reference assets spanning 30-minute intake scoping, capacity math, and automated pull-request gates.
           </p>
         </div>
 

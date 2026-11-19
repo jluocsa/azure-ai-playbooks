@@ -7,14 +7,13 @@ description: Multi-author playbook roadmap across Foundry Model Migration, Multi
 
 <PageBrief
   stepLabel="SERIES ROADMAP & CO-AUTHORING"
-  audience="All Users & Domain Specialists"
   readTime="3 min read"
   problem="Enterprise Azure AI readiness spans model efficiency, gateway routing, and regional resiliency—too broad for one monolith."
-  takeaway="Three modular playbooks cover the full stack, with named Track Lead and Co-Author roles open for users."
-  csaUse="Use Playbook 01 today, or nominate yourself as a Track Lead / Co-Author on Playbook 02 (APIM) or Playbook 03 (BCP) with full byline credit."
+  takeaway="Three modular playbooks cover the full stack, with named Track Lead and Co-Author charters open for contribution."
+  csaUse="Apply Playbook 01 today, or claim a Track Lead / Co-Author charter on Playbook 02 (APIM) or Playbook 03 (BCP) with full byline credit."
 />
 
-This hub is structured as a **three-part Enterprise Foundry Architecture Series**, where each playbook owns one layer of production readiness and is led by named specialist co-authors.
+This hub is structured as a **three-part Enterprise Foundry Architecture Series**, where each playbook owns one layer of production readiness and is maintained with clear track ownership.
 
 <div class="arch-diagram">
   <svg viewBox="0 0 700 162" role="img" aria-labelledby="ser-title ser-desc">
@@ -28,22 +27,22 @@ This hub is structured as a **three-part Enterprise Foundry Architecture Series*
     <text x="360" y="62" font-size="8.1" font-weight="700" fill="#0f766e">SKU-aware breakpoint stripping &amp; 429 spillover</text>
     <rect x="12" y="68" width="676" height="38" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
     <text x="24" y="84" font-size="9.6" font-weight="700" fill="#183e62">Playbook 02 (CHARTERED) &middot; Multi-Backend Foundry APIM Gateway, Circuit-Breaker Failover &amp; Token Governance</text>
-    <text x="24" y="98" font-size="8.4" fill="#334e68">Co-Author Track Lead: Open for User Nomination &bull; Assets: Bicep gateway policies, Retry-After breakers, SSE streaming guards</text>
+    <text x="24" y="98" font-size="8.4" fill="#334e68">Co-Author Charter: Open for Nomination &bull; Assets: Bicep gateway policies, Retry-After breakers, SSE streaming guards</text>
     <path d="M350 122 V108" stroke="#0f766e" stroke-width="1.8" marker-end="url(#arr-ser)"/>
     <text x="360" y="118" font-size="8.1" font-weight="700" fill="#183e62">Regional stamp resiliency &amp; active-passive RTO/RPO</text>
     <rect x="12" y="124" width="676" height="34" rx="6" fill="#fff7eb" stroke="#d97706" stroke-width="1.4"/>
     <text x="24" y="139" font-size="9.5" font-weight="700" fill="#92400e">Playbook 03 (CHARTERED) &middot; Multi-Region Foundry Business Continuity (BCP), Quota Strategy &amp; Failover Drills</text>
-    <text x="24" y="151" font-size="8.3" fill="#92400e">Co-Author Track Lead: Open for User Nomination &bull; Assets: Data Zone vs. Regional PTU matrix, game-day failover runbook</text>
+    <text x="24" y="151" font-size="8.3" fill="#92400e">Co-Author Charter: Open for Nomination &bull; Assets: Data Zone vs. Regional PTU matrix, game-day failover runbook</text>
   </svg>
 </div>
 
 ## Series Overview & Ownership Matrix
 
-| Playbook | Status | Customer-Zero Provenance (Sanitized) | Track Lead / Co-Authors | Companion Assets |
+| Playbook | Status | Customer-Zero Provenance (Sanitized) | Track Ownership | Companion Assets |
 | :--- | :--- | :--- | :--- | :--- |
-| **[01 · Prompt Caching & PTU Readiness on GPT-5.6+](/playbooks/prompt-caching/start/01-executive-thesis)** | **Live `v1.0`** | Enterprise stateless multi-node document review & rubric-scoring platform | **Lead:** John Luo (`@jluocsa`)<br>*Open to domain co-authors* | Single-page printable white paper, PTU/shard calculator, `PCR001–006` CLI linter, KQL gate |
-| **02 · Multi-Backend Foundry APIM Gateway & Spillover** | **Chartered (`v0.1` intake)** | Multi-region enterprise GenAI gateway fronting pooled Foundry accounts & PTU/PAYG tiers | **Co-Author Track Lead: Open for User Nomination**<br>*(Advisor: `@jluocsa`)* | Bicep gateway patterns, native `Retry-After` circuit-breaker policies, SSE streaming guards |
-| **03 · Multi-Region Foundry BCP & Failover Drills** | **Chartered (`v0.1` intake)** | Regulated enterprise business-continuity architecture across paired & non-paired regions | **Co-Author Track Lead: Open for User Nomination**<br>*(Advisor: `@jluocsa`)* | Data Zone vs. Regional PTU matrix, failover runbook, synthetic health probes |
+| **[01 · Prompt Caching & PTU Readiness on GPT-5.6+](/playbooks/prompt-caching/start/01-executive-thesis)** | **Live `v1.0`** | Enterprise stateless multi-node document review & rubric-scoring platform | **Lead:** John Luo (`@jluocsa`)<br>*Open to co-authors* | Single-page printable white paper, PTU/shard calculator, `PCR001–006` CLI linter, KQL gate |
+| **02 · Multi-Backend Foundry APIM Gateway & Spillover** | **Chartered (`v0.1` intake)** | Multi-region enterprise GenAI gateway fronting pooled Foundry accounts & PTU/PAYG tiers | **Open for Co-Author Nomination**<br>*(`@jluocsa`)* | Bicep gateway patterns, native `Retry-After` circuit-breaker policies, SSE streaming guards |
+| **03 · Multi-Region Foundry BCP & Failover Drills** | **Chartered (`v0.1` intake)** | Regulated enterprise business-continuity architecture across paired & non-paired regions | **Open for Co-Author Nomination**<br>*(`@jluocsa`)* | Data Zone vs. Regional PTU matrix, failover runbook, synthetic health probes |
 
 ---
 
@@ -77,11 +76,11 @@ This hub is structured as a **three-part Enterprise Foundry Architecture Series*
 Review [`CONTRIBUTING.md`](https://github.com/jluocsa/azure-ai-playbooks/blob/main/CONTRIBUTING.md) for the 3-gate pre-publication workflow (Sanitization &rarr; Peer Architecture Review &rarr; IP/Channel Disposition). Co-authors receive full frontmatter and PDF cover attribution and own their track directory via `.github/CODEOWNERS`.
 :::
 
-## How Users Publish or Co-Author in 5 Steps
+## Publishing & Co-Authoring in 5 Steps
 
 <div class="arch-diagram">
   <svg viewBox="0 0 760 144" role="img" aria-labelledby="coauth-title coauth-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
-    <title id="coauth-title">Five-Step User Co-Authoring Workflow</title>
+    <title id="coauth-title">Five-Step Co-Authoring Workflow</title>
     <desc id="coauth-desc">Shows 1 Pick a Track or Pattern, 2 Strip Customer Context, 3 Author Visual Chapter with PageBrief, 4 Run Automated Verify CLI, and 5 Merge with Named Bylines.</desc>
     <defs><marker id="coauth-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
     <rect x="8" y="14" width="132" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
@@ -103,7 +102,7 @@ Review [`CONTRIBUTING.md`](https://github.com/jluocsa/azure-ai-playbooks/blob/ma
     <text x="326" y="49" font-size="8.2" fill="#334e68">Lead each page with</text>
     <text x="326" y="62" font-size="8.2" fill="#334e68">&lt;PageBrief /&gt; + clean</text>
     <text x="326" y="75" font-size="8.2" fill="#334e68">SVG diagram &amp; [M] links</text>
-    <text x="326" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Easy for All Levels]</text>
+    <text x="326" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Consistent Layout]</text>
     <path d="M452 59 H470" stroke="#0f766e" stroke-width="1.7" marker-end="url(#coauth-arr)"/>
     <rect x="474" y="14" width="134" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
     <text x="482" y="33" font-size="9.2" font-weight="700" fill="#183e62">4. Run Verify CLI</text>
@@ -115,9 +114,9 @@ Review [`CONTRIBUTING.md`](https://github.com/jluocsa/azure-ai-playbooks/blob/ma
     <rect x="630" y="14" width="122" height="90" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.5"/>
     <text x="638" y="33" font-size="9.2" font-weight="700" fill="#115e59">5. Publish &amp; Own</text>
     <text x="638" y="49" font-size="8.2" fill="#334e68">Named byline on web</text>
-    <text x="638" y="62" font-size="8.2" fill="#334e68">&amp; printable PDF +</text>
+    <text x="638" y="62" font-size="8.2" fill="#334e68">&amp; white paper +</text>
     <text x="638" y="75" font-size="8.2" fill="#334e68">CODEOWNERS credit</text>
     <text x="638" y="94" font-size="7.8" font-weight="700" fill="#0f766e">[1:N Recognition]</text>
-    <text x="10" y="130" font-size="8.4" fill="#526c80">Built so users can turn engagement breakthroughs into visible, reusable field standards without heavy formatting work.</text>
+    <text x="10" y="130" font-size="8.4" fill="#526c80">Turns validated engagement breakthroughs into visible, reusable standards without heavy formatting work.</text>
   </svg>
 </div>

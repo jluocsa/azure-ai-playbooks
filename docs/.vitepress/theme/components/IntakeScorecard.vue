@@ -93,8 +93,8 @@ async function copyScopeSummary() {
   <div class="isc-card no-print">
     <div class="isc-head">
       <div>
-        <span class="isc-kicker">INTERACTIVE USER DISCOVERY TOOL &middot; 30-MINUTE TRIAGE</span>
-        <strong class="isc-title">Live Customer Intake Qualification Scorecard</strong>
+        <span class="isc-kicker">INTERACTIVE DISCOVERY TOOL &middot; 30-MINUTE TRIAGE</span>
+        <strong class="isc-title">Live Intake Qualification Scorecard</strong>
       </div>
       <button type="button" class="isc-copy-btn" @click="copyScopeSummary">
         {{ copied ? '✓ Copied Scope Summary' : 'Copy Intake Summary' }}

@@ -7,11 +7,10 @@ description: Mapping orthogonal Scope and Volatility context axes onto strict pr
 
 <PageBrief
   stage="design"
-  audience="Users & Prompt/App Leads"
   readTime="4 min read"
-  problem="Mixing global instructions, workspace metadata, user history, and live RAG chunks in arbitrary order destroys cross-user and cross-turn cache hits."
+  problem="Mixing global instructions, workspace metadata, session history, and live RAG chunks in arbitrary order destroys cross-user and cross-turn cache hits."
   takeaway="Order every prompt strictly from most-shared & static (Pos 1–3 Global T0) to workspace-scoped (Pos 4 L2), session-scoped (Pos 5 L1), and live RAG last (Pos 6)."
-  csaUse="Put the Pos 1–6 diagram below on screen during your customer Architecture Design Session to refactor their prompt builder in under an hour."
+  csaUse="Use the Pos 1–6 diagram below during design reviews to map every prompt block onto its exact scope and volatility position."
 />
 
 Enterprise agent context divides cleanly along two orthogonal axes <span class="ev-badge ev-arch">[Arch]</span>:

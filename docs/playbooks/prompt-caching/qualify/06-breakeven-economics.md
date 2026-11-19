@@ -7,11 +7,10 @@ description: Mathematical break-even analysis balancing 1.25x cache-write weight
 
 <PageBrief
   stage="qualify"
-  audience="Users & FinOps Reviewers"
   readTime="3 min read"
-  problem="FinOps teams worry that GPT-5.6+ cache-write fees (1.25× weight) could make prompt caching more expensive than uncached calls."
-  takeaway="Just ONE subsequent cache read (1:1 ratio) already cuts effective prefix cost by 32.5%–35%; at our 10:1 target gate, cost drops by 80%–84%."
-  csaUse="Share the visual curve below with FinOps stakeholders to prove that write penalties only happen when early dynamic text forces 0:1 misses."
+  problem="GPT-5.6+ cache-write fees (1.25× weight) raise questions about whether prompt caching could cost more than uncached calls."
+  takeaway="Just ONE subsequent cache read (1:1 ratio) already cuts effective prefix cost by 32.5%–35%; at a 10:1 target gate, cost drops by 80%–84%."
+  csaUse="Use the break-even curve below to verify that write penalties occur only when early dynamic text forces repeated 0:1 misses."
 />
 
 Because GPT-5.6, GPT-6, and GPT-6.1 introduce explicit cache-write billing (including `12h` write billing effective November 1, 2026) and normalized PTU weights <span class="ev-badge ev-m">[M]</span>, architecture teams must verify that cached prefixes are read enough times within their TTL to amortize the initial write premium.

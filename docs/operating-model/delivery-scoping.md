@@ -7,14 +7,13 @@ description: Turnkey intake qualification scorecard and 3-week structured delive
 
 <PageBrief
   stepLabel="PROACTIVE DELIVERY · 03"
-  audience="Users, Delivery Leads & Account Teams"
   readTime="4 min read"
-  problem="Proactive customer readiness work stalls when teams lack a fast qualification filter or a bounded week-by-week delivery plan."
+  problem="Proactive readiness work stalls without a fast qualification filter and a bounded week-by-week delivery plan."
   takeaway="Qualify exposure in 30 minutes using 6 boundary questions, then execute a structured 3-week engagement with concrete exit artifacts."
-  csaUse="Open the interactive scorecard below live on your customer discovery call, toggle their workload traits, and copy the scope summary."
+  csaUse="Run the interactive scorecard below during a 30-minute discovery session, toggle the workload traits, and copy the scope summary."
 />
 
-A core goal of Solution Industrialization is making architecture patterns **immediately scopable as repeatable proactive delivery engagements**. Any engineering lead or delivery manager can use the interactive triage tool and 3-week blueprint below to scope a **Foundry Model Migration, Prompt Caching & PTU Readiness Engagement**.
+A core goal of Solution Industrialization is making architecture patterns **immediately scopable as repeatable proactive delivery engagements**. Use the interactive triage tool and 3-week blueprint below to scope a **Foundry Model Migration, Prompt Caching & PTU Readiness Engagement**.
 
 ## 1. Intake Qualification Scorecard
 
@@ -65,7 +64,7 @@ Capture **orders of magnitude and architectural boundaries** during a 30-minute 
     <text x="600" y="62" font-size="8.2" fill="#334e68">KQL workbook &amp; right-sized</text>
     <text x="600" y="75" font-size="8.2" fill="#334e68">PTU reservation model</text>
     <text x="600" y="94" font-size="7.8" font-weight="700" fill="#0f766e">[Exit: Signed C1–C15]</text>
-    <text x="10" y="130" font-size="8.4" fill="#526c80">Each week produces one tangible engineering artifact reviewed jointly with App, SRE, and FinOps leads.</text>
+    <text x="10" y="130" font-size="8.4" fill="#526c80">Each week produces one tangible engineering artifact verified before advancing to the next phase.</text>
   </svg>
 </div>
 
@@ -75,11 +74,11 @@ Capture **orders of magnitude and architectural boundaries** during a 30-minute 
 | **Week 2: Prefix Refactoring, Sharding & Gateway Wiring** | • Refactor context assembly middleware to strict `Pos 1–6` (`T0 → L2 → L1 → Volatile Tail`) order.<br>• Add deterministic `prompt_cache_key` with `>15 RPM` sharding and SKU-aware breakpoints (`Standard` / `GPT-6+ PTU-M`).<br>• Configure APIM `429 Retry-After` circuit-breaker spillover from PTU-M to Standard PAYG. | **2. Refactored Context Middleware & SKU-Aware APIM Policy** validated in non-prod. |
 | **Week 3: 7-Layer Gate Verification & PTU Right-Sizing** | • Execute 2-pass DeepEval quality + cache parity suite (`cached_tokens >= 1024`, share `>=60%`, `R/W >= 10:1`).<br>• Run peak concurrency load test (`>15 RPM/family`) verifying zero HTTP `429`s below `60–70%` PTU saturation.<br>• Deploy App Insights KQL workbook and finalize right-sized PTU reservation model. | **3. Signed `C1–C15` Migration Readiness Record + Right-Sized PTU Capacity Model**. |
 
-## 3. Roles & Ownership Boundaries
+## 3. Workstream Ownership Boundaries
 
-| Role | Responsibility During the 3-Week Engagement |
+| Workstream | Scope During the 3-Week Engagement |
 | :--- | :--- |
-| **Architecture Advisor (User Lead)** | Leads intake scorecard, `Pos 1–6` prefix architecture workshop, APIM spillover design review, and two-regime PTU sizing verification. |
-| **Customer App / Prompt Lead** | Refactors prompt/middleware ordering, canonicalizes `tools[]` JSON serialization, and owns the 50–200 case golden evaluation dataset. |
-| **Customer Platform / SRE Lead** | Implements APIM backend pool failover policy, OpenTelemetry `gen_ai.*` span attributes, DCR PII masking, and KQL alert rules. |
-| **Customer FinOps / Capacity Lead** | Reviews `PeakNormTPM` vs. `AvgNormTPM` telemetry and approves the final Global / Data Zone PTU allocation + Standard spillover budget. |
+| **1. Architecture & Sizing** | Intake scorecard qualification, `Pos 1–6` prefix workshop, APIM spillover design review, and two-regime PTU sizing verification. |
+| **2. Application & Evaluation** | Context middleware refactoring, canonical `tools[]` JSON serialization, and the 50–200 case golden evaluation dataset. |
+| **3. Gateway & Observability** | APIM backend pool failover policy, OpenTelemetry `gen_ai.*` span attributes, DCR PII masking, and KQL alert rules. |
+| **4. Capacity & Cost Governance** | Review of `DeployPeakNormTPM` vs. `ShardAvgNormTPM` telemetry and approval of Global / Data Zone PTU allocation + Standard spillover budget. |

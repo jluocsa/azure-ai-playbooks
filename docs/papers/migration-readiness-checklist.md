@@ -17,11 +17,10 @@ description: Copy-ready Pull Request and Azure DevOps cutover readiness template
 
 <PageBrief
   stepLabel="CUTOVER SIGN-OFF TEMPLATE"
-  audience="Users, Release Managers & FinOps"
   readTime="2 min setup"
-  problem="Production model cutovers need a clear, auditable sign-off record across App Engineering, SRE, and FinOps."
-  takeaway="Provides both a printable ARB sign-off checklist and a 1-click copyable Markdown template for GitHub PRs or Azure DevOps work items."
-  csaUse="Paste the Markdown block at the bottom into .github/pull_request_template.md or print this page for formal Week 3 cutover approval."
+  problem="Production model cutovers require an objective, auditable release-gate record across architecture, CI linting, load testing, and capacity sizing."
+  takeaway="Provides both a printable sign-off checklist and a 1-click copyable Markdown template for GitHub PRs or Azure DevOps work items."
+  csaUse="Paste the Markdown block at the bottom into .github/pull_request_template.md or print this page for Week 3 cutover sign-off."
 />
 
 Use this subpage during Architecture Review Boards (or click **Print / Save as PDF** above for offline sign-off), or **1-click copy** the Markdown block at the bottom into `.github/pull_request_template.md` or an Azure DevOps release gate work item.
@@ -56,7 +55,7 @@ Use this subpage during Architecture Review Boards (or click **Print / Save as P
 - [ ] **C11 (`PCR006`):** `cached_tokens`, `cache_write_tokens`, `prompt_cache_key`, and TTFT emitted via metadata-only OpenTelemetry spans (`input_tokens_details` / `prompt_tokens_details`) to Application Insights.
 - [ ] **C13:** Peak load test completed below `60–70%` PTU queuing saturation with zero unexpected HTTP `429`s.
 - [ ] **C14:** PTU capacity model updated from measured deployment-wide `DeployPeakNormTPM` (pre-GPT-6 vs. GPT-6/6.1 normalized weights) and rounded to the 5-PTU increment.
-- [ ] **C15:** Readiness artifacts reviewed and signed off by App Lead, Platform/SRE Lead, and FinOps Lead.
+- [ ] **C15:** Readiness artifacts verified and signed off across architecture, platform, and capacity workstreams.
 
 ---
 
@@ -92,7 +91,7 @@ Hover the top-right corner of the block below to copy directly into your reposit
 - [ ] **C11 (`PCR006`):** `cached_tokens`, `cache_write_tokens`, `prompt_cache_key`, and TTFT emitted via metadata-only OpenTelemetry spans to App Insights.
 - [ ] **C13:** Peak load test completed below `60–70%` PTU queuing saturation with zero unexpected HTTP `429`s.
 - [ ] **C14:** PTU capacity model updated from measured `DeployPeakNormTPM` (pre-GPT-6 vs. GPT-6/6.1 normalized weights) and rounded to the 5-PTU increment.
-- [ ] **C15:** Readiness artifacts reviewed and signed off by App Lead, Platform/SRE Lead, and FinOps Lead.
+- [ ] **C15:** Readiness artifacts verified and signed off across architecture, platform, and capacity workstreams.
 ```
 
 </div>

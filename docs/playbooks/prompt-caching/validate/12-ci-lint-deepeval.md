@@ -11,11 +11,10 @@ import { withBase } from 'vitepress'
 
 <PageBrief
   stage="validate"
-  audience="Users & App/DevOps Engineers"
   readTime="3 min read"
   problem="Even after a clean migration, a routine pull request adding a timestamp to system instructions can silently break caching in production."
   takeaway="Block regressions in PR CI with two fast gates: zero-dependency static linting (pcr_lint.py) + a 2-pass DeepEval cache-hit assertion."
-  csaUse="Drop pcr_lint.py into the customer's repo in 2 minutes during Week 1 to surface every prefix-breaking defect automatically."
+  csaUse="Add pcr_lint.py to repository CI during Week 1 to surface prefix-breaking defects automatically on every pull request."
 />
 
 Prevent un-cached code from promoting by enforcing two automated checks in pull-request CI: **(1)** static AST/regex linting (`PCR001–PCR006`) in Layer 1, and **(2)** a 2-pass DeepEval quality + cache-hit contract test in Layer 2 <span class="ev-badge ev-arch">[Arch]</span>.

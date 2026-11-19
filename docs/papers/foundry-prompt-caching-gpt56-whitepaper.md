@@ -19,17 +19,16 @@ description: Consolidated single-page architecture white paper covering stateles
 
 <PageBrief
   stepLabel="SINGLE-PAGE ARCHITECTURE EDITION"
-  audience="Executives, ARBs & Principal Architects"
-  readTime="10 min full · 2 min exec scan"
-  problem="Architecture Review Boards and offline stakeholders often want the entire playbook consolidated in one searchable, print-ready document."
+  readTime="10 min full · 2 min scan"
+  problem="Architecture reviews and offline sign-off workflows often require the entire playbook consolidated in one searchable, print-ready document."
   takeaway="Consolidates Playbook 01's thesis, diagrams, two-regime PTU math, Pos 1–6 ordering, CI/KQL gates, and R1–R6 Microsoft Learn sources."
-  csaUse="Click 'Print / Save as PDF' above to generate a clean customer briefing PDF, or use the Role-Based Reading Guide below in live reviews."
+  csaUse="Click 'Print / Save as PDF' above to generate a clean briefing PDF, or jump directly to a workstream via Quick Topic Navigation below."
 />
 
-::: tip Role-Based Reading Guide
-- **Platform & Architecture Leads:** Focus on [§01 Executive Summary](#sec-01), [§04 SKU Boundary & PTU Sizing](#sec-04), [§05 Break-Even Economics](#sec-05), and [§09 `C1–C15` Readiness Standard](#sec-09).
-- **Application & Prompt Engineers:** Focus on [§02 Stateless Hydration](#sec-02), [§03 KV Mechanics & GPT-5.6+ Delta](#sec-03), [§06 Scope × Volatility Prefix Order & Anti-Patterns](#sec-06), and [§07 Wire Controls & APIM Spillover](#sec-07).
-- **Quality, FinOps & SRE:** Focus on [§04 PTU Sizing](#sec-04), [§08 7-Layer Gates, Linter & KQL](#sec-08), and [§10 Verification Matrix & Sources](#sec-10).
+::: tip Quick Topic Navigation
+- **Thesis, SKU Boundaries & Capacity Math:** [§01 Executive Summary](#sec-01), [§04 SKU Boundary & PTU Sizing](#sec-04), [§05 Break-Even Economics](#sec-05), and [§09 `C1–C15` Readiness Standard](#sec-09).
+- **Hydration, Prefix Ordering & Gateway Routing:** [§02 Stateless Hydration](#sec-02), [§03 KV Mechanics & GPT-5.6+ Delta](#sec-03), [§06 Scope × Volatility Prefix Order & Anti-Patterns](#sec-06), and [§07 Wire Controls & APIM Spillover](#sec-07).
+- **CI Linting, Telemetry Gates & Official Sources:** [§08 7-Layer Gates, Linter & KQL](#sec-08) and [§10 Verification Matrix & Sources](#sec-10).
 :::
 
 ---
@@ -318,7 +317,7 @@ Copy-ready PR template available at [`C1–C15` Migration Readiness PR Checklist
 | **C12** | `ALL` | 2-pass DeepEval golden set (50–200 cases) passes hit rate `>=80%`, share `>=60%`, TTFT, and quality parity. | 2-pass eval report |
 | **C13** | `ALL` | Peak concurrency load test passes below `60–70%` PTU queuing saturation with zero unexpected HTTP `429`s. | Load report |
 | **C14** | `ALL` | PTU capacity model updated from measured `DeployPeakNormTPM` and model-specific normalized weights. | FinOps PTU sheet |
-| **C15** | `ALL` | Readiness record signed off jointly by App Lead, Platform/SRE Lead, and FinOps Lead. | Release sign-off |
+| **C15** | `ALL` | Readiness record verified and signed off across architecture, platform, and capacity workstreams. | Release sign-off |
 
 ---
 

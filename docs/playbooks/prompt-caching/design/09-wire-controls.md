@@ -7,11 +7,10 @@ description: Wire-level configuration for Responses API and Chat Completions API
 
 <PageBrief
   stage="design"
-  audience="Users & App/API Engineers"
   readTime="4 min read"
   problem="High-traffic prompts (>15 RPM) overflow a single cache bucket, while putting user_id or cost_center in prompt_cache_key destroys reuse."
   takeaway="Use {app}:{node}:{ver}:shard-{0..N-1} where N = ceil(Peak_RPM / 12), route by hash(thread_id) % N, and copy the exact JSON payloads below."
-  csaUse="Hand the JSON payload templates and sharding formula below directly to customer backend engineers during Week 2 implementation."
+  csaUse="Apply the JSON payload templates and sharding formula below directly in Responses API and Chat Completions client wrappers."
 />
 
 Enterprise agent workloads on Azure OpenAI in Microsoft Foundry call both the **Responses API (`/openai/v1/responses`)** and the **Chat Completions API (`/openai/v1/chat/completions`)**. Both APIs support `prompt_cache_key`, `prompt_cache_options`, and `prompt_cache_breakpoint` on GPT-5.6+ <span class="ev-badge ev-m">[M]</span> (note: to combine function tools with active reasoning on `gpt-5.6`, use `/openai/v1/responses` <span class="ev-badge ev-m">[M]</span>).

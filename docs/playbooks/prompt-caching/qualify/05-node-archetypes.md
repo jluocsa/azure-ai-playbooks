@@ -7,11 +7,10 @@ description: Eight recurring enterprise LLM node archetypes with prefix sizes, p
 
 <PageBrief
   stage="qualify"
-  audience="Users & Solution Architects"
   readTime="3 min read"
-  problem="Multi-agent workflows often contain 6–12 LLM nodes, and teams waste weeks refactoring low-traffic nodes or paying write fees on tiny prompts."
+  problem="Multi-agent workflows often contain 6–12 LLM nodes, and refactoring low-traffic nodes first delays high-impact savings or incurs write fees on short prompts."
   takeaway="Rank all nodes by Peak RPM × Prefix Tokens, refactor the top 3 high-volume nodes first (75–85% of spend), and disable cache writes below 1,024 tokens."
-  csaUse="Map each node in a customer's agent graph to one of the 8 archetypes below during Week 1 to build a focused refactoring backlog."
+  csaUse="Map each node in an agent graph to one of the 8 archetypes below during Week 1 to prioritize refactoring."
 />
 
 Multi-node enterprise AI platforms (such as rubric-scoring evaluators, compliance reviewers, and multi-agent RAG orchestrators) combine distinct LLM node archetypes with different prefix sizes, RPM profiles, and SKU controls <span class="ev-badge ev-arch">[Arch]</span>.

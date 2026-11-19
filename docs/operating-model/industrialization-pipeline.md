@@ -7,11 +7,10 @@ description: How Customer-Zero architecture engagements are sanitized, reviewed,
 
 <PageBrief
   stepLabel="OPERATING MODEL · 01"
-  audience="Leadership & All Users"
   readTime="3 min read"
-  problem="Flagship accounts solve hard Azure AI cutover problems 1:1, while peer teams hit the exact same bottlenecks weeks later."
+  problem="Flagship accounts solve hard Azure AI cutover problems 1:1, while subsequent projects hit the exact same bottlenecks weeks later."
   takeaway="A governed 5-stage factory turns one Customer-Zero win into sanitized, Learn-verified 1:N playbooks, 3-week scopes, and MIT kits."
-  csaUse="Use an existing playbook on your account today—or route your own Customer-Zero breakthrough through this factory to scale your impact."
+  csaUse="Apply an existing playbook directly—or route a validated Customer-Zero pattern through these five stages for 1:N reuse."
 />
 
 Enterprise AI architecture specialists regularly solve complex, cross-service production problems for a single flagship account (**Customer-Zero**)—only for those exact same migration, capacity, and resiliency problems to recur across dozens of other enterprise accounts weeks later.

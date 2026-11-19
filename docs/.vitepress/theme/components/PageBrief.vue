@@ -3,7 +3,6 @@ const props = defineProps<{
   stage?: 'start' | 'qualify' | 'design' | 'validate' | 'govern' | 'profile' | 'reference'
   stepLabel?: string
   readTime?: string
-  audience?: string
   verifiedAt?: string
   problem: string
   takeaway: string
@@ -20,7 +19,7 @@ const journey = [
 </script>
 
 <template>
-  <aside class="pb-brief" aria-label="Chapter executive summary">
+  <aside class="pb-brief" aria-label="Page summary">
     <div class="pb-brief-top">
       <div v-if="props.stage && journey.some(j => j.id === props.stage)" class="pb-journey" aria-label="Playbook stage">
         <span
@@ -33,11 +32,10 @@ const journey = [
       </div>
       <div v-else class="pb-brief-kicker">
         <span class="pb-brief-dot"></span>
-        <span>{{ props.stepLabel || 'EXECUTIVE & USER BRIEF' }}</span>
+        <span>{{ props.stepLabel || 'OVERVIEW BRIEF' }}</span>
       </div>
 
       <div class="pb-brief-badges">
-        <span v-if="props.audience" class="pb-chip pb-chip-role">{{ props.audience }}</span>
         <span v-if="props.readTime" class="pb-chip">{{ props.readTime }}</span>
         <span class="pb-chip pb-chip-verified">
           <span class="ms-live-dot" aria-hidden="true"></span>
@@ -56,7 +54,7 @@ const journey = [
         <p>{{ props.takeaway }}</p>
       </div>
       <div class="pb-brief-col">
-        <span class="pb-col-label">How Users Use This</span>
+        <span class="pb-col-label">Practical Application</span>
         <p>{{ props.csaUse }}</p>
       </div>
     </div>

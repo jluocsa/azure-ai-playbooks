@@ -11,11 +11,10 @@ import { withBase } from 'vitepress'
 
 <PageBrief
   stage="govern"
-  audience="Users, SREs & FinOps"
   readTime="4 min read"
-  problem="Security teams block raw prompt logging, while standard token dashboards miss per-shard cache hit rates and GPT-6 vs. GPT-5.6 PTU math."
+  problem="Privacy rules block raw prompt logging, while standard token dashboards miss per-shard cache hit rates and GPT-6 vs. GPT-5.6 PTU math."
   takeaway="Emit metadata-only OpenTelemetry counters (zero prompt text) and run the copy-ready KQL query below to track DeployPeakNormTPM and shard SLOs."
-  csaUse="Paste ptu-cache-release-gate.kql into customer Log Analytics during Week 3 to right-size PTU reservations from real traffic."
+  csaUse="Run ptu-cache-release-gate.kql in Log Analytics during Week 3 to right-size PTU reservations from measured traffic."
 />
 
 Production agent telemetry flows through OpenTelemetry into workspace-based Azure Monitor Application Insights and Log Analytics, anchored on the entry request span and correlated across internal agent nodes by `thread_id` <span class="ev-badge ev-arch">[Arch]</span>.
@@ -48,7 +47,7 @@ Production agent telemetry flows through OpenTelemetry into workspace-based Azur
     <text x="610" y="49" font-size="8.2" fill="#334e68">Hit &ge;80%, Share &ge;60%,</text>
     <text x="610" y="62" font-size="8.2" fill="#334e68">R/W &ge;10:1 &rarr; PASS</text>
     <text x="610" y="84" font-size="7.8" font-weight="700" fill="#0f766e">[Standing FinOps Gate]</text>
-    <text x="10" y="122" font-size="8.4" fill="#526c80">CISO-friendly telemetry: zero customer document content is required to govern cache efficiency and PTU capacity.</text>
+    <text x="10" y="122" font-size="8.4" fill="#526c80">Privacy-preserving telemetry: zero customer document content is required to govern cache efficiency and PTU capacity.</text>
   </svg>
 </div>
 

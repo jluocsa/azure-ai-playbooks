@@ -7,11 +7,10 @@ description: Recommended 15-point production readiness standard mapped across th
 
 <PageBrief
   stage="govern"
-  audience="All Levels · ARB & Cutover Sign-Off"
   readTime="3 min read"
-  problem="Model cutover meetings drag out when App, SRE, and FinOps leads lack a single objective go/no-go sign-off checklist."
+  problem="Model cutover reviews stall without a single objective go/no-go checklist tying architecture, testing, and capacity sizing together."
   takeaway="Adopt C1–C15 as your standing release gate—mapping every architecture, CI lint, load-test, and PTU sizing check to concrete evidence."
-  csaUse="Bring this page (or the printable PR template) into the Week 3 cutover review for joint App, SRE, and FinOps sign-off."
+  csaUse="Use this page (or the printable PR template) during Week 3 cutover verification before promoting to production."
 />
 
 Open the copy-ready PR / release-gate template subpage: [`C1–C15` Migration Readiness PR Checklist →](/papers/migration-readiness-checklist)
@@ -33,8 +32,8 @@ Adopt criteria **`C1`–`C15`** as a standing release gate across the 7-layer pi
 | **C11** | `ALL` | `cached_tokens`, `cache_write_tokens`, `prompt_cache_key`, and TTFT are emitted via OTel to App Insights (metadata-only). | KQL span check (`PCR006`) | Layer 7 (OTel) |
 | **C12** | `ALL` | Layer 2 DeepEval golden set (50–200 cases) run before and after migration; hit rate (`>=80%`), cached share (`>=60%`), TTFT, and quality pass. | 2-pass DeepEval report | Layer 2 (Eval) |
 | **C13** | `ALL` | Layer 5 peak load test completed with zero cache degradation and zero unexpected HTTP `429`s at target concurrency. | Concurrency report | Layer 5 (Load) |
-| **C14** | `ALL` | PTU / TPM capacity sizing updated using measured `PeakNormTPM` hit rate and Chapter 04 model-specific PTU formulas. | Right-sized PTU model | FinOps / Sizing |
-| **C15** | `ALL` | All validation and sizing artifacts recorded in the Model Migration Readiness Record for engineering and FinOps sign-off. | Readiness record | Release Gate |
+| **C14** | `ALL` | PTU / TPM capacity sizing updated using measured `DeployPeakNormTPM` hit rate and Chapter 04 model-specific PTU formulas. | Right-sized PTU model | Capacity Sizing |
+| **C15** | `ALL` | All validation and sizing artifacts recorded in the Model Migration Readiness Record for production release sign-off. | Readiness record | Release Gate |
 
 *Scope legend:* `ALL` = all GPT-5.6+ deployments; `STD / 6+` = Standard 5.6+ and PTU-M GPT-6+; `PTU 5.6` = Provisioned Throughput on GPT-5.6. For regulated audit, tax, legal, and compliance workpapers, augment `C12` and `C15` with the four **Workpaper Defensibility Controls (`C-WP1–C-WP4`)** in [Regulated Multi-Engagement & Compliance Platforms](/playbooks/prompt-caching/profiles/regulated-multi-engagement#4-workpaper-grade-reproducibility-across-model-retirements).
 

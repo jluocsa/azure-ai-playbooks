@@ -7,11 +7,10 @@ description: Exact wire elements in the cached prefix, 1,024-token threshold, re
 
 <PageBrief
   stage="start"
-  audience="Users & Platform Engineers"
   readTime="4 min read"
-  problem="Teams assume GPT-5.6+ caches prompts the exact same way GPT-4o did—missing new write fees, reasoning token replay, and PTU breakpoint rules."
+  problem="Assuming GPT-5.6+ caches prompts identically to GPT-4o overlooks write billing, reasoning token replay, and PTU breakpoint rules."
   takeaway="First 1,024 wire tokens must match character-for-character (starting with response_format), reasoning.context defaults to all_turns on 5.6/6, and cache writes can be billed."
-  csaUse="Use the generation matrix below during migration readiness reviews to flag HTTP 400 risks, PTU-M differences, and reasoning.context bloat."
+  csaUse="Use the generation matrix below during migration reviews to flag HTTP 400 risks, PTU-M differences, and reasoning.context token growth."
 />
 
 Prompt caching retains precomputed key-value (KV) attention tensors for identical leading input tokens. It never alters model output determinism or quality—only time-to-first-token (TTFT), input billing, and PTU capacity utilization <span class="ev-badge ev-m">[M]</span>.

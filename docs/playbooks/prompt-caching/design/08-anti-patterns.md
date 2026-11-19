@@ -7,11 +7,10 @@ description: Six concrete code-level causes of cache misses in agent harnesses a
 
 <PageBrief
   stage="design"
-  audience="Users & App Engineers"
   readTime="4 min read"
   problem="One dynamic character—like a timestamp or unsorted JSON key—in the first 1,024 tokens silently forces 0% cache hits across all calls."
   takeaway="Strip timestamps and user IDs from Pos 1–3, sort tools[] and JSON keys deterministically, keep response_format static, and push RAG chunks to Pos 6."
-  csaUse="Compare the Before vs. After visual and Python code snippet below directly against the customer's prompt middleware during Week 1/2."
+  csaUse="Compare the Before vs. After visual and Python code snippet below directly against context-assembly middleware during Week 1/2."
 />
 
 A single dynamic byte inside the first 1,024 tokens forces `cached_tokens = 0` and, on GPT-5.6+ Standard or GPT-6+ PTU-M, writes a new unamortized cache entry <span class="ev-badge ev-m">[M]</span>. Below are the six prefix-breaking patterns most frequently uncovered during codebase audits.

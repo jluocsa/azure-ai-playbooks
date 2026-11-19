@@ -11,11 +11,10 @@ import { withBase } from 'vitepress'
 
 <PageBrief
   stepLabel="EXECUTABLE MIT KITS"
-  audience="Users, App Engineers & SREs"
   readTime="2 min setup"
-  problem="Writing static AST linters and normalized PTU KQL queries from scratch slows down every customer engagement."
+  problem="Writing static AST linters and normalized PTU KQL queries from scratch slows down migration readiness work."
   takeaway="Zero-dependency pcr_lint.py scans Python/TS/JS/C# repos in seconds, and ptu-cache-release-gate.kql computes two-regime PTU & shard SLOs."
-  csaUse="Download or 1-click copy either file below directly into your customer's repository and Log Analytics workspace (MIT licensed)."
+  csaUse="Download or 1-click copy either file below directly into target repositories and Log Analytics workspaces (MIT licensed)."
 />
 
 Both artifacts below are rendered directly from the live kit files in this repository so you can **inspect, search, 1-click copy**, or download the raw CLI/query file into customer repositories.

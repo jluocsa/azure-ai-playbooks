@@ -62,7 +62,7 @@ const factoryStages = [
   {
     num: '3',
     title: 'Peer Architecture Review',
-    desc: 'Reviewers verify published Microsoft Learn product facts and clearly separate them from field design recommendations.',
+    desc: 'Verifies published Microsoft Learn product facts and clearly separates them from reference design patterns.',
   },
   {
     num: '4',
@@ -71,8 +71,8 @@ const factoryStages = [
   },
   {
     num: '5',
-    title: '1:N Field Delivery',
-    desc: 'Specialist teams apply the finished playbook in architecture sessions and repeatable 3-week customer readiness engagements.',
+    title: '1:N Reuse',
+    desc: 'Finished playbooks scale directly into architecture sessions and repeatable 3-week readiness engagements.',
   },
 ]
 
@@ -146,7 +146,7 @@ const playbookOneBox = [
             <span>Active v1.0 &middot; Last Verified: <strong>2026-11-18 21:21 PST</strong></span>
           </span>
           <span class="eo-live-sep" aria-hidden="true">&middot;</span>
-          <span class="eo-live-meta">100% Sanitized &middot; Grounded in Published Microsoft Learn &middot; Open for User Co-Authors</span>
+          <span class="eo-live-meta">100% Sanitized &middot; Grounded in Published Microsoft Learn &middot; Open for Co-Author Contributions</span>
         </div>
 
         <div class="eo-kpi-strip">
@@ -283,8 +283,8 @@ const playbookOneBox = [
 
             <rect x="10" y="28" width="166" height="58" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.3" />
             <text x="20" y="45" font-size="9.4" font-weight="700" fill="#92400e">1. Bespoke Fire-Drill</text>
-            <text x="20" y="59" font-size="8.3" fill="#475569">Specialists solve tough cutover</text>
-            <text x="20" y="71" font-size="8.3" fill="#475569">issue for one flagship account</text>
+            <text x="20" y="59" font-size="8.3" fill="#475569">Hard cutover bottleneck solved</text>
+            <text x="20" y="71" font-size="8.3" fill="#475569">once for a flagship account</text>
 
             <path d="M176 57 H198" stroke="#b45309" stroke-width="1.7" marker-end="url(#eo-arr-warn)" />
 
@@ -447,7 +447,7 @@ const playbookOneBox = [
           <h2 class="eo-h2">One Connected Three-Playbook Series</h2>
           <p class="eo-sub">
             Rather than publishing disconnected articles, the hub is organized around the three production layers
-            every enterprise Azure AI platform must get right—with open co-author roles for specialist leads.
+            every enterprise Azure AI platform must get right—with open co-author charters for each track.
           </p>
         </div>
 
@@ -528,7 +528,7 @@ const playbookOneBox = [
           <h2 class="eo-h2">How Any Team Runs a Playbook with a Customer in 3 Weeks</h2>
           <p class="eo-sub">
             Every playbook includes a concrete engagement blueprint—turning architectural guidance into a predictable
-            3-week customer delivery with clear roles and measurable exit criteria.
+            3-week delivery with clear workstreams and measurable exit criteria.
           </p>
         </div>
 
@@ -591,7 +591,7 @@ const playbookOneBox = [
             <text x="638" y="99" font-size="7.8" font-weight="700" fill="#0f766e">[Protected in Prod]</text>
 
             <text x="10" y="138" font-size="8.5" fill="#526c80">
-              Clear roles across Solution Architect, Customer App Lead, Platform/SRE, and FinOps keep engagements bounded to 3 weeks.
+              Defined workstreams across architecture, application, gateway, and capacity planning keep engagements bounded to 3 weeks.
             </text>
           </svg>
         </div>

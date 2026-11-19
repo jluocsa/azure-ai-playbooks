@@ -7,11 +7,10 @@ description: Embedding GPT-5.6+ prompt caching and PTU gates directly into the 7
 
 <PageBrief
   stage="validate"
-  audience="Users, QA & Release Leads"
   readTime="4 min read"
-  problem="Teams verify model accuracy in staging but never test prompt caching under concurrency—discovering 0% hits and 429 storms only after cutover."
-  takeaway="Embed caching checks directly into your existing unit, eval, load, and observability pipeline using the 7-step pre-cutover validation protocol."
-  csaUse="Use the 7-step table at the bottom as your Week 2/3 test plan with the customer's QA, App, and SRE leads."
+  problem="Staging suites often verify model accuracy while skipping prompt caching under concurrency—surfacing 0% hits and 429 storms only after cutover."
+  takeaway="Embed caching checks directly into unit, eval, load, and observability stages using the 7-step pre-cutover validation protocol."
+  csaUse="Follow the 7-step table at the bottom as the Week 2/3 pre-cutover verification sequence."
 />
 
 Rather than creating a separate governance silo, prompt-caching and PTU readiness plug directly into a defense-in-depth **7-Layer Testing & Quality Strategy** spanning Development Time (Layers 1–2), Deployment Gates (Layers 3 & 5), and Production Assurance (Layers 4, 6 & 7) <span class="ev-badge ev-arch">[Arch]</span>.
@@ -78,4 +77,4 @@ Rather than creating a separate governance silo, prompt-caching and PTU readines
 | **4** | Apply Chapters 07–09 refactoring (Pos 1–6 order + `prompt_cache_key` + SKU breakpoints) and run 2-pass benchmark. | Pass 2 `cached_tokens >= 1,024`; quality `>=` baseline. |
 | **5** | Compute steady-state cache metrics across the full 50–200 case replay suite. | **Hit rate `>=80%`**; **cached share `>=60%`**; **`R/W >=10:1`**; TTFT p95 `<=` baseline. |
 | **6** | Execute peak concurrency load test (`>15 RPM/family`) to validate shard bucket count and PTU headroom (`<60–70%` utilization). | Zero cache degradation at peak; zero unexpected HTTP `429`s. |
-| **7** | Attach benchmark & right-sized PTU model to the Migration Readiness Record before production cutover. | Joint sign-off by App Lead + Platform/SRE + FinOps. |
+| **7** | Attach benchmark & right-sized PTU model to the Migration Readiness Record before production cutover. | Release gate sign-off completed. |

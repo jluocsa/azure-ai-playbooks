@@ -7,11 +7,10 @@ description: Evidence tagging standards, 3-gate pre-publication controls, multi-
 
 <PageBrief
   stepLabel="OPERATING MODEL · 02"
-  audience="All Users & Architecture Reviewers"
   readTime="3 min read"
-  problem="Field wikis lose trust fast when opinions blur into product SLAs or customer identifiers slip into shared docs."
+  problem="Architecture documentation loses trust when opinions blur into product SLAs or sensitive identifiers slip into shared pages."
   takeaway="Every page enforces 4 explicit source tags ([M], [Arch], [Agree], [Validate]) and passes 3 automated PR gates before merge."
-  csaUse="Share playbooks confidently with customer CISOs and review boards knowing every product fact links to published Microsoft Learn."
+  csaUse="Verify every product specification directly against linked Microsoft Learn pages while treating [Agree] thresholds as recommended SLO baselines."
 />
 
 High-trust architecture guidance requires strict separation between **verified platform specifications**, **reference design patterns**, and **proposed operational thresholds**—paired with clear ownership and outcome tracking.
@@ -67,7 +66,7 @@ Every technical claim, table, and code block across this hub uses four explicit 
 | :--- | :--- | :--- |
 | <span class="ev-badge ev-m">[M]</span> **Microsoft Learn Verified** | Published Azure OpenAI in Microsoft Foundry Models or OpenAI platform specification (e.g., PTU-M breakpoint boundaries, `12h` cache-write billing date, `reasoning.context` defaults, normalized token weights). | Must cite an authoritative URL on the playbook's `Sources` page with an explicit `Last verified` date. |
 | <span class="ev-badge ev-arch">[Arch]</span> **Reference Architecture Pattern** | Recommended reference architecture pattern for enterprise runtimes, context assembly, APIM failover, or CI/CD quality pipelines. | Must document trade-offs, preconditions, and do/avoid boundaries. |
-| <span class="ev-badge ev-agree">[Agree]</span> **Recommended Gate SLO** | Proposed engineering / FinOps release threshold (e.g., `&ge;80%` repeat cache hit rate, `&ge;60%` cached input share, `&ge;10:1` read/write ratio). | Presented transparently as a recommended target for customer App Lead + FinOps sign-off—never disguised as a hard platform limit. |
+| <span class="ev-badge ev-agree">[Agree]</span> **Recommended Gate SLO** | Proposed release threshold (e.g., `&ge;80%` repeat cache hit rate, `&ge;60%` cached input share, `&ge;10:1` read/write ratio). | Presented transparently as a recommended target for release sign-off—never disguised as a hard platform limit. |
 | <span class="ev-badge ev-val">[Validate]</span> **Subscription Empirical Check** | Behavior that depends on regional rollout state, quota tier, or endpoint configuration. | Paired with a reproducible probe (e.g., the 2-pass cache hit probe or regional quota check). Never references unpublished roadmaps. |
 
 ## 2. Three-Gate Pre-Publication Checklist
@@ -84,7 +83,7 @@ Playbooks are owned by **named Track Leads and Co-Authors**, not anonymous wiki 
 
 - **Visible Bylines:** Every playbook displays its Track Owners, Customer-Zero provenance category, governance status, and `Last verified` date in the `<PlaybookMeta />` header banner across both chapter pages and consolidated white-paper subpages.
 - **Scoped Directory Ownership:** `.github/CODEOWNERS` routes PRs in `/docs/playbooks/<track>/` directly to that track's co-authors while keeping root sanitization rules gated centrally.
-- **Low-Friction Peer Contribution:** Specialists can either co-own a full playbook ([see open Series Charters](/playbooks/series-charters/)) or contribute a single node archetype / KQL query via Pull Request.
+- **Low-Friction Peer Contribution:** Contributors can either co-own a full playbook ([see open Series Charters](/playbooks/series-charters/)) or submit a single node archetype / KQL query via Pull Request.
 
 ## 4. Outcome-Oriented Adoption Metrics (What We Measure—and What We Don't)
 

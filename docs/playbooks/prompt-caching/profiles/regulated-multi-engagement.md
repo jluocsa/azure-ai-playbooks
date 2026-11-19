@@ -18,11 +18,10 @@ description: Reference architecture for multi-engagement advisory, assurance, ta
 
 <PageBrief
   stepLabel="WORKLOAD PROFILE · REGULATED PLATFORMS"
-  audience="Users, CISOs & Regulated Practice Leads"
   readTime="5 min read"
-  problem="Audit, tax, legal, and financial platforms fear cross-client cache bleed, break cache keys with cost-center IDs, and overspend on 4× seasonal filing cliffs."
-  takeaway="Combine Posture A/B ethical walls, out-of-band FinOps headers, 110-PTU base + PAYG filing-cliff spillover (71% TCO saved), and C-WP1–C-WP4 workpaper parity."
-  csaUse="Bring Section 1 to CISO/Risk reviews, Section 2–3 to FinOps sizing reviews, and Section 4 to Audit/Quality compliance sign-off."
+  problem="Audit, tax, legal, and financial platforms require zero cross-client cache bleed, decoupled cost-center billing, and economical 4× seasonal filing-cliff capacity."
+  takeaway="Combine Posture A/B ethical walls, out-of-band chargeback headers, 110-PTU base + PAYG filing-cliff spillover (71% TCO saved), and C-WP1–C-WP4 workpaper parity."
+  csaUse="Apply Section 1 for data-isolation posture selection, Sections 2–3 for chargeback and seasonal capacity modeling, and Section 4 for workpaper auditability."
 />
 
 Multi-tenant knowledge-work platforms—spanning **statutory audit and assurance, tax and regulatory advisory, legal matter and M&A diligence, financial risk/control testing, and GxP compliance review**—share four operational constraints that generic enterprise chatbots never encounter:
@@ -92,7 +91,7 @@ Per published Microsoft Learn specifications ([R1](/playbooks/prompt-caching/sou
 - **Exact-prefix tensor reuse—never semantic retrieval:** A cache hit reuses precomputed KV attention tensors *only* when the incoming request already supplies the **exact character-for-character prefix** (`>=1,024` tokens) <span class="ev-badge ev-m">[M]</span>. Prompt caching cannot retrieve, complete, or surface tokens that the caller did not already transmit in that request, and has **no impact on model output content** <span class="ev-badge ev-m">[M]</span>.
 - **Subscription & residency boundaries:** Azure OpenAI never shares prompt caches across Azure subscriptions <span class="ev-badge ev-m">[M]</span>, and cached KV data remains strictly inside the **Data Zone** or **Regional** boundary of the deployment SKU <span class="ev-badge ev-m">[M]</span>.
 
-### Two CISO-Approvable Ethical-Wall Caching Postures `[Arch]`
+### Two Security-Verified Ethical-Wall Caching Postures `[Arch]`
 
 Select Posture A or Posture B per engagement classification tier:
 

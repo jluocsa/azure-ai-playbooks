@@ -7,11 +7,10 @@ description: Reference topology pairing right-sized PTU-M base capacity with SKU
 
 <PageBrief
   stage="design"
-  audience="Users & Platform/Gateway Architects"
   readTime="3 min read"
   problem="Forwarding identical JSON payloads across GPT-5.6 PTU-M and Standard PAYG fails when PTU-M rejects explicit breakpoints or drops cache keys on 429 failover."
   takeaway="Size base PTU-M for steady demand, strip breakpoint fields only on the GPT-5.6 PTU-M leg in APIM, and preserve prompt_cache_key on 429 spillover."
-  csaUse="Review this 3-rule gateway pattern with the customer's Azure API Management / Platform team when configuring PTU + PAYG backend pools."
+  csaUse="Apply this 3-rule gateway pattern when configuring Azure API Management PTU-M primary and Standard PAYG spillover backend pools."
 />
 
 Rolling 30-day PTU right-sizing works best when base **Global / Data Zone PTU-M** capacity is sized for steady sustained demand (staying below `~60–70%` queuing saturation) and paired with automatic **Standard (PAYG) spillover** via Azure API Management (APIM) on HTTP `429` <span class="ev-badge ev-arch">[Arch]</span>.
