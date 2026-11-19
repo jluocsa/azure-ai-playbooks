@@ -1,7 +1,6 @@
 ---
 title: "Template · C1–C15 Migration Readiness PR & Cutover Checklist"
 description: Copy-ready Pull Request and Azure DevOps cutover readiness template enforcing C1–C15 across GPT-5.6, GPT-6, and GPT-6.1 migrations.
-outline: [2, 3]
 ---
 
 # `C1–C15` Migration Readiness PR & Cutover Checklist
@@ -11,9 +10,18 @@ outline: [2, 3]
   provenance="Customer-Zero Validated (MIT Kit)"
   governance="Sanitized · Ready for GitHub / Azure DevOps"
   owners="John Luo (@jluocsa) · Co-Authors Welcome"
-  verified="2026-11-16"
+  verified="2026-11-18 21:21 PST"
   status="Active v1.0"
   printable
+/>
+
+<PageBrief
+  stepLabel="CUTOVER SIGN-OFF TEMPLATE"
+  audience="CSAs, Release Managers & FinOps"
+  readTime="2 min setup"
+  problem="Production model cutovers need a clear, auditable sign-off record across App Engineering, SRE, and FinOps."
+  takeaway="Provides both a printable ARB sign-off checklist and a 1-click copyable Markdown template for GitHub PRs or Azure DevOps work items."
+  csaUse="Paste the Markdown block at the bottom into .github/pull_request_template.md or print this page for formal Week 3 cutover approval."
 />
 
 Use this subpage during Architecture Review Boards (or click **Print / Save as PDF** above for offline sign-off), or **1-click copy** the Markdown block at the bottom into `.github/pull_request_template.md` or an Azure DevOps release gate work item.

@@ -1,5 +1,5 @@
 // Application Insights KQL: Per-node cache efficiency + Two-Regime Shard & Deployment-Wide PTU Normalized TPM
-// Last verified: 2026-11-16 | License: MIT
+// Last verified: 2026-11-18 21:21 PST | License: MIT
 let AllCalls = AppDependencies
 | where TimeGenerated > ago(24h) and Type == "AzureOpenAI"
 | extend cd = parse_json(Properties)

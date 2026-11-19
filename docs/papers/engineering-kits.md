@@ -1,7 +1,6 @@
 ---
 title: "Copy-Ready Engineering Kits · PCR001–006 Linter & Two-Regime KQL Gate"
 description: Previewable, copy-ready Python static AST/regex linter (pcr_lint.py) and Application Insights two-regime KQL release gate for GPT-5.6, GPT-6, and GPT-6.1 migrations.
-outline: [2, 3]
 ---
 
 <script setup>
@@ -9,6 +8,15 @@ import { withBase } from 'vitepress'
 </script>
 
 # Copy-Ready Engineering Kits (`PCR001–006` & KQL Gate)
+
+<PageBrief
+  stepLabel="EXECUTABLE MIT KITS"
+  audience="CSAs, App Engineers & SREs"
+  readTime="2 min setup"
+  problem="Writing static AST linters and normalized PTU KQL queries from scratch slows down every customer engagement."
+  takeaway="Zero-dependency pcr_lint.py scans Python/TS/JS/C# repos in seconds, and ptu-cache-release-gate.kql computes two-regime PTU & shard SLOs."
+  csaUse="Download or 1-click copy either file below directly into your customer's repository and Log Analytics workspace (MIT licensed)."
+/>
 
 Both artifacts below are rendered directly from the live kit files in this repository so you can **inspect, search, 1-click copy**, or download the raw CLI/query file into customer repositories.
 

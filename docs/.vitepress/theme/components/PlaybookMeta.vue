@@ -39,7 +39,7 @@ function printPage() {
       </div>
       <div>
         <span class="pb-label">Last Verified</span>
-        <strong>{{ verified || '2026-11-16' }} ({{ status || 'Active v1.0' }})</strong>
+        <strong>{{ verified || '2026-11-18 21:21 PST' }} ({{ status || 'Active v1.0' }})</strong>
       </div>
       <div v-if="paperHref" class="pb-pdf no-print">
         <span class="pb-label">Consolidated Reader</span>

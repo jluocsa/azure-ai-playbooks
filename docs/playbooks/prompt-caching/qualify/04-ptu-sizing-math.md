@@ -1,12 +1,40 @@
 ---
 title: 04 · SKU Boundary, PTU Sizing & Interactive Calculator
 description: Standard vs. PTU-M breakpoint rules, official Microsoft Learn PTU sizing parameters, two-regime PTU math, and live estimator.
-outline: [2, 3]
 ---
 
 # 04 · Deployment SKU Boundary & PTU Capacity Math
 
+<PageBrief
+  stage="qualify"
+  audience="CSAs, FinOps & Capacity Leads"
+  readTime="4 min read"
+  problem="Sizing PTU reservations using old GPT-4o formulas—or assuming GPT-5.6 PTU-M supports breakpoints—leads to 2.56× capacity shortfalls or HTTP 400 errors."
+  takeaway="GPT-5.6 deducts cached tokens 100% from PTU draw (no breakpoints on PTU-M), while GPT-6/6.1 support PTU-M breakpoints with 0.1x/0.05x read and 1.25x write weights."
+  csaUse="Open the interactive calculator below on your customer sizing call, click a workload preset, and copy the PTU + shard estimate directly into chat."
+/>
+
 Enterprise production workloads commonly pair **Provisioned Throughput (PTU-M)** base capacity with **Standard (Pay-As-You-Go)** spillover. Available caching parameters and PTU utilization formulas differ sharply between **GPT-5.6** and **GPT-6 / GPT-6.1** <span class="ev-badge ev-m">[M]</span>.
+
+<div class="arch-diagram">
+  <svg viewBox="0 0 760 144" role="img" aria-labelledby="ptu-reg-title ptu-reg-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
+    <title id="ptu-reg-title">Two-Regime PTU Capacity Accounting Across Model Families</title>
+    <desc id="ptu-reg-desc">Compares Regime 1 (GPT-5.6 and earlier: 0 percent PTU draw on cached tokens, 6x output weight, no PTU-M breakpoints) against Regime 2 (GPT-6 and GPT-6.1: 0.1x or 0.05x cached read weight, 1.25x write weight, 5.0x output weight, full PTU-M breakpoint support).</desc>
+    <rect x="10" y="12" width="360" height="98" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="20" y="31" font-size="9.5" font-weight="700" fill="#183e62">Regime 1 · Pre-GPT-6 (incl. GPT-5.6 PTU-M)</text>
+    <text x="20" y="48" font-size="8.3" fill="#334e68">&bull; Cached input tokens: 0% PTU draw (100% deducted)</text>
+    <text x="20" y="62" font-size="8.3" fill="#334e68">&bull; Uncached input: 1.0x &middot; Output tokens: 6.0x</text>
+    <text x="20" y="76" font-size="8.3" fill="#334e68">&bull; PTU-M breakpoints: Not supported (use prefix + key)</text>
+    <text x="20" y="96" font-size="8.0" font-weight="700" fill="#1d4ed8">[80% Hit = 170 PTUs vs. 0% Hit = 435 PTUs (2.56&times;)]</text>
+    <rect x="390" y="12" width="360" height="98" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.5"/>
+    <text x="400" y="31" font-size="9.5" font-weight="700" fill="#115e59">Regime 2 · GPT-6 &amp; GPT-6.1 Normalized PTU-M</text>
+    <text x="400" y="48" font-size="8.3" fill="#334e68">&bull; Cached read: 0.10x (GPT-6) or 0.05x (GPT-6.1 Sol)</text>
+    <text x="400" y="62" font-size="8.3" fill="#334e68">&bull; Cache write: 1.25x &middot; Uncached: 1.0x &middot; Output: 5.0x</text>
+    <text x="400" y="76" font-size="8.3" fill="#334e68">&bull; PTU-M breakpoints: Fully supported (up to 4 writes)</text>
+    <text x="400" y="96" font-size="8.0" font-weight="700" fill="#0f766e">[Amortize 1.25x Writes via &ge;10:1 Read/Write Ratio]</text>
+    <text x="10" y="130" font-size="8.4" fill="#526c80">Always match your PTU sizing spreadsheet and KQL alerts to the target model family's accounting regime [M].</text>
+  </svg>
+</div>
 
 ## 1. Standard vs. PTU-M Control Matrix `[M]`
 

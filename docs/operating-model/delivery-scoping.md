@@ -1,14 +1,24 @@
 ---
 title: 03 · Repeatable Readiness Engagement Scope
 description: Turnkey intake qualification scorecard and 3-week structured delivery blueprint for scoping proactive Foundry model migration & PTU readiness engagements.
-outline: [2, 3]
 ---
 
 # 03 · Repeatable Readiness Engagement Scope
 
-A core goal of Solution Industrialization is making architecture patterns **immediately scopable as repeatable proactive delivery engagements**. Any engineering lead or delivery manager can use the intake scorecard and 3-week blueprint below to scope a **Foundry Model Migration, Prompt Caching & PTU Readiness Engagement**.
+<PageBrief
+  stepLabel="PROACTIVE DELIVERY · 03"
+  audience="CSAs, Delivery Leads & Account Teams"
+  readTime="4 min read"
+  problem="Proactive customer readiness work stalls when teams lack a fast qualification filter or a bounded week-by-week delivery plan."
+  takeaway="Qualify exposure in 30 minutes using 6 boundary questions, then execute a structured 3-week engagement with concrete exit artifacts."
+  csaUse="Open the interactive scorecard below live on your customer discovery call, toggle their workload traits, and copy the scope summary."
+/>
+
+A core goal of Solution Industrialization is making architecture patterns **immediately scopable as repeatable proactive delivery engagements**. Any engineering lead or delivery manager can use the interactive triage tool and 3-week blueprint below to scope a **Foundry Model Migration, Prompt Caching & PTU Readiness Engagement**.
 
 ## 1. Intake Qualification Scorecard
+
+<IntakeScorecard />
 
 Capture **orders of magnitude and architectural boundaries** during a 30-minute intake call—not false precision:
 
@@ -22,6 +32,42 @@ Capture **orders of magnitude and architectural boundaries** during a 30-minute 
 | **6. Ethical Walls, Chargeback & Seasonal Cliffs** | Does the platform isolate concurrent client engagements/matters, bill tokens to `cost_center` codes, or face `3×–6×` filing/audit-close traffic surges? | Activates the [Regulated Multi-Engagement & Compliance Profile](/playbooks/prompt-caching/profiles/regulated-multi-engagement): `Posture A` zero-client-cache mode, out-of-band OTel chargeback, seasonal PTU + PAYG spillover math, and `C-WP1–C-WP4` workpaper parity gates. |
 
 ## 2. Phased 3-Week Delivery Blueprint
+
+<div class="arch-diagram">
+  <svg viewBox="0 0 760 144" role="img" aria-labelledby="del-bp-title del-bp-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
+    <title id="del-bp-title">Three-Week Customer Readiness Delivery Flow</title>
+    <desc id="del-bp-desc">Shows 30-Minute Intake Triage leading to Week 1 Baseline Audit Report, Week 2 Refactored Middleware and APIM Policy, and Week 3 Signed C1-C15 Readiness Record and Right-Sized PTU Model.</desc>
+    <defs><marker id="del-bp-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
+    <rect x="8" y="14" width="166" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="16" y="33" font-size="9.3" font-weight="700" fill="#183e62">Intake (30 Min)</text>
+    <text x="16" y="49" font-size="8.2" fill="#334e68">Score retiring models,</text>
+    <text x="16" y="62" font-size="8.2" fill="#334e68">SKU mix &amp; &gt;15 RPM</text>
+    <text x="16" y="75" font-size="8.2" fill="#334e68">concurrency boundaries</text>
+    <text x="16" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Exit: Scoped Plan]</text>
+    <path d="M174 59 H196" stroke="#0f766e" stroke-width="1.8" marker-end="url(#del-bp-arr)"/>
+    <rect x="200" y="14" width="170" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="208" y="33" font-size="9.3" font-weight="700" fill="#183e62">Week 1 · Baseline Audit</text>
+    <text x="208" y="49" font-size="8.2" fill="#334e68">Rank nodes by RPM&times;Tok,</text>
+    <text x="208" y="62" font-size="8.2" fill="#334e68">run pcr_lint.py &amp; capture</text>
+    <text x="208" y="75" font-size="8.2" fill="#334e68">un-tuned miss baseline</text>
+    <text x="208" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Exit: Audit Report]</text>
+    <path d="M370 59 H392" stroke="#0f766e" stroke-width="1.8" marker-end="url(#del-bp-arr)"/>
+    <rect x="396" y="14" width="170" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="404" y="33" font-size="9.3" font-weight="700" fill="#183e62">Week 2 · Prefix &amp; APIM</text>
+    <text x="404" y="49" font-size="8.2" fill="#334e68">Refactor Pos 1–6 order,</text>
+    <text x="404" y="62" font-size="8.2" fill="#334e68">shard keys &amp; wire 429</text>
+    <text x="404" y="75" font-size="8.2" fill="#334e68">PAYG spillover in non-prod</text>
+    <text x="404" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Exit: Staging Policy]</text>
+    <path d="M566 59 H588" stroke="#0f766e" stroke-width="1.8" marker-end="url(#del-bp-arr)"/>
+    <rect x="592" y="14" width="160" height="90" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.5"/>
+    <text x="600" y="33" font-size="9.3" font-weight="700" fill="#115e59">Week 3 · Gate Sign-Off</text>
+    <text x="600" y="49" font-size="8.2" fill="#334e68">2-pass evals, peak load,</text>
+    <text x="600" y="62" font-size="8.2" fill="#334e68">KQL workbook &amp; right-sized</text>
+    <text x="600" y="75" font-size="8.2" fill="#334e68">PTU reservation model</text>
+    <text x="600" y="94" font-size="7.8" font-weight="700" fill="#0f766e">[Exit: Signed C1–C15]</text>
+    <text x="10" y="130" font-size="8.4" fill="#526c80">Each week produces one tangible engineering artifact reviewed jointly with App, SRE, and FinOps leads.</text>
+  </svg>
+</div>
 
 | Phase | Core Engineering Activities | Concrete Exit Artifact |
 | :--- | :--- | :--- |

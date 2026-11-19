@@ -22,7 +22,26 @@ Before opening or merging a Pull Request, verify all three gates:
    - Confirm whether any novel mechanism is an active patent / invention-disclosure candidate. **Do not commit active invention-disclosure drafts to public repositories** (public commits create immediate prior art).
    - Identify companion upstream targets where applicable (Product Group engineering brief or Azure Architecture Center PR).
 
-## 3. Submitting a Change
+## 3. Page Structure Standard (Readable Across All Audience Levels)
+
+Every chapter and subpage follows a **progressive-disclosure pattern** so leadership, account CSAs, and deep engineers can all use the same page:
+
+1. **Top `<PageBrief />` Card:** Concise 3-column summary (*Why It Matters*, *Key Takeaway*, *How a CSA Uses This*) with journey stage indicator and read time.
+2. **Visual Mental Model:** Clean horizontal SVG architecture/flow diagram (using `.arch-diagram`) before any wide specification tables.
+3. **Verified Engineering Detail:** Evidence-tagged (`[M]`, `[Arch]`, `[Agree]`, `[Validate]`) matrices, formulas, and copy-ready code/KQL snippets.
+
+```markdown
+<PageBrief
+  stage="design"
+  audience="Architects & App Leads"
+  readTime="3 min read"
+  problem="Concise customer problem solved on this page."
+  takeaway="Single-sentence architectural rule or bottom-line conclusion."
+  csaUse="How a peer CSA uses this page in a customer ADS or delivery sprint."
+/>
+```
+
+## 4. Submitting a Change
 
 ```powershell
 git checkout -b feat/<playbook>-<topic>

@@ -2,6 +2,7 @@
 """PCR001-PCR006 Static Prompt-Caching Readiness Linter (Python AST + Regex).
 
 Zero-dependency CLI scanner for GPT-5.6, GPT-6, and GPT-6.1 migrations.
+Last verified: 2026-11-18 21:21 PST
 Usage:
     python pcr_lint.py ./src
     python pcr_lint.py ./src --json

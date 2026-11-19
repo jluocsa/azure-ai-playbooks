@@ -1,10 +1,18 @@
 ---
 title: 02 · Stateless Agents & Per-Turn Hydration Tax
 description: Why Model 2 stateless enterprise web backends depend on Azure OpenAI KV prefix caching as their cross-turn hydration memory.
-outline: [2, 3]
 ---
 
 # 02 · Stateless Agent Runtimes & the Hydration Tax
+
+<PageBrief
+  stage="start"
+  audience="CSAs & App Architects"
+  readTime="3 min read"
+  problem="Cloud container backends forget everything between HTTP requests—resending 4,000–12,000 instruction and tool tokens on every single turn."
+  takeaway="In a stateless web service (Model 2), Azure OpenAI prompt caching is your cross-turn memory; breaking the prefix pays full cost 3–8× per user turn."
+  csaUse="Show the diagram below when customer developers ask why local CLI agent prototypes feel fast and cheap while production containers hit PTU limits."
+/>
 
 Production enterprise agent platforms follow a **Model 2 stateless web backend pattern** (constructed and torn down on every HTTP request) rather than a **Model 1 stateful local CLI process** (resident in memory across turns) <span class="ev-badge ev-arch">[Arch]</span>.
 

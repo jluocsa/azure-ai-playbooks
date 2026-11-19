@@ -1,24 +1,22 @@
 ---
 title: 01 · Solution Industrialization Pipeline
 description: How Customer-Zero architecture engagements are sanitized, reviewed, routed for IP/product disposition, and packaged into repeatable 1:N field playbooks.
-outline: [2, 3]
 ---
 
 # 01 · Solution Industrialization Pipeline
 
+<PageBrief
+  stepLabel="OPERATING MODEL · 01"
+  audience="Leadership & All CSAs"
+  readTime="3 min read"
+  problem="Flagship accounts solve hard Azure AI cutover problems 1:1, while peer teams hit the exact same bottlenecks weeks later."
+  takeaway="A governed 5-stage factory turns one Customer-Zero win into sanitized, Learn-verified 1:N playbooks, 3-week scopes, and MIT kits."
+  csaUse="Use an existing playbook on your account today—or route your own Customer-Zero breakthrough through this factory to scale your impact."
+/>
+
 Enterprise AI architecture specialists regularly solve complex, cross-service production problems for a single flagship account (**Customer-Zero**)—only for those exact same migration, capacity, and resiliency problems to recur across dozens of other enterprise accounts weeks later.
 
 This hub provides the **Solution Industrialization mechanism** that converts bespoke 1:1 engagement artifacts into **governed, repeatable 1:N engineering assets**.
-
-## Five Strategic Value Pillars
-
-| Strategic Pillar | Operational Problem Solved | Mechanism in This Hub |
-| :--- | :--- | :--- |
-| **1. Convert Specialist Coverage into 1:N Leverage** | When specialist architects are spread thinly across many enterprise portfolios, bespoke per-account white papers do not scale. | One deep Customer-Zero engagement establishes a peer-reviewed reference playbook, KQL gate, and CI lint spec reusable across every peer team. |
-| **2. Protect Production Workloads During Model Retirement Waves** | Model retirements (`gpt-4.x`, `o3-mini` &rarr; `gpt-5.6`, `gpt-6`, `gpt-6.1`) stall when teams hit `0%` cache hits, `2.56×` PTU spikes, or HTTP `429` storms. | Standardized [`C1–C15` readiness gates](/playbooks/prompt-caching/govern/14-readiness-standard), two-regime PTU math, and SKU-aware APIM spillover make every cutover predictable. |
-| **3. Operationalize Solution Industrialization** | Field IP often stays trapped in slide decks or customer-specific PDFs that cannot be shared across accounts. | Automated sanitization (`check-sanitized.mjs`) + **Interactive Multi-Chapter Playbook + Single-Page Printable White Paper (`.md`)** packaging make field IP turnkey. |
-| **4. Governed Field-to-Product Innovation Pathway** | Ad-hoc external sharing risks either leaking customer context or inadvertently creating prior art on patentable mechanisms. | Every candidate clears a structured **Sanitization + Architecture Review + Tri-Path Disposition Gate** (IP Hold vs. Product Group/Learn Upstream vs. Field Playbook). |
-| **5. Scopable Proactive Delivery Assets** | Proactive readiness engagements require clear intake criteria, bounded timelines, and concrete exit artifacts to scope consistently. | Every playbook ships with an [Intake Qualification Scorecard & 3-Week Delivery Blueprint](/operating-model/delivery-scoping). |
 
 ## The Five-Stage Industrialization Factory
 
@@ -66,6 +64,16 @@ This hub provides the **Solution Industrialization mechanism** that converts bes
     <text x="8" y="174" font-size="8.4" fill="#526c80">Governed five-stage factory converting 1:1 Customer-Zero engagements into sanitized, peer-reviewed 1:N assets.</text>
   </svg>
 </div>
+
+## Five Strategic Value Pillars
+
+| Strategic Pillar | Operational Problem Solved | Mechanism in This Hub |
+| :--- | :--- | :--- |
+| **1. Convert Specialist Coverage into 1:N Leverage** | When specialist architects are spread thinly across many enterprise portfolios, bespoke per-account white papers do not scale. | One deep Customer-Zero engagement establishes a peer-reviewed reference playbook, KQL gate, and CI lint spec reusable across every peer team. |
+| **2. Protect Production Workloads During Model Retirement Waves** | Model retirements (`gpt-4.x`, `o3-mini` &rarr; `gpt-5.6`, `gpt-6`, `gpt-6.1`) stall when teams hit `0%` cache hits, `2.56×` PTU spikes, or HTTP `429` storms. | Standardized [`C1–C15` readiness gates](/playbooks/prompt-caching/govern/14-readiness-standard), two-regime PTU math, and SKU-aware APIM spillover make every cutover predictable. |
+| **3. Operationalize Solution Industrialization** | Field IP often stays trapped in slide decks or customer-specific PDFs that cannot be shared across accounts. | Automated sanitization (`check-sanitized.mjs`) + **Interactive Multi-Chapter Playbook + Single-Page Printable White Paper (`.md`)** packaging make field IP turnkey. |
+| **4. Governed Field-to-Product Innovation Pathway** | Ad-hoc external sharing risks either leaking customer context or inadvertently creating prior art on patentable mechanisms. | Every candidate clears a structured **Sanitization + Architecture Review + Tri-Path Disposition Gate** (IP Hold vs. Product Group/Learn Upstream vs. Field Playbook). |
+| **5. Scopable Proactive Delivery Assets** | Proactive readiness engagements require clear intake criteria, bounded timelines, and concrete exit artifacts to scope consistently. | Every playbook ships with an [Intake Qualification Scorecard & 3-Week Delivery Blueprint](/operating-model/delivery-scoping). |
 
 ### Stage-by-Stage Operating Rules
 

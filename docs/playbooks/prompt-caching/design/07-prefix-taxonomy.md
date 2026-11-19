@@ -1,10 +1,18 @@
 ---
 title: 07 · Scope × Volatility Prefix Architecture (Pos 1–6)
 description: Mapping orthogonal Scope and Volatility context axes onto strict prompt prefix positions 1 through 6.
-outline: [2, 3]
 ---
 
 # 07 · Scope × Volatility Prefix Architecture
+
+<PageBrief
+  stage="design"
+  audience="CSAs & Prompt/App Leads"
+  readTime="4 min read"
+  problem="Mixing global instructions, workspace metadata, user history, and live RAG chunks in arbitrary order destroys cross-user and cross-turn cache hits."
+  takeaway="Order every prompt strictly from most-shared & static (Pos 1–3 Global T0) to workspace-scoped (Pos 4 L2), session-scoped (Pos 5 L1), and live RAG last (Pos 6)."
+  csaUse="Put the Pos 1–6 diagram below on screen during your customer Architecture Design Session to refactor their prompt builder in under an hour."
+/>
 
 Enterprise agent context divides cleanly along two orthogonal axes <span class="ev-badge ev-arch">[Arch]</span>:
 

@@ -1,7 +1,6 @@
 ---
 title: 01 · Executive Thesis & Core Questions
 description: Architectural thesis and verified engineering answers for migrating stateless enterprise agents to GPT-5.6, GPT-6, and GPT-6.1 across Standard and PTU-M deployments.
-outline: [2, 3]
 ---
 
 # 01 · Executive Thesis & Core Migration Questions
@@ -11,15 +10,79 @@ outline: [2, 3]
   provenance="Customer-Zero Validated (Regulated Multi-Node Agent Platform)"
   governance="Sanitized · Peer Reviewed · IP Screened"
   owners="John Luo (@jluocsa) · Co-Authors Welcome"
-  verified="2026-11-16"
+  verified="2026-11-18 21:21 PST"
   status="Live v1.0"
   paperHref="/papers/foundry-prompt-caching-gpt56-whitepaper"
   paperLabel="Single-Page White Paper →"
 />
 
-Enterprise AI applications—such as **rubric-scoring / control-evaluation agents** and multi-node document-review workflows—assemble multi-thousand-token prompts combining system policies, skill catalogs, tool schemas, workspace context cards, and retrieved grounding evidence.
+<PageBrief
+  stage="start"
+  audience="All Levels · Executive & CSA"
+  readTime="3 min read"
+  problem="Upgrading apps from GPT-4 / o3-mini to GPT-5.6, GPT-6, and GPT-6.1 without prompt discipline causes a 2.56× jump in PTU capacity and slower responses."
+  takeaway="Keep static instructions and sorted tools first, shard cache keys above 15 RPM, match controls to SKU, and enforce automated CI + KQL gates."
+  csaUse="Start customer migration conversations here—walk through the 5-box diagram below, then pick the matching intake, ADS, or CI kit row."
+/>
 
-Migrating these workloads from `gpt-4.x` or `o3-mini` to **GPT-5.6, GPT-6, and GPT-6.1** without explicit prefix engineering causes cache misses, a **2.56× spike in deployed PTU draw** (`2.60×` raw TPM), higher time-to-first-token (TTFT) latency, and unamortized cache-write charges.
+## At a Glance: What Problem This Solves & How Another CSA Uses It
+
+When enterprise AI applications—such as **document-review, compliance, and multi-step agent platforms**—upgrade from `gpt-4.x` or `o3-mini` to **GPT-5.6, GPT-6, and GPT-6.1**, dynamic fields placed near the top of prompts (timestamps, user IDs, or unsorted tool lists) silently break Azure’s prompt cache. Without prefix discipline, teams hit a **2.56× spike in required PTU capacity** (`2.60×` raw TPM), slower time-to-first-token (TTFT), and unamortized cache-write charges.
+
+This playbook was produced through the hub’s [Five-Stage Industrialization Factory](/operating-model/industrialization-pipeline)—taking a proven **Customer-Zero** fix, stripping all customer identifiers, verifying every product boundary against Microsoft Learn, and packaging a repeatable architecture and automation kit for every peer CSA.
+
+<div class="arch-diagram">
+  <svg viewBox="0 0 760 154" role="img" aria-labelledby="pb1-glance-title pb1-glance-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
+    <title id="pb1-glance-title">Playbook 01 End-to-End Story Flow</title>
+    <desc id="pb1-glance-desc">Shows 1 Upgrade Trigger to GPT-5.6 and GPT-6, 2 Hidden Cache-Miss Trap causing a 2.56x PTU spike, 3 Stable-First Prefix and APIM Spillover Fix, 4 Automated CI and KQL Gates, and 5 Verified Cutover Outcome.</desc>
+    <defs><marker id="pb1-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
+    <rect x="8" y="18" width="132" height="96" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="16" y="37" font-size="9.2" font-weight="700" fill="#183e62">1. Upgrade Trigger</text>
+    <text x="16" y="53" font-size="8.2" fill="#334e68">Apps migrate from</text>
+    <text x="16" y="66" font-size="8.2" fill="#334e68">GPT-4 / o3-mini to</text>
+    <text x="16" y="79" font-size="8.2" fill="#334e68">GPT-5.6, 6 &amp; 6.1</text>
+    <text x="16" y="100" font-size="7.8" font-weight="700" fill="#1d4ed8">[Model Retirement]</text>
+    <path d="M140 66 H158" stroke="#0f766e" stroke-width="1.7" marker-end="url(#pb1-arr)"/>
+    <rect x="162" y="18" width="134" height="96" rx="6" fill="#fff7eb" stroke="#d97706" stroke-width="1.4"/>
+    <text x="170" y="37" font-size="9.2" font-weight="700" fill="#92400e">2. Hidden Trap</text>
+    <text x="170" y="53" font-size="8.2" fill="#334e68">Early timestamps or IDs</text>
+    <text x="170" y="66" font-size="8.2" fill="#334e68">zero out prompt reuse</text>
+    <text x="170" y="79" font-size="8.2" fill="#334e68">across stateless turns</text>
+    <text x="170" y="100" font-size="7.8" font-weight="700" fill="#b45309">[2.56× PTU Spike]</text>
+    <path d="M296 66 H314" stroke="#0f766e" stroke-width="1.7" marker-end="url(#pb1-arr)"/>
+    <rect x="318" y="18" width="136" height="96" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="326" y="37" font-size="9.2" font-weight="700" fill="#183e62">3. Architecture Fix</text>
+    <text x="326" y="53" font-size="8.2" fill="#334e68">Pos 1–6 stable prefix,</text>
+    <text x="326" y="66" font-size="8.2" fill="#334e68">shard keys &amp; APIM 429</text>
+    <text x="326" y="79" font-size="8.2" fill="#334e68">spillover to PAYG</text>
+    <text x="326" y="100" font-size="7.8" font-weight="700" fill="#1d4ed8">[80%+ Cache Hit]</text>
+    <path d="M454 66 H472" stroke="#0f766e" stroke-width="1.7" marker-end="url(#pb1-arr)"/>
+    <rect x="476" y="18" width="132" height="96" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="484" y="37" font-size="9.2" font-weight="700" fill="#183e62">4. Automated Gates</text>
+    <text x="484" y="53" font-size="8.2" fill="#334e68">pcr_lint.py AST scan,</text>
+    <text x="484" y="66" font-size="8.2" fill="#334e68">2-pass evals &amp; KQL</text>
+    <text x="484" y="79" font-size="8.2" fill="#334e68">release verification</text>
+    <text x="484" y="100" font-size="7.8" font-weight="700" fill="#1d4ed8">[C1–C15 Standard]</text>
+    <path d="M608 66 H626" stroke="#0f766e" stroke-width="1.7" marker-end="url(#pb1-arr)"/>
+    <rect x="630" y="18" width="122" height="96" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.5"/>
+    <text x="638" y="37" font-size="9.2" font-weight="700" fill="#115e59">5. Proven Result</text>
+    <text x="638" y="53" font-size="8.2" fill="#334e68">2.56× spike avoided</text>
+    <text x="638" y="66" font-size="8.2" fill="#334e68">&amp; 71% seasonal</text>
+    <text x="638" y="79" font-size="8.2" fill="#334e68">TCO saved</text>
+    <text x="638" y="100" font-size="7.8" font-weight="700" fill="#0f766e">[Cutover Ready]</text>
+    <text x="10" y="140" font-size="8.4" fill="#526c80">Customer-Zero validated path from model-upgrade risk to governed production cutover.</text>
+  </svg>
+</div>
+
+| How Another CSA Uses This Playbook | Where to Start |
+| :--- | :--- |
+| **1. Qualify an Account in 30 Minutes** — Score retiring models, stateless turn hydration, PTU vs. PAYG mix, `>15 RPM` concurrency, and client-isolation requirements. | [3-Week Delivery Scope & Intake Scorecard](/operating-model/delivery-scoping) · [Hub Visual Overview](/) |
+| **2. Lead an Architecture Design Session (ADS)** — Walk customer architects and FinOps through prefix ordering, right-sized PTU math, APIM spillover, or ethical-wall isolation. | [04 · PTU Calculator](../qualify/04-ptu-sizing-math) · [07 · Prefix Order](../design/07-prefix-taxonomy) · [10 · APIM Spillover](../design/10-apim-spillover) · [Regulated Profile](../profiles/regulated-multi-engagement) |
+| **3. Drop Executable Gates into Customer CI/CD** — Hand off zero-dependency static linting, 2-pass cache assertions, App Insights KQL alerts, and the PR cutover checklist. | [`pcr_lint.py` & KQL Kits](/papers/engineering-kits) · [`C1–C15` PR Checklist](/papers/migration-readiness-checklist) · [Printable White Paper](/papers/foundry-prompt-caching-gpt56-whitepaper) |
+
+---
+
+## Technical Deep Dive: Architectural Conclusions & Mechanics
 
 ::: info Four Architectural Conclusions
 1. **Prompt caching remains active on GPT-5.6+**, but introduces an explicit control surface (`prompt_cache_key`, `prompt_cache_options`, `prompt_cache_breakpoint`), TTL-tiered cache-write billing, and a default `reasoning.context = "all_turns"` setting on GPT-5.6 and GPT-6 that amplifies multi-turn token volume <span class="ev-badge ev-m">[M]</span>.

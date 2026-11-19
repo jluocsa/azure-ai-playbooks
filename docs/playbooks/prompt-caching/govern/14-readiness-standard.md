@@ -1,10 +1,18 @@
 ---
 title: 14 · 15-Point Migration Readiness Standard (C1–C15)
 description: Recommended 15-point production readiness standard mapped across the 7-layer quality pipeline and 4-stage governance lifecycle.
-outline: [2, 3]
 ---
 
 # 14 · 15-Point Migration Readiness Standard (`C1–C15`)
+
+<PageBrief
+  stage="govern"
+  audience="All Levels · ARB & Cutover Sign-Off"
+  readTime="3 min read"
+  problem="Model cutover meetings drag out when App, SRE, and FinOps leads lack a single objective go/no-go sign-off checklist."
+  takeaway="Adopt C1–C15 as your standing release gate—mapping every architecture, CI lint, load-test, and PTU sizing check to concrete evidence."
+  csaUse="Bring this page (or the printable PR template) into the Week 3 cutover review for joint App, SRE, and FinOps sign-off."
+/>
 
 Open the copy-ready PR / release-gate template subpage: [`C1–C15` Migration Readiness PR Checklist →](/papers/migration-readiness-checklist)
 
@@ -31,6 +39,38 @@ Adopt criteria **`C1`–`C15`** as a standing release gate across the 7-layer pi
 *Scope legend:* `ALL` = all GPT-5.6+ deployments; `STD / 6+` = Standard 5.6+ and PTU-M GPT-6+; `PTU 5.6` = Provisioned Throughput on GPT-5.6. For regulated audit, tax, legal, and compliance workpapers, augment `C12` and `C15` with the four **Workpaper Defensibility Controls (`C-WP1–C-WP4`)** in [Regulated Multi-Engagement & Compliance Platforms](/playbooks/prompt-caching/profiles/regulated-multi-engagement#4-workpaper-grade-reproducibility-across-model-retirements).
 
 ## Four-Stage Standing Governance Lifecycle `[Arch]`
+
+<div class="arch-diagram">
+  <svg viewBox="0 0 760 132" role="img" aria-labelledby="gov4-title gov4-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
+    <title id="gov4-title">Four-Stage Standing Model Readiness Governance Loop</title>
+    <desc id="gov4-desc">Shows Stage I Design and Lint, Stage II Shadow 2-Pass Eval, Stage III 30-Day PTU Calibration, and Stage IV Continuous OTel/KQL Drift Assurance.</desc>
+    <defs><marker id="gov4-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
+    <rect x="8" y="14" width="168" height="82" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="16" y="33" font-size="9.1" font-weight="700" fill="#183e62">Stage I · Design &amp; Lint</text>
+    <text x="16" y="49" font-size="8.2" fill="#334e68">Map Pos 1–6 boundaries</text>
+    <text x="16" y="62" font-size="8.2" fill="#334e68">&amp; enforce PCR001–006</text>
+    <text x="16" y="82" font-size="7.8" font-weight="700" fill="#1d4ed8">[C1–C4, C6, C8–C9]</text>
+    <path d="M176 55 H198" stroke="#0f766e" stroke-width="1.7" marker-end="url(#gov4-arr)"/>
+    <rect x="202" y="14" width="168" height="82" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="210" y="33" font-size="9.1" font-weight="700" fill="#183e62">Stage II · Shadow Eval</text>
+    <text x="210" y="49" font-size="8.2" fill="#334e68">Run 2-pass golden set</text>
+    <text x="210" y="62" font-size="8.2" fill="#334e68">(Hit &ge;80%, R/W &ge;10:1)</text>
+    <text x="210" y="82" font-size="7.8" font-weight="700" fill="#1d4ed8">[C5, C10, C12]</text>
+    <path d="M370 55 H392" stroke="#0f766e" stroke-width="1.7" marker-end="url(#gov4-arr)"/>
+    <rect x="396" y="14" width="170" height="82" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.4"/>
+    <text x="404" y="33" font-size="9.1" font-weight="700" fill="#115e59">Stage III · PTU Sizing</text>
+    <text x="404" y="49" font-size="8.2" fill="#334e68">Load-test shards &amp; right-</text>
+    <text x="404" y="62" font-size="8.2" fill="#334e68">size PTU + PAYG spillover</text>
+    <text x="404" y="82" font-size="7.8" font-weight="700" fill="#0f766e">[C7, C13–C15]</text>
+    <path d="M566 55 H588" stroke="#0f766e" stroke-width="1.7" marker-end="url(#gov4-arr)"/>
+    <rect x="592" y="14" width="160" height="82" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.5"/>
+    <text x="600" y="33" font-size="9.1" font-weight="700" fill="#115e59">Stage IV · Drift Guard</text>
+    <text x="600" y="49" font-size="8.2" fill="#334e68">Continuous OTel &amp; KQL</text>
+    <text x="600" y="62" font-size="8.2" fill="#334e68">alerts across snapshots</text>
+    <text x="600" y="82" font-size="7.8" font-weight="700" fill="#0f766e">[C11 · Always On]</text>
+    <text x="10" y="118" font-size="8.4" fill="#526c80">Turns model retirement waves from emergency fire-drills into a routine 4-stage engineering check.</text>
+  </svg>
+</div>
 
 1. **Stage I — Design & Lint:** Map every prompt family to Pos 1–6 and enforce `PCR001–006` in PR CI.
 2. **Stage II — Shadow Eval:** Execute the 2-pass DeepEval quality + cache contract suite on candidate models.

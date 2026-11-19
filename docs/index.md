@@ -1,10 +1,10 @@
 ---
 title: Enterprise Azure AI Playbooks
 titleTemplate: Solution Industrialization Hub
-description: Customer-Zero validated architecture playbooks, readiness gates, PTU sizing math, and scopable delivery kits for Microsoft Foundry and Azure AI.
+description: Governed five-stage factory converting Customer-Zero Azure AI and Microsoft Foundry engagements into repeatable playbooks, 3-week delivery scopes, and automated guardrails.
 layout: page
 sidebar: false
 ---
 
-<HomeShowcase />
+<ExecutiveOverview />
 

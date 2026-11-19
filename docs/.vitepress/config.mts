@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 const base = process.env.VITEPRESS_BASE || '/azure-ai-playbooks/'
 const siteOrigin = 'https://jluocsa.github.io'
 const siteUrl = `${siteOrigin}${base}`
+const buildTimestamp = Date.now()
 
 export default defineConfig({
   title: 'Azure AI Playbooks',
@@ -12,6 +13,10 @@ export default defineConfig({
   base,
   cleanUrls: true,
   lastUpdated: true,
+
+  transformPageData(pageData) {
+    pageData.lastUpdated = buildTimestamp
+  },
 
   sitemap: {
     hostname: siteUrl,
@@ -57,6 +62,8 @@ export default defineConfig({
 
   themeConfig: {
       logo: '/favicon.svg',
+      aside: false,
+      outline: false,
       nav: [
         { text: 'Home', link: '/' },
         { text: 'Operating Model', link: '/operating-model/industrialization-pipeline' },
@@ -288,6 +295,18 @@ export default defineConfig({
       },
 
       search: { provider: 'local' },
+
+      lastUpdated: {
+        text: 'Last updated',
+        formatOptions: {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZoneName: 'short',
+        },
+      },
 
       editLink: {
         pattern: 'https://github.com/jluocsa/azure-ai-playbooks/edit/main/docs/:path',

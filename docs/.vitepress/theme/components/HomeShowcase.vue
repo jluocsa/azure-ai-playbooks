@@ -181,23 +181,24 @@ const signals = [
 
 <template>
   <div class="ms-landing">
-    <!-- Hero Band -->
+    <!-- Practitioner Deep-Dive Hero + Reference Stack -->
     <section class="ms-hero">
       <div class="ms-hero-bg" aria-hidden="true"></div>
       <div class="ms-container ms-hero-grid">
         <div class="ms-hero-copy">
+          <a :href="withBase('/')" class="th-back-link no-print">&larr; Back to Hub Overview</a>
           <div class="ms-eyebrow">
             <span class="ms-eyebrow-dot"></span>
-            <span>MICROSOFT FOUNDRY &amp; AZURE AI &middot; FIELD ARCHITECTURE HUB</span>
+            <span>PRACTITIONER DEEP DIVE &middot; FULL TECHNICAL HUB</span>
           </div>
           <h1 class="ms-hero-title">
-            Enterprise Azure AI
-            <span class="ms-hero-accent">Solution Industrialization Hub</span>
+            Architecture Catalog &amp;
+            <span class="ms-hero-accent">Cross-Service Engineering Kits</span>
           </h1>
           <p class="ms-hero-lead">
-            Production AI cutovers rarely fail inside a single feature—they fail at the
-            <strong>seams between services</strong>. Convert Customer-Zero architecture work into
-            governed playbooks, two-regime PTU math, ethical-wall patterns, and executable CI/KQL release gates.
+            Implementation-level reference layers across Microsoft Foundry, APIM, OpenTelemetry, and CI/CD—combining
+            <strong>two-regime PTU sizing math</strong>, regulated ethical-wall postures, and executable
+            <code>PCR001–006</code> &amp; KQL release gates.
           </p>
           <div class="ms-hero-actions">
             <a class="ms-btn ms-btn-primary" :href="withBase('/playbooks/prompt-caching/start/01-executive-thesis')">
@@ -215,6 +216,10 @@ const signals = [
             <span class="ev-badge ev-m">[M] Learn Grounded</span>
             <span class="ev-badge ev-arch">[Arch] Patterns</span>
             <span class="ev-badge ev-agree">[Agree] Gate SLOs</span>
+            <span class="pb-chip pb-chip-verified">
+              <span class="ms-live-dot" aria-hidden="true"></span>
+              <span>Verified 2026-11-18 21:21 PST</span>
+            </span>
             <a :href="withBase('/playbooks/prompt-caching/sources')" class="ms-trust-link">Verified Sources &rarr;</a>
           </div>
         </div>
@@ -361,14 +366,14 @@ const signals = [
 
         <div class="ms-operating-banner">
           <div>
-            <strong>How the 1:N Solution Industrialization Pipeline Works</strong>
+            <strong>Co-Author Playbooks 02 (APIM Gateway) &amp; 03 (Multi-Region BCP)</strong>
             <p>
-              Customer-Zero Validation &rarr; Automated Sanitization Gate &rarr; Peer Architecture Review &rarr;
-              Tri-Path Disposition (Patent Hold, Learn/PG Upstream, or Field Playbook).
+              Have a Customer-Zero architecture pattern ready for 1:N reuse? Review open Track Lead charters and the
+              3-gate sanitization, ARB, and IP clearance workflow.
             </p>
           </div>
-          <a class="ms-btn ms-btn-secondary" :href="withBase('/operating-model/industrialization-pipeline')">
-            Read Operating Model &rarr;
+          <a class="ms-btn ms-btn-secondary" :href="withBase('/playbooks/series-charters/')">
+            View Series Charters &rarr;
           </a>
         </div>
       </div>

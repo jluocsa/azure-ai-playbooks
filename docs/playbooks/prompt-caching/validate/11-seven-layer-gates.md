@@ -1,10 +1,18 @@
 ---
 title: 11 · 7-Layer Quality Pipeline & 7-Step Validation Protocol
 description: Embedding GPT-5.6+ prompt caching and PTU gates directly into the 7-layer testing and quality lifecycle.
-outline: [2, 3]
 ---
 
 # 11 · 7-Layer Quality Pipeline & 7-Step Protocol
+
+<PageBrief
+  stage="validate"
+  audience="CSAs, QA & Release Leads"
+  readTime="4 min read"
+  problem="Teams verify model accuracy in staging but never test prompt caching under concurrency—discovering 0% hits and 429 storms only after cutover."
+  takeaway="Embed caching checks directly into your existing unit, eval, load, and observability pipeline using the 7-step pre-cutover validation protocol."
+  csaUse="Use the 7-step table at the bottom as your Week 2/3 test plan with the customer's QA, App, and SRE leads."
+/>
 
 Rather than creating a separate governance silo, prompt-caching and PTU readiness plug directly into a defense-in-depth **7-Layer Testing & Quality Strategy** spanning Development Time (Layers 1–2), Deployment Gates (Layers 3 & 5), and Production Assurance (Layers 4, 6 & 7) <span class="ev-badge ev-arch">[Arch]</span>.
 

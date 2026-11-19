@@ -1,12 +1,20 @@
 ---
 title: 15 · Verification Matrix & Official Sources
 description: Specification verification register separating Microsoft Learn verified rules from subscription-level empirical checks, plus authoritative source links.
-outline: [2, 3]
 ---
 
 # 15 · Verification Matrix & Official Microsoft Sources
 
-*Last verified against published Microsoft Learn and OpenAI documentation: **2026-11-16**.*
+<PageBrief
+  stepLabel="VERIFICATION REGISTER · 15"
+  audience="All Levels · ARB & Customer Security"
+  readTime="3 min read"
+  problem="Customers need certainty on which behaviors are published Microsoft Learn product guarantees versus regional checks to run in their own subscription."
+  takeaway="Every [M] platform claim in Playbook 01 maps directly to authoritative Microsoft Learn / Azure Pricing URLs (R1–R6), separated from [Validate] probes."
+  csaUse="Share links R1–R6 directly with customer Architecture Review Boards to back up sizing, breakpoint, and isolation decisions."
+/>
+
+*Last verified against published Microsoft Learn and OpenAI documentation: **2026-11-18 21:21 PST**.*
 
 ## 1. Technical Specification Verification Matrix
 

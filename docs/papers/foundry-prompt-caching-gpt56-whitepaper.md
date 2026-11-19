@@ -1,7 +1,6 @@
 ---
 title: "White Paper · Model Migration Readiness: Prompt Caching on GPT-5.6 & Later"
 description: Consolidated single-page architecture white paper covering stateless agent hydration, GPT-5.6 / GPT-6 / GPT-6.1 prompt caching mechanics, two-regime PTU sizing economics, Scope × Volatility prefix engineering, and 7-layer CI/OTel release gates.
-outline: [2, 3]
 ---
 
 # Model Migration Readiness: Prompt Caching on GPT-5.6 & Later
@@ -13,9 +12,18 @@ outline: [2, 3]
   provenance="Customer-Zero Validated (Sanitized Reference Edition)"
   governance="Sanitized · Peer Reviewed · IP Screened"
   owners="John Luo (@jluocsa) · Co-Authors Welcome"
-  verified="2026-11-16"
+  verified="2026-11-18 21:21 PST"
   status="Active v1.0"
   printable
+/>
+
+<PageBrief
+  stepLabel="SINGLE-PAGE ARCHITECTURE EDITION"
+  audience="Executives, ARBs & Principal Architects"
+  readTime="10 min full · 2 min exec scan"
+  problem="Architecture Review Boards and offline stakeholders often want the entire playbook consolidated in one searchable, print-ready document."
+  takeaway="Consolidates Playbook 01's thesis, diagrams, two-regime PTU math, Pos 1–6 ordering, CI/KQL gates, and R1–R6 Microsoft Learn sources."
+  csaUse="Click 'Print / Save as PDF' above to generate a clean customer briefing PDF, or use the Role-Based Reading Guide below in live reviews."
 />
 
 ::: tip Role-Based Reading Guide
@@ -316,7 +324,7 @@ Copy-ready PR template available at [`C1–C15` Migration Readiness PR Checklist
 
 ## 10 · Verification Matrix & Official Microsoft Sources {#sec-10}
 
-*Last verified against published Microsoft Learn documentation: **2026-11-16**.*
+*Last verified against published Microsoft Learn documentation: **2026-11-18 21:21 PST**.*
 
 - **R1 · Prompt caching in Azure OpenAI (`[M]`):** <https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/prompt-caching>
 - **R2 · Azure OpenAI Service pricing (`[M]`):** <https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/>

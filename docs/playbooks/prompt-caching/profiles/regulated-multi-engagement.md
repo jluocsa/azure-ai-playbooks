@@ -1,7 +1,6 @@
 ---
 title: Workload Profile · Regulated Multi-Engagement & Compliance Platforms
 description: Reference architecture for multi-engagement advisory, assurance, tax, legal, and financial compliance platforms—covering ethical-wall cache isolation, chargeback separation, seasonal filing-cliff PTU math, and workpaper reproducibility.
-outline: [2, 3]
 ---
 
 # Workload Profile · Regulated Multi-Engagement & Compliance Platforms
@@ -11,10 +10,19 @@ outline: [2, 3]
   provenance="Cross-Industry Pattern (Assurance, Tax, Legal, Advisory & Risk Compliance)"
   governance="Sanitized · Peer Reviewed · IP Screened"
   owners="John Luo (@jluocsa) · Co-Authors Welcome"
-  verified="2026-11-16"
+  verified="2026-11-18 21:21 PST"
   status="Live v1.0"
   paperHref="/papers/foundry-prompt-caching-gpt56-whitepaper"
   paperLabel="Single-Page White Paper →"
+/>
+
+<PageBrief
+  stepLabel="WORKLOAD PROFILE · REGULATED PLATFORMS"
+  audience="CSAs, CISOs & Regulated Practice Leads"
+  readTime="5 min read"
+  problem="Audit, tax, legal, and financial platforms fear cross-client cache bleed, break cache keys with cost-center IDs, and overspend on 4× seasonal filing cliffs."
+  takeaway="Combine Posture A/B ethical walls, out-of-band FinOps headers, 110-PTU base + PAYG filing-cliff spillover (71% TCO saved), and C-WP1–C-WP4 workpaper parity."
+  csaUse="Bring Section 1 to CISO/Risk reviews, Section 2–3 to FinOps sizing reviews, and Section 4 to Audit/Quality compliance sign-off."
 />
 
 Multi-tenant knowledge-work platforms—spanning **statutory audit and assurance, tax and regulatory advisory, legal matter and M&A diligence, financial risk/control testing, and GxP compliance review**—share four operational constraints that generic enterprise chatbots never encounter:

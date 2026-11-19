@@ -115,6 +115,72 @@ const avgInput = ref(10000)
 const avgOutput = ref(500)
 const cacheHitPct = ref(80)
 const rwRatio = ref(10)
+const activePreset = ref('doc-review')
+const copiedSizing = ref(false)
+
+interface Preset {
+  id: string
+  label: string
+  model: string
+  rpm: number
+  input: number
+  output: number
+  hitPct: number
+  rw: number
+}
+
+const PRESETS: Preset[] = [
+  {
+    id: 'doc-review',
+    label: 'Document Review Agent (Default)',
+    model: 'gpt-5.6-terra',
+    rpm: 100,
+    input: 10000,
+    output: 500,
+    hitPct: 80,
+    rw: 12,
+  },
+  {
+    id: 'router',
+    label: 'High-RPM Guardrail Router',
+    model: 'gpt-5.6-luna',
+    rpm: 240,
+    input: 2400,
+    output: 120,
+    hitPct: 85,
+    rw: 25,
+  },
+  {
+    id: 'copilot',
+    label: 'Multi-Turn Enterprise Copilot',
+    model: 'gpt-6-sol',
+    rpm: 60,
+    input: 8000,
+    output: 650,
+    hitPct: 75,
+    rw: 10,
+  },
+  {
+    id: 'compliance',
+    label: 'GPT-6.1 Compliance Scorer',
+    model: 'gpt-6.1-sol',
+    rpm: 120,
+    input: 12000,
+    output: 450,
+    hitPct: 82,
+    rw: 15,
+  },
+]
+
+function applyPreset(p: Preset) {
+  activePreset.value = p.id
+  selectedId.value = p.model
+  peakRpm.value = p.rpm
+  avgInput.value = p.input
+  avgOutput.value = p.output
+  cacheHitPct.value = p.hitPct
+  rwRatio.value = p.rw
+}
 
 const spec = computed(() => MODELS.find(m => m.id === selectedId.value) || MODELS[0])
 
@@ -155,6 +221,8 @@ const calc = computed(() => {
   const depCached = roundToDeployable(rawCached, m.minGlobalDz, m.incGlobalDz)
   const depUncached = roundToDeployable(rawUncached, m.minGlobalDz, m.incGlobalDz)
   const spike = depCached > 0 ? depUncached / depCached : 1
+  const savedPtu = Math.max(0, depUncached - depCached)
+  const cachedBarPct = depUncached > 0 ? Math.max(8, Math.round((depCached / depUncached) * 100)) : 100
   const shards = Math.max(1, Math.ceil(Math.max(1, peakRpm.value) / 12))
 
   return {
@@ -166,20 +234,61 @@ const calc = computed(() => {
     rawUncached: rawUncached.toFixed(1),
     depCached,
     depUncached,
+    savedPtu,
+    cachedBarPct,
     spike: spike.toFixed(2),
     shards,
   }
 })
+
+async function copyEstimate() {
+  const m = spec.value
+  const text = [
+    `### PTU & Cache-Shard Estimate (${m.label})`,
+    `- **Traffic Profile:** ${peakRpm.value} Peak RPM · ${avgInput.value.toLocaleString()} Input Tok · ${avgOutput.value.toLocaleString()} Output Tok`,
+    `- **Tuned PTU Allocation (${calc.value.effectiveHitPct}% Cache Hit):** **${calc.value.depCached} PTUs** (${calc.value.normCached.toLocaleString()} Norm TPM)`,
+    `- **Un-Tuned 0%-Hit Exposure:** ${calc.value.depUncached} PTUs (${calc.value.spike}× spike · saves ${calc.value.savedPtu} PTUs)`,
+    `- **Recommended Key Shards (>15 RPM Rule):** \`${calc.value.shards}\` shard(s) (\`shard-0..${calc.value.shards - 1}\`)`,
+  ].join('\n')
+  try {
+    await navigator.clipboard.writeText(text)
+    copiedSizing.value = true
+    setTimeout(() => {
+      copiedSizing.value = false
+    }, 2200)
+  } catch {}
+}
 </script>
 
 <template>
   <div class="ptu-calc">
     <div class="ptu-header">
-      <strong>Interactive Two-Regime PTU &amp; Cache-Shard Estimator (Global / Data Zone)</strong>
-      <span class="ev-badge ev-m">[M] Learn Formulas</span>
+      <div>
+        <span class="ptu-kicker">INTERACTIVE CSA SIZING TOOL &middot; LIVE CUSTOMER ESTIMATOR</span>
+        <strong class="ptu-title">Two-Regime PTU &amp; Cache-Shard Calculator (Global / Data Zone)</strong>
+      </div>
+      <div class="ptu-header-right">
+        <span class="ev-badge ev-m">[M] Learn Formulas</span>
+        <button type="button" class="ptu-copy-btn no-print" @click="copyEstimate">
+          {{ copiedSizing ? '✓ Copied Summary' : 'Copy Estimate' }}
+        </button>
+      </div>
     </div>
 
-    <div class="ptu-inputs">
+    <div class="ptu-presets no-print" role="group" aria-label="Customer scenario presets">
+      <span class="ptu-preset-lbl">Quick Scenarios:</span>
+      <button
+        v-for="p in PRESETS"
+        :key="p.id"
+        type="button"
+        :class="['ptu-preset-chip', { 'is-active': activePreset === p.id }]"
+        @click="applyPreset(p)"
+      >
+        {{ p.label }}
+      </button>
+    </div>
+
+    <div class="ptu-inputs" @input="activePreset = 'custom'">
       <label>
         <span>Target Model</span>
         <select v-model="selectedId">
@@ -226,6 +335,27 @@ const calc = computed(() => {
       </div>
     </div>
 
+    <div class="ptu-bars">
+      <div class="ptu-bar-row">
+        <div class="ptu-bar-meta">
+          <span><strong>Tuned Prefix Architecture</strong> ({{ calc.effectiveHitPct }}% cached share)</span>
+          <strong class="ptu-bar-ok">{{ calc.depCached }} PTUs</strong>
+        </div>
+        <div class="ptu-bar-track">
+          <div class="ptu-bar-fill fill-ok" :style="{ width: `${calc.cachedBarPct}%` }"></div>
+        </div>
+      </div>
+      <div class="ptu-bar-row">
+        <div class="ptu-bar-meta">
+          <span><strong>Un-Tuned Migration</strong> (0% cache hits — saves {{ calc.savedPtu }} PTUs)</span>
+          <strong class="ptu-bar-warn">{{ calc.depUncached }} PTUs ({{ calc.spike }}&times;)</strong>
+        </div>
+        <div class="ptu-bar-track">
+          <div class="ptu-bar-fill fill-warn" style="width: 100%"></div>
+        </div>
+      </div>
+    </div>
+
     <p class="ptu-note">
       <strong>SKU Breakpoint Rule:</strong>
       <span v-if="spec.ptuBreakpoints">
@@ -251,12 +381,127 @@ const calc = computed(() => {
 .ptu-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--vp-c-divider);
+}
+.ptu-kicker {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--vp-c-brand-1);
+  margin-bottom: 2px;
+}
+.ptu-title {
+  display: block;
+  font-size: 0.96rem;
+  color: var(--vp-c-text-1);
+}
+.ptu-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ptu-copy-btn {
+  padding: 4px 11px;
+  border-radius: 5px;
+  border: 1px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.ptu-copy-btn:hover {
+  background: var(--vp-c-brand-1);
+  color: #fff;
+}
+.ptu-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.ptu-preset-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  margin-right: 2px;
+}
+.ptu-preset-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+.ptu-preset-chip:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+.ptu-preset-chip.is-active {
+  background: #0078d4;
+  border-color: #0078d4;
+  color: #fff;
+}
+.ptu-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+}
+.ptu-bar-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--vp-c-text-2);
+  margin-bottom: 5px;
+}
+.ptu-bar-ok {
+  color: #0f766e;
+}
+.dark .ptu-bar-ok {
+  color: #5eead4;
+}
+.ptu-bar-warn {
+  color: #b45309;
+}
+.dark .ptu-bar-warn {
+  color: #fbbf24;
+}
+.ptu-bar-track {
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--vp-c-bg-soft);
+  overflow: hidden;
+}
+.ptu-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+.ptu-bar-fill.fill-ok {
+  background: linear-gradient(90deg, #0078d4 0%, #0f766e 100%);
+}
+.ptu-bar-fill.fill-warn {
+  background: linear-gradient(90deg, #d97706 0%, #dc2626 100%);
 }
 .ptu-inputs {
   display: grid;

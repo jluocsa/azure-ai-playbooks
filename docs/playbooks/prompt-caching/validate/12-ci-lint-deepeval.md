@@ -1,7 +1,6 @@
 ---
 title: 12 · PCR001–006 Static Linter & 2-Pass DeepEval Gate
 description: Automated CI static scanner rules (PCR001–PCR006) and illustrative 2-pass DeepEval quality + prompt-caching contract test.
-outline: [2, 3]
 ---
 
 <script setup>
@@ -10,7 +9,59 @@ import { withBase } from 'vitepress'
 
 # 12 · Automated CI Scanner (`PCR001–006`) & DeepEval Gate
 
+<PageBrief
+  stage="validate"
+  audience="CSAs & App/DevOps Engineers"
+  readTime="3 min read"
+  problem="Even after a clean migration, a routine pull request adding a timestamp to system instructions can silently break caching in production."
+  takeaway="Block regressions in PR CI with two fast gates: zero-dependency static linting (pcr_lint.py) + a 2-pass DeepEval cache-hit assertion."
+  csaUse="Drop pcr_lint.py into the customer's repo in 2 minutes during Week 1 to surface every prefix-breaking defect automatically."
+/>
+
 Prevent un-cached code from promoting by enforcing two automated checks in pull-request CI: **(1)** static AST/regex linting (`PCR001–PCR006`) in Layer 1, and **(2)** a 2-pass DeepEval quality + cache-hit contract test in Layer 2 <span class="ev-badge ev-arch">[Arch]</span>.
+
+<div class="arch-diagram">
+  <svg viewBox="0 0 760 138" role="img" aria-labelledby="ci2-title ci2-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
+    <title id="ci2-title">Two-Stage Pull Request CI Gate for Prompt Caching and Quality</title>
+    <desc id="ci2-desc">Shows Pull Request triggering Gate 1 pcr_lint.py static AST scan (&lt;2s), Gate 2 Pass 1 cache warm write, Gate 2 Pass 2 asserting cached_tokens &gt;= 1,024 and GEval quality parity, then allowing Merge to Main.</desc>
+    <defs><marker id="ci2-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
+    <rect x="8" y="14" width="132" height="86" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="16" y="33" font-size="9.1" font-weight="700" fill="#183e62">1. Pull Request</text>
+    <text x="16" y="49" font-size="8.2" fill="#334e68">Prompt template,</text>
+    <text x="16" y="62" font-size="8.2" fill="#334e68">tool schema, or</text>
+    <text x="16" y="75" font-size="8.2" fill="#334e68">model config edit</text>
+    <text x="16" y="92" font-size="7.8" font-weight="700" fill="#1d4ed8">[Triggers PR CI]</text>
+    <path d="M140 57 H158" stroke="#0f766e" stroke-width="1.7" marker-end="url(#ci2-arr)"/>
+    <rect x="162" y="14" width="144" height="86" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="170" y="33" font-size="9.1" font-weight="700" fill="#183e62">2. Static AST Lint</text>
+    <text x="170" y="49" font-size="8.2" fill="#334e68">python3 pcr_lint.py</text>
+    <text x="170" y="62" font-size="8.2" fill="#334e68">Checks PCR001–006</text>
+    <text x="170" y="75" font-size="8.2" fill="#334e68">in &lt;2s (0 API cost)</text>
+    <text x="170" y="92" font-size="7.8" font-weight="700" fill="#1d4ed8">[Layer 1 Unit Gate]</text>
+    <path d="M306 57 H324" stroke="#0f766e" stroke-width="1.7" marker-end="url(#ci2-arr)"/>
+    <rect x="328" y="14" width="136" height="86" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="336" y="33" font-size="9.1" font-weight="700" fill="#183e62">3. Eval Pass 1 (Warm)</text>
+    <text x="336" y="49" font-size="8.2" fill="#334e68">Sends Case A with</text>
+    <text x="336" y="62" font-size="8.2" fill="#334e68">shared Pos 1–4 prefix</text>
+    <text x="336" y="75" font-size="8.2" fill="#334e68">&amp; deterministic key</text>
+    <text x="336" y="92" font-size="7.8" font-weight="700" fill="#1d4ed8">[Seeds Partition]</text>
+    <path d="M464 57 H482" stroke="#0f766e" stroke-width="1.7" marker-end="url(#ci2-arr)"/>
+    <rect x="486" y="14" width="142" height="86" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.4"/>
+    <text x="494" y="33" font-size="9.1" font-weight="700" fill="#115e59">4. Eval Pass 2 (Hit)</text>
+    <text x="494" y="49" font-size="8.2" fill="#334e68">Sends Case B (new tail)</text>
+    <text x="494" y="62" font-size="8.2" fill="#334e68">Asserts cached &ge;1,024</text>
+    <text x="494" y="75" font-size="8.2" fill="#334e68">&amp; share &ge;60% + GEval</text>
+    <text x="494" y="92" font-size="7.8" font-weight="700" fill="#0f766e">[Layer 2 Contract]</text>
+    <path d="M628 57 H646" stroke="#0f766e" stroke-width="1.7" marker-end="url(#ci2-arr)"/>
+    <rect x="650" y="14" width="102" height="86" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.5"/>
+    <text x="658" y="33" font-size="9.1" font-weight="700" fill="#115e59">5. Safe Merge</text>
+    <text x="658" y="49" font-size="8.2" fill="#334e68">Zero silent</text>
+    <text x="658" y="62" font-size="8.2" fill="#334e68">cache misses</text>
+    <text x="658" y="75" font-size="8.2" fill="#334e68">reach prod</text>
+    <text x="658" y="92" font-size="7.8" font-weight="700" fill="#0f766e">[Gate Green]</text>
+    <text x="10" y="124" font-size="8.4" fill="#526c80">Catches 95%+ of prefix-breaking code changes before merge—without waiting for production telemetry.</text>
+  </svg>
+</div>
 
 ## 1. Layer 1: Static Codebase Scanner Rule Catalog (`PCR001–PCR006`)
 

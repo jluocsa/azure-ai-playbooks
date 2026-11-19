@@ -1,10 +1,18 @@
 ---
 title: Playbook Series Roadmap & Co-Author Charters
 description: Multi-author playbook roadmap across Foundry Model Migration, Multi-Backend APIM Gateway, and Multi-Region Foundry Resiliency.
-outline: [2, 3]
 ---
 
 # Playbook Series Roadmap & Co-Author Charters
+
+<PageBrief
+  stepLabel="SERIES ROADMAP & CO-AUTHORING"
+  audience="All CSAs & Domain Specialists"
+  readTime="3 min read"
+  problem="Enterprise Azure AI readiness spans model efficiency, gateway routing, and regional resiliency—too broad for one monolith."
+  takeaway="Three modular playbooks cover the full stack, with named Track Lead and Co-Author roles open for fellow CSAs."
+  csaUse="Use Playbook 01 today, or nominate yourself as a Track Lead / Co-Author on Playbook 02 (APIM) or Playbook 03 (BCP) with full byline credit."
+/>
 
 This hub is structured as a **three-part Enterprise Foundry Architecture Series**, where each playbook owns one layer of production readiness and is led by named specialist co-authors.
 
@@ -68,3 +76,48 @@ This hub is structured as a **three-part Enterprise Foundry Architecture Series*
 ::: info Interested in Co-Owning Track 02 or Track 03?
 Review [`CONTRIBUTING.md`](https://github.com/jluocsa/azure-ai-playbooks/blob/main/CONTRIBUTING.md) for the 3-gate pre-publication workflow (Sanitization &rarr; Peer Architecture Review &rarr; IP/Channel Disposition). Co-authors receive full frontmatter and PDF cover attribution and own their track directory via `.github/CODEOWNERS`.
 :::
+
+## How Any CSA Publishes or Co-Authors in 5 Steps
+
+<div class="arch-diagram">
+  <svg viewBox="0 0 760 144" role="img" aria-labelledby="coauth-title coauth-desc" font-family="Segoe UI, Inter, -apple-system, sans-serif">
+    <title id="coauth-title">Five-Step CSA Co-Authoring Workflow</title>
+    <desc id="coauth-desc">Shows 1 Pick a Track or Pattern, 2 Strip Customer Context, 3 Author Visual Chapter with PageBrief, 4 Run Automated Verify CLI, and 5 Merge with Named Bylines.</desc>
+    <defs><marker id="coauth-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#0f766e"/></marker></defs>
+    <rect x="8" y="14" width="132" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="16" y="33" font-size="9.2" font-weight="700" fill="#183e62">1. Pick Scope</text>
+    <text x="16" y="49" font-size="8.2" fill="#334e68">Claim a Track Charter</text>
+    <text x="16" y="62" font-size="8.2" fill="#334e68">or add 1 archetype /</text>
+    <text x="16" y="75" font-size="8.2" fill="#334e68">KQL / lint rule</text>
+    <text x="16" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Modular Scope]</text>
+    <path d="M140 59 H158" stroke="#0f766e" stroke-width="1.7" marker-end="url(#coauth-arr)"/>
+    <rect x="162" y="14" width="134" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="170" y="33" font-size="9.2" font-weight="700" fill="#183e62">2. Generalize</text>
+    <text x="170" y="49" font-size="8.2" fill="#334e68">Express Customer-Zero</text>
+    <text x="170" y="62" font-size="8.2" fill="#334e68">findings in neutral</text>
+    <text x="170" y="75" font-size="8.2" fill="#334e68">domain terms</text>
+    <text x="170" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Zero Customer IDs]</text>
+    <path d="M296 59 H314" stroke="#0f766e" stroke-width="1.7" marker-end="url(#coauth-arr)"/>
+    <rect x="318" y="14" width="134" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="326" y="33" font-size="9.2" font-weight="700" fill="#183e62">3. Visual Story</text>
+    <text x="326" y="49" font-size="8.2" fill="#334e68">Lead each page with</text>
+    <text x="326" y="62" font-size="8.2" fill="#334e68">&lt;PageBrief /&gt; + clean</text>
+    <text x="326" y="75" font-size="8.2" fill="#334e68">SVG diagram &amp; [M] links</text>
+    <text x="326" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[Easy for All Levels]</text>
+    <path d="M452 59 H470" stroke="#0f766e" stroke-width="1.7" marker-end="url(#coauth-arr)"/>
+    <rect x="474" y="14" width="134" height="90" rx="6" fill="#edf3fb" stroke="#5b87b2" stroke-width="1.4"/>
+    <text x="482" y="33" font-size="9.2" font-weight="700" fill="#183e62">4. Run Verify CLI</text>
+    <text x="482" y="49" font-size="8.2" fill="#334e68">npm run verify checks</text>
+    <text x="482" y="62" font-size="8.2" fill="#334e68">sanitization, links &amp;</text>
+    <text x="482" y="75" font-size="8.2" fill="#334e68">production build</text>
+    <text x="482" y="94" font-size="7.8" font-weight="700" fill="#1d4ed8">[1-Command Check]</text>
+    <path d="M608 59 H626" stroke="#0f766e" stroke-width="1.7" marker-end="url(#coauth-arr)"/>
+    <rect x="630" y="14" width="122" height="90" rx="6" fill="#eaf4f5" stroke="#0f766e" stroke-width="1.5"/>
+    <text x="638" y="33" font-size="9.2" font-weight="700" fill="#115e59">5. Publish &amp; Own</text>
+    <text x="638" y="49" font-size="8.2" fill="#334e68">Named byline on web</text>
+    <text x="638" y="62" font-size="8.2" fill="#334e68">&amp; printable PDF +</text>
+    <text x="638" y="75" font-size="8.2" fill="#334e68">CODEOWNERS credit</text>
+    <text x="638" y="94" font-size="7.8" font-weight="700" fill="#0f766e">[1:N Recognition]</text>
+    <text x="10" y="130" font-size="8.4" fill="#526c80">Built so fellow CSAs can turn engagement breakthroughs into visible, reusable field standards without heavy formatting work.</text>
+  </svg>
+</div>
