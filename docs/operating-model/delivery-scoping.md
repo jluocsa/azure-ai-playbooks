@@ -79,7 +79,7 @@ Capture **orders of magnitude and architectural boundaries** during a 30-minute 
 
 | Role | Responsibility During the 3-Week Engagement |
 | :--- | :--- |
-| **Cloud Solution Architect (Advisor)** | Leads intake scorecard, `Pos 1–6` prefix architecture workshop, APIM spillover design review, and two-regime PTU sizing verification. |
+| **Architecture Advisor (User Lead)** | Leads intake scorecard, `Pos 1–6` prefix architecture workshop, APIM spillover design review, and two-regime PTU sizing verification. |
 | **Customer App / Prompt Lead** | Refactors prompt/middleware ordering, canonicalizes `tools[]` JSON serialization, and owns the 50–200 case golden evaluation dataset. |
 | **Customer Platform / SRE Lead** | Implements APIM backend pool failover policy, OpenTelemetry `gen_ai.*` span attributes, DCR PII masking, and KQL alert rules. |
 | **Customer FinOps / Capacity Lead** | Reviews `PeakNormTPM` vs. `AvgNormTPM` telemetry and approves the final Global / Data Zone PTU allocation + Standard spillover budget. |
