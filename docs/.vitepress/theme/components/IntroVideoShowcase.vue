@@ -2,27 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 
-interface VideoChapter {
-  num: string
-  label: string
-  timeLabel: string
-  start: number
-  end: number
-}
-
-const chapters: VideoChapter[] = [
-  { num: '01', label: 'Production Cliff', timeLabel: '0:00', start: 0, end: 26.87 },
-  { num: '02', label: 'The Hub', timeLabel: '0:27', start: 26.87, end: 44.57 },
-  { num: '03', label: '5-Stage Factory', timeLabel: '0:45', start: 44.57, end: 64.26 },
-  { num: '04', label: 'Playbook 01 Math', timeLabel: '1:04', start: 64.26, end: 94.34 },
-  { num: '05', label: 'Runnable Kits', timeLabel: '1:34', start: 94.34, end: 111.78 },
-  { num: '06', label: '3-Week Scope', timeLabel: '1:52', start: 111.78, end: 127.34 },
-  { num: '07', label: 'CSA Call to Action', timeLabel: '2:07', start: 127.34, end: 145 },
-]
-
 const videoRef = ref<HTMLVideoElement | null>(null)
 const sectionRef = ref<HTMLElement | null>(null)
-const activeChapterIdx = ref(0)
 const isPlaying = ref(false)
 const hasStarted = ref(false)
 
@@ -33,26 +14,7 @@ function ensureAudible(el: HTMLVideoElement) {
 
 function onTimeUpdate() {
   const el = videoRef.value
-  if (!el) return
-  const t = el.currentTime
-  if (t > 0.05) hasStarted.value = true
-  for (let i = chapters.length - 1; i >= 0; i--) {
-    if (t >= chapters[i].start - 0.15) {
-      activeChapterIdx.value = i
-      break
-    }
-  }
-}
-
-function jumpToChapter(idx: number) {
-  const el = videoRef.value
-  const ch = chapters[idx]
-  if (!el || !ch) return
-  hasStarted.value = true
-  activeChapterIdx.value = idx
-  ensureAudible(el)
-  el.currentTime = ch.start
-  el.play().catch(() => {})
+  if (el && el.currentTime > 0.05) hasStarted.value = true
 }
 
 function playWithSound() {
@@ -160,23 +122,6 @@ defineExpose({ playFromStart })
                 <span>1080p HD &middot; Baritone Voiceover + Score &middot; Sound On</span>
               </span>
             </span>
-          </button>
-        </div>
-
-        <div class="ivs-chapters" role="navigation" aria-label="Video chapters">
-          <button
-            v-for="(ch, idx) in chapters"
-            :key="ch.num"
-            type="button"
-            class="ivs-chapter-btn"
-            :class="{ 'is-active': activeChapterIdx === idx }"
-            @click="jumpToChapter(idx)"
-          >
-            <span class="ivs-ch-top">
-              <span class="ivs-ch-num">{{ ch.num }}</span>
-              <span class="ivs-ch-time">{{ ch.timeLabel }}</span>
-            </span>
-            <span class="ivs-ch-label">{{ ch.label }}</span>
           </button>
         </div>
       </div>
