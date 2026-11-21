@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { withBase } from 'vitepress'
+import IntroVideoShowcase from './IntroVideoShowcase.vue'
 
 const copiedPitch = ref(false)
+const introVideoRef = ref<InstanceType<typeof IntroVideoShowcase> | null>(null)
+
+function watchIntroVideo() {
+  introVideoRef.value?.playFromStart()
+}
 
 function printOverview() {
   if (typeof window !== 'undefined') window.print()
@@ -125,7 +131,11 @@ const playbookOneBox = [
         </p>
 
         <div class="eo-hero-actions no-print">
-          <a class="ms-btn ms-btn-primary" :href="withBase('/playbooks/prompt-caching/start/01-executive-thesis')">
+          <button type="button" class="ms-btn ms-btn-primary eo-print-btn" @click="watchIntroVideo">
+            <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M4.5 2.75a.75.75 0 0 1 1.14-.64l8 5a.75.75 0 0 1 0 1.28l-8 5A.75.75 0 0 1 4.5 12.75v-10Z"/></svg>
+            <span>Watch 2.4-Min Forum Intro</span>
+          </button>
+          <a class="ms-btn ms-btn-secondary" :href="withBase('/playbooks/prompt-caching/start/01-executive-thesis')">
             <span>Playbook 01 &middot; Prompt Caching</span>
             <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06Z"/></svg>
           </a>
@@ -158,6 +168,9 @@ const playbookOneBox = [
         </div>
       </div>
     </section>
+
+    <!-- CSA Forum Studio Introduction Film -->
+    <IntroVideoShowcase ref="introVideoRef" />
 
     <!-- Story Step 1: Lead Directly with The Five-Stage Industrialization Factory -->
     <section id="step-1-factory" class="eo-section">

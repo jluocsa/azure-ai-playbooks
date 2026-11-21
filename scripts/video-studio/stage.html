@@ -1,0 +1,1912 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1" />
+<title>Enterprise Azure AI Playbooks — CSA Forum Studio Stage</title>
+<style>
+  :root {
+    --font-sans: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, Inter, sans-serif;
+    --font-mono: "Cascadia Code", "Cascadia Mono", Consolas, monospace;
+    --az-blue: #0078d4;
+    --az-sky: #38bdf8;
+    --az-cyan: #00b7c3;
+    --az-teal: #14b8a6;
+    --az-emerald: #10b981;
+    --az-violet: #8b5cf6;
+    --az-amber: #f59e0b;
+    --az-red: #ef4444;
+    --bg-deep: #050b14;
+    --bg-card: rgba(13, 25, 43, 0.84);
+    --bg-card-strong: rgba(16, 31, 54, 0.93);
+    --border-subtle: rgba(148, 163, 184, 0.18);
+    --border-glow: rgba(56, 189, 248, 0.42);
+    --txt-primary: #f8fafc;
+    --txt-secondary: #cbd5e1;
+    --txt-muted: #94a3b8;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: var(--bg-deep);
+    color: var(--txt-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+    user-select: none;
+  }
+
+  #stage {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 18%, #0c213d 0%, #06101f 58%, #040913 100%);
+  }
+
+  /* Ambient Canvas + Grid */
+  #bg-canvas {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 0;
+  }
+
+  .blueprint-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(to right, rgba(56, 189, 248, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(56, 189, 248, 0.055) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 88% 78% at 50% 42%, #000 38%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 88% 78% at 50% 42%, #000 38%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* Top Broadcast Chrome */
+  .top-ribbon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    z-index: 30;
+    background: linear-gradient(90deg, #0078d4 0%, #00b7c3 50%, #8b5cf6 100%);
+  }
+
+  .top-bar {
+    position: absolute;
+    top: 24px;
+    left: 72px;
+    right: 72px;
+    height: 48px;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #0078d4 0%, #00b7c3 65%, #6d28d9 100%);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 20px rgba(0, 183, 195, 0.35);
+  }
+
+  .brand-text {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+  }
+
+  .brand-text span {
+    color: #38bdf8;
+  }
+
+  .top-right-pills {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chapter-pill {
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: rgba(15, 29, 50, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.32);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #7dd3fc;
+  }
+
+  .forum-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(20, 184, 166, 0.14);
+    border: 1px solid rgba(20, 184, 166, 0.38);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    color: #5eead4;
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+  }
+
+  /* Bottom Scrubber & Metadata */
+  .bottom-bar {
+    position: absolute;
+    left: 72px;
+    right: 72px;
+    bottom: 22px;
+    z-index: 25;
+  }
+
+  .bottom-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #94a3b8;
+    letter-spacing: 0.02em;
+  }
+
+  .bottom-meta strong {
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+
+  .bottom-url {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: #38bdf8;
+    font-weight: 600;
+  }
+
+  .seg-bar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    height: 5px;
+  }
+
+  .seg-track {
+    background: rgba(148, 163, 184, 0.18);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .seg-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0078d4, #38bdf8, #14b8a6);
+  }
+
+  /* Scene Containers */
+  .scene {
+    position: absolute;
+    top: 90px;
+    left: 72px;
+    right: 72px;
+    bottom: 70px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    align-self: flex-start;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(0, 120, 212, 0.16);
+    border: 1px solid rgba(56, 189, 248, 0.34);
+    color: #7dd3fc;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .h-hero {
+    font-size: 62px;
+    font-weight: 750;
+    line-height: 1.09;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+  }
+
+  .h-section {
+    font-size: 46px;
+    font-weight: 720;
+    line-height: 1.13;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+  }
+
+  .grad-text {
+    background: linear-gradient(90deg, #38bdf8 0%, #2dd4bf 55%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .sub-lead {
+    font-size: 22px;
+    line-height: 1.48;
+    color: var(--txt-secondary);
+    max-width: 1240px;
+    margin-top: 12px;
+  }
+
+  .glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(16px);
+  }
+
+  /* ==================== SCENE 01 ==================== */
+  .s1-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-top: 34px;
+  }
+
+  .s1-card {
+    padding: 24px 24px 22px;
+    border-top: 4px solid #f59e0b;
+    position: relative;
+  }
+
+  .s1-card.danger {
+    border-top-color: #ef4444;
+  }
+
+  .s1-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(245, 158, 11, 0.16);
+    color: #fcd34d;
+    margin-bottom: 14px;
+  }
+
+  .s1-card.danger .s1-tag {
+    background: rgba(239, 68, 68, 0.18);
+    color: #fca5a5;
+  }
+
+  .s1-metric {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .s1-card.danger .s1-metric {
+    color: #f87171;
+  }
+
+  .s1-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+  }
+
+  .s1-desc {
+    font-size: 15.5px;
+    line-height: 1.45;
+    color: #94a3b8;
+  }
+
+  .s1-silo-banner {
+    margin-top: 26px;
+    padding: 20px 28px;
+    border-radius: 14px;
+    background: linear-gradient(90deg, rgba(127, 29, 29, 0.36) 0%, rgba(30, 41, 59, 0.82) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.42);
+    border-left: 5px solid #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .s1-silo-steps {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fecaca;
+  }
+
+  .s1-silo-pill {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(248, 113, 113, 0.28);
+    color: #f8fafc;
+  }
+
+  .s1-silo-badge {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: rgba(239, 68, 68, 0.22);
+    border: 1px solid rgba(248, 113, 113, 0.5);
+    color: #fca5a5;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  /* ==================== SCENE 02 ==================== */
+  .s2-browser {
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(15, 29, 52, 0.95) 0%, rgba(9, 19, 35, 0.95) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.36);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55), 0 0 50px rgba(0, 120, 212, 0.22);
+    overflow: hidden;
+  }
+
+  .s2-chrome {
+    height: 48px;
+    padding: 0 22px;
+    background: rgba(6, 13, 25, 0.9);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .s2-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .s2-dots i {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .s2-addr {
+    padding: 5px 22px;
+    border-radius: 8px;
+    background: rgba(30, 41, 59, 0.72);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: #7dd3fc;
+  }
+
+  .s2-body {
+    padding: 38px 46px 40px;
+  }
+
+  .s2-trust-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+
+  .s2-chip {
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    background: rgba(20, 184, 166, 0.14);
+    border: 1px solid rgba(45, 212, 191, 0.34);
+    color: #5eead4;
+  }
+
+  .s2-chip.blue {
+    background: rgba(0, 120, 212, 0.18);
+    border-color: rgba(56, 189, 248, 0.36);
+    color: #bae6fd;
+  }
+
+  .s2-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .s2-kpi {
+    padding: 24px 24px;
+    border-radius: 14px;
+    background: rgba(15, 28, 49, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-top: 4px solid #0078d4;
+  }
+
+  .s2-kpi:nth-child(2) { border-top-color: #00b7c3; }
+  .s2-kpi:nth-child(3) { border-top-color: #10b981; }
+  .s2-kpi:nth-child(4) { border-top-color: #8b5cf6; }
+
+  .s2-kpi-val {
+    font-size: 46px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #38bdf8;
+    line-height: 1.08;
+    margin-bottom: 6px;
+  }
+
+  .s2-kpi:nth-child(3) .s2-kpi-val { color: #34d399; }
+  .s2-kpi:nth-child(4) .s2-kpi-val { color: #c4b5fd; }
+
+  .s2-kpi-lbl {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 6px;
+  }
+
+  .s2-kpi-txt {
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: #94a3b8;
+  }
+
+  /* ==================== SCENE 03 ==================== */
+  .s3-diagram-wrap {
+    margin-top: 26px;
+    padding: 28px 30px 24px;
+    border-top: 4px solid #00b7c3;
+  }
+
+  .s3-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .s3-stage-card {
+    padding: 18px 18px;
+    border-radius: 12px;
+    background: rgba(13, 25, 43, 0.85);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    transition: none;
+  }
+
+  .s3-stage-num {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #2dd4bf;
+    margin-bottom: 6px;
+  }
+
+  .s3-stage-title {
+    font-size: 17.5px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 6px;
+  }
+
+  .s3-stage-desc {
+    font-size: 14px;
+    line-height: 1.44;
+    color: #94a3b8;
+  }
+
+  /* ==================== SCENE 04 ==================== */
+  .s4-cols {
+    display: grid;
+    grid-template-columns: 1.04fr 0.96fr;
+    gap: 28px;
+    margin-top: 24px;
+    align-items: stretch;
+  }
+
+  .s4-panel {
+    padding: 24px 28px;
+    border-top: 4px solid #0078d4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .s4-panel.right {
+    border-top-color: #10b981;
+  }
+
+  .s4-panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .s4-panel-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .s4-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .s4-layer {
+    display: grid;
+    grid-template-columns: 78px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    background: rgba(15, 32, 58, 0.88);
+    border: 1px solid rgba(56, 189, 248, 0.26);
+  }
+
+  .s4-layer.volatile {
+    background: rgba(69, 39, 16, 0.55);
+    border-color: rgba(245, 158, 11, 0.42);
+  }
+
+  .s4-pos {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: #38bdf8;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(0, 120, 212, 0.2);
+    text-align: center;
+  }
+
+  .s4-layer.volatile .s4-pos {
+    color: #fcd34d;
+    background: rgba(245, 158, 11, 0.2);
+  }
+
+  .s4-layer-name {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+
+  .s4-layer-name code {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: #7dd3fc;
+  }
+
+  .s4-badge {
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.18);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+  }
+
+  .s4-layer.volatile .s4-badge {
+    background: rgba(245, 158, 11, 0.18);
+    color: #fde68a;
+    border-color: rgba(245, 158, 11, 0.35);
+  }
+
+  .s4-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .s4-ctrl-box {
+    padding: 14px 16px;
+    border-radius: 11px;
+    background: rgba(15, 29, 50, 0.9);
+    border: 1px solid rgba(56, 189, 248, 0.24);
+  }
+
+  .s4-ctrl-box strong {
+    display: block;
+    font-size: 15px;
+    color: #7dd3fc;
+    margin-bottom: 4px;
+  }
+
+  .s4-ctrl-box span {
+    font-size: 13.5px;
+    color: #cbd5e1;
+    line-height: 1.4;
+  }
+
+  .s4-bars {
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: rgba(7, 15, 28, 0.82);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    margin-bottom: 16px;
+  }
+
+  .s4-bar-row {
+    margin-bottom: 14px;
+  }
+
+  .s4-bar-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .s4-bar-lbl {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+
+  .s4-bar-track {
+    height: 22px;
+    border-radius: 999px;
+    background: rgba(30, 41, 59, 0.85);
+    overflow: hidden;
+  }
+
+  .s4-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+  }
+
+  .s4-reg-box {
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(15, 118, 110, 0.24), rgba(15, 29, 50, 0.88));
+    border: 1px solid rgba(45, 212, 191, 0.36);
+    border-left: 4px solid #14b8a6;
+  }
+
+  .s4-reg-box strong {
+    display: block;
+    font-size: 15.5px;
+    color: #5eead4;
+    margin-bottom: 4px;
+  }
+
+  .s4-reg-box p {
+    font-size: 14px;
+    line-height: 1.42;
+    color: #e2e8f0;
+  }
+
+  /* ==================== SCENE 05 ==================== */
+  .s5-bento {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+    height: 610px;
+  }
+
+  .s5-tile {
+    padding: 22px 26px;
+    border-top: 4px solid #0078d4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .s5-tile:nth-child(2) { border-top-color: #10b981; }
+  .s5-tile:nth-child(3) { border-top-color: #00b7c3; }
+  .s5-tile:nth-child(4) { border-top-color: #8b5cf6; }
+
+  .s5-tile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .s5-kicker {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #38bdf8;
+  }
+
+  .s5-pill {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    background: rgba(16, 185, 129, 0.16);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.32);
+  }
+
+  .s5-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .code-win {
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #040912;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.52;
+    color: #e2e8f0;
+  }
+
+  .c-kw { color: #38bdf8; }
+  .c-fn { color: #c4b5fd; }
+  .c-ok { color: #34d399; font-weight: 700; }
+  .c-warn { color: #fbbf24; }
+  .c-dim { color: #64748b; }
+
+  .calc-mock {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .calc-stat {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(6, 13, 25, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.22);
+  }
+
+  .calc-stat b {
+    display: block;
+    font-size: 24px;
+    color: #38bdf8;
+    margin-bottom: 3px;
+  }
+
+  .calc-stat span {
+    font-size: 12.5px;
+    color: #94a3b8;
+  }
+
+  /* ==================== SCENE 06 ==================== */
+  .s6-weeks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+
+  .s6-wk {
+    padding: 20px 22px;
+    border-top: 4px solid #38bdf8;
+  }
+
+  .s6-wk:nth-child(4) {
+    border-top-color: #10b981;
+  }
+
+  .s6-wk-badge {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-bottom: 6px;
+  }
+
+  .s6-wk-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+  }
+
+  .s6-wk-desc {
+    font-size: 14.5px;
+    line-height: 1.44;
+    color: #cbd5e1;
+    margin-bottom: 10px;
+  }
+
+  .s6-exit {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #5eead4;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(20, 184, 166, 0.14);
+    border: 1px solid rgba(45, 212, 191, 0.3);
+  }
+
+  .s6-series {
+    margin-top: 22px;
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 24px;
+    align-items: center;
+    border-top: 4px solid #8b5cf6;
+  }
+
+  .s6-tracks {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .s6-track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 18px;
+    border-radius: 10px;
+    background: rgba(8, 17, 32, 0.88);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+  }
+
+  .s6-track.live {
+    border-color: rgba(20, 184, 166, 0.5);
+    background: rgba(13, 42, 48, 0.55);
+  }
+
+  .s6-track-name {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: #f8fafc;
+  }
+
+  .s6-track-sub {
+    font-size: 13.5px;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
+
+  .s6-status {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    background: rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    white-space: nowrap;
+  }
+
+  .s6-status.charter {
+    background: rgba(56, 189, 248, 0.16);
+    color: #7dd3fc;
+    border-color: rgba(56, 189, 248, 0.35);
+  }
+
+  .s6-outcome {
+    padding: 24px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(0, 120, 212, 0.22), rgba(20, 184, 166, 0.18));
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .s6-outcome h4 {
+    font-size: 21px;
+    font-weight: 750;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  .s6-outcome li {
+    list-style: none;
+    font-size: 15.5px;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ==================== SCENE 07 ==================== */
+  .s7-center {
+    text-align: center;
+    align-items: center;
+  }
+
+  .s7-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+    margin-top: 30px;
+    text-align: left;
+  }
+
+  .s7-card {
+    padding: 28px 28px;
+    border-top: 4px solid #0078d4;
+  }
+
+  .s7-card:nth-child(2) { border-top-color: #00b7c3; }
+  .s7-card:nth-child(3) { border-top-color: #10b981; }
+
+  .s7-num {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 800;
+    color: #38bdf8;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(0, 120, 212, 0.2);
+    margin-bottom: 12px;
+  }
+
+  .s7-card h3 {
+    font-size: 23px;
+    font-weight: 750;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .s7-card p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #cbd5e1;
+  }
+
+  .s7-mantra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 36px;
+  }
+
+  .s7-pillar {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    padding: 10px 24px;
+    border-radius: 12px;
+    background: rgba(15, 29, 52, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #ffffff;
+  }
+
+  .s7-url-box {
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 34px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(0, 120, 212, 0.32), rgba(0, 183, 195, 0.28));
+    border: 1.5px solid rgba(56, 189, 248, 0.65);
+    box-shadow: 0 0 42px rgba(0, 183, 195, 0.32);
+  }
+
+  .s7-url-box span {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #bae6fd;
+  }
+
+  .s7-url-box code {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg-canvas" width="1920" height="1080"></canvas>
+  <div class="blueprint-grid"></div>
+  <div class="top-ribbon"></div>
+
+  <!-- Top Broadcast Header -->
+  <header class="top-bar">
+    <div class="brand-lockup">
+      <div class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#fff" stroke-width="2" />
+          <circle cx="12" cy="12" r="3.5" fill="#fff" />
+        </svg>
+      </div>
+      <div class="brand-text">MICROSOFT FOUNDRY &amp; AZURE AI &middot; <span>SOLUTION INDUSTRIALIZATION HUB</span></div>
+    </div>
+    <div class="top-right-pills">
+      <div id="chapter-indicator" class="chapter-pill">01 / 07 &middot; THE PRODUCTION CLIFF</div>
+      <div class="forum-badge">
+        <span class="live-dot"></span>
+        <span>CSA FORUM PRESENTATION</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== SCENE 01: THE PRODUCTION CLIFF ==================== -->
+  <section id="scene-0" class="scene">
+    <div id="s1-eyebrow" class="eyebrow">01 &middot; THE PRODUCTION BOTTLENECK</div>
+    <h1 class="h-hero">
+      <span id="s1-h1a" style="display:block;">Demos Are Easy.</span>
+      <span id="s1-h1b" class="grad-text" style="display:block;">Production Cutover Is Where Enterprise AI Stalls.</span>
+    </h1>
+    <p id="s1-lead" class="sub-lead">
+      Across flagship enterprise accounts, complex model waves, capacity math, burst throttling, and compliance rules collide at cutover.
+    </p>
+
+    <div class="s1-grid">
+      <div id="s1-c0" class="glass-card s1-card">
+        <span class="s1-tag">Model Retirement Wave</span>
+        <div class="s1-metric">GPT-5.6 &amp; 6</div>
+        <div class="s1-title">Forced Cutover Deadlines</div>
+        <p class="s1-desc">Migrating stateless agents from GPT-4.x &amp; o3-mini changes caching weights &amp; reasoning defaults.</p>
+      </div>
+      <div id="s1-c1" class="glass-card s1-card danger">
+        <span class="s1-tag">Silent Cache Miss</span>
+        <div class="s1-metric">2.56&times; Spike</div>
+        <div class="s1-title">PTU Capacity Explosion</div>
+        <p class="s1-desc">Early timestamps or unsorted tool schemas zero out KV prefix reuse (170 &rarr; 435 PTUs).</p>
+      </div>
+      <div id="s1-c2" class="glass-card s1-card danger">
+        <span class="s1-tag">Traffic Saturation</span>
+        <div class="s1-metric">HTTP 429</div>
+        <div class="s1-title">Burst Throttling Storms</div>
+        <p class="s1-desc">Hot prompt families above 15 RPM saturate single routing shards without PAYG spillover.</p>
+      </div>
+      <div id="s1-c3" class="glass-card s1-card">
+        <span class="s1-tag">Regulated Platforms</span>
+        <div class="s1-metric">Ethical Walls</div>
+        <div class="s1-title">Isolation &amp; Chargeback</div>
+        <p class="s1-desc">Client matter walls, cost-center billing, and 3&times;&ndash;6&times; seasonal filing surges collide.</p>
+      </div>
+    </div>
+
+    <div id="s1-silo" class="s1-silo-banner">
+      <div class="s1-silo-steps">
+        <span class="s1-silo-pill">1. Flagship 1:1 Fire-Drill</span>
+        <span>&rarr;</span>
+        <span class="s1-silo-pill">2. Trapped in Single-Account Deck</span>
+        <span>&rarr;</span>
+        <span class="s1-silo-pill">3. Peer Teams Hit Same Wall Weeks Later</span>
+      </div>
+      <span class="s1-silo-badge">1:1 SILOS DO NOT SCALE</span>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 02: THE HUB REVEAL ==================== -->
+  <section id="scene-1" class="scene">
+    <div id="s2-browser" class="s2-browser">
+      <div class="s2-chrome">
+        <div class="s2-dots">
+          <i style="background:#ef4444"></i>
+          <i style="background:#f59e0b"></i>
+          <i style="background:#10b981"></i>
+        </div>
+        <div class="s2-addr">https://jluocsa.github.io/azure-ai-playbooks/</div>
+        <div style="font-size:12.5px;font-weight:700;color:#5eead4;letter-spacing:0.06em;">ACTIVE v1.0 &middot; MIT &amp; CC BY 4.0</div>
+      </div>
+      <div class="s2-body">
+        <div class="eyebrow" style="margin-bottom:14px;">BUILT BY CLOUD SOLUTION ARCHITECTS, FOR CLOUD SOLUTION ARCHITECTS</div>
+        <h1 class="h-hero" style="font-size:56px;">
+          Enterprise Azure AI <span class="grad-text">Solution Industrialization Hub</span>
+        </h1>
+        <p class="sub-lead" style="max-width:1360px;margin-top:14px;">
+          A governed, multi-author field engineering factory converting proven <strong>Customer-Zero</strong> breakthroughs into sanitized, Learn-verified <strong>1:N playbooks, 3-week delivery scopes, and runnable CI &amp; KQL guardrails</strong>.
+        </p>
+        <div id="s2-chips" class="s2-trust-row">
+          <span class="s2-chip">&#10003; 100% Automated Sanitization Gate</span>
+          <span class="s2-chip blue">[M] Grounded in Published Microsoft Learn</span>
+          <span class="s2-chip blue">Interactive Sizing &amp; Triage Calculators</span>
+          <span class="s2-chip">Open Co-Author Track Ownership</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="s2-kpis">
+      <div id="s2-k0" class="s2-kpi">
+        <div class="s2-kpi-val" id="s2-v0">1 &rarr; Many</div>
+        <div class="s2-kpi-lbl">Solve Once, Reuse Everywhere</div>
+        <p class="s2-kpi-txt">Turn one flagship customer proof into a turnkey field kit any specialist team can deliver.</p>
+      </div>
+      <div id="s2-k1" class="s2-kpi">
+        <div class="s2-kpi-val" id="s2-v1">2.56&times;</div>
+        <div class="s2-kpi-lbl">Capacity Spike Prevented</div>
+        <p class="s2-kpi-txt">Preserving Azure prefix KV reuse avoids a 2.56&times; jump in reserved PTU capacity.</p>
+      </div>
+      <div id="s2-k2" class="s2-kpi">
+        <div class="s2-kpi-val" id="s2-v2">71%</div>
+        <div class="s2-kpi-lbl">Peak-Season TCO Saved</div>
+        <p class="s2-kpi-txt">Right-sized PTU baseline paired with automatic Standard PAYG overflow absorbs surges.</p>
+      </div>
+      <div id="s2-k3" class="s2-kpi">
+        <div class="s2-kpi-val" id="s2-v3">3 Weeks</div>
+        <div class="s2-kpi-lbl">Turnkey Customer Scope</div>
+        <p class="s2-kpi-txt">Ships with a 30-minute intake scorecard, weekly exit artifacts, and MIT code gates.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 03: FIVE-STAGE FACTORY ==================== -->
+  <section id="scene-2" class="scene">
+    <div class="eyebrow">02 &middot; GOVERNED OPERATING MODEL</div>
+    <h2 class="h-section">The Five-Stage <span class="grad-text">Solution Industrialization Factory</span></h2>
+    <p class="sub-lead" style="font-size:20px;">
+      Fast field sharing without risking customer confidentiality, unverified product claims, or premature patent disclosure.
+    </p>
+
+    <div class="glass-card s3-diagram-wrap">
+      <svg viewBox="0 0 1680 290" width="100%" height="290">
+        <defs>
+          <marker id="arr-cyan" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+            <path d="M0 0 L10 5 L0 10 Z" fill="#2dd4bf" />
+          </marker>
+          <linearGradient id="stageActiveGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0f3458" />
+            <stop offset="100%" stop-color="#0c233c" />
+          </linearGradient>
+        </defs>
+
+        <!-- Stage 1 -->
+        <g id="s3-n0">
+          <rect x="12" y="64" width="272" height="162" rx="14" fill="url(#stageActiveGrad)" stroke="#14b8a6" stroke-width="2.5" />
+          <text x="32" y="102" font-size="18" font-weight="800" fill="#5eead4">1. CUSTOMER-ZERO</text>
+          <text x="32" y="132" font-size="16" fill="#e2e8f0">Exercised in live enterprise</text>
+          <text x="32" y="156" font-size="16" fill="#e2e8f0">workload with real telemetry</text>
+          <rect x="32" y="180" width="164" height="28" rx="6" fill="rgba(20,184,166,0.2)" />
+          <text x="44" y="199" font-size="13.5" font-weight="700" fill="#5eead4">[Proven Baseline]</text>
+        </g>
+
+        <path id="s3-e0" d="M284 145 H336" stroke="#2dd4bf" stroke-width="3" marker-end="url(#arr-cyan)" />
+
+        <!-- Stage 2 -->
+        <g id="s3-n1">
+          <rect x="344" y="64" width="272" height="162" rx="14" fill="url(#stageActiveGrad)" stroke="#38bdf8" stroke-width="2.5" />
+          <text x="364" y="102" font-size="18" font-weight="800" fill="#7dd3fc">2. SANITIZATION GATE</text>
+          <text x="364" y="132" font-size="16" fill="#e2e8f0">check-sanitized.mjs strips</text>
+          <text x="364" y="156" font-size="16" fill="#e2e8f0">names, emails, orgs &amp; GUIDs</text>
+          <rect x="364" y="180" width="176" height="28" rx="6" fill="rgba(56,189,248,0.2)" />
+          <text x="376" y="199" font-size="13.5" font-weight="700" fill="#7dd3fc">[Automated CI Gate]</text>
+        </g>
+
+        <path id="s3-e1" d="M616 145 H668" stroke="#2dd4bf" stroke-width="3" marker-end="url(#arr-cyan)" />
+
+        <!-- Stage 3 -->
+        <g id="s3-n2">
+          <rect x="676" y="64" width="276" height="162" rx="14" fill="url(#stageActiveGrad)" stroke="#38bdf8" stroke-width="2.5" />
+          <text x="696" y="102" font-size="18" font-weight="800" fill="#7dd3fc">3. PEER ARCH REVIEW</text>
+          <text x="696" y="132" font-size="16" fill="#e2e8f0">Verify [M] MS Learn facts vs.</text>
+          <text x="696" y="156" font-size="16" fill="#e2e8f0">[Arch] patterns &amp; [Agree] SLOs</text>
+          <rect x="696" y="180" width="166" height="28" rx="6" fill="rgba(56,189,248,0.2)" />
+          <text x="708" y="199" font-size="13.5" font-weight="700" fill="#7dd3fc">[Peer ARB Check]</text>
+        </g>
+
+        <!-- Tri-path arrows -->
+        <g id="s3-e2">
+          <path d="M952 110 H995 V48 H1026" stroke="#2dd4bf" stroke-width="2.6" fill="none" marker-end="url(#arr-cyan)" />
+          <path d="M952 145 H1026" stroke="#2dd4bf" stroke-width="2.8" fill="none" marker-end="url(#arr-cyan)" />
+          <path d="M952 180 H995 V242 H1026" stroke="#2dd4bf" stroke-width="2.6" fill="none" marker-end="url(#arr-cyan)" />
+        </g>
+
+        <!-- Stage 4A / 4B / 4C -->
+        <g id="s3-n3">
+          <rect x="1034" y="12" width="302" height="74" rx="11" fill="rgba(120,53,15,0.45)" stroke="#f59e0b" stroke-width="2.2" />
+          <text x="1054" y="42" font-size="16.5" font-weight="800" fill="#fcd34d">4A. Patent / IDF Hold</text>
+          <text x="1054" y="66" font-size="14.5" fill="#fde68a">Confidential IP prior-art screen</text>
+
+          <rect x="1034" y="108" width="302" height="74" rx="11" fill="rgba(15,45,82,0.75)" stroke="#38bdf8" stroke-width="2.2" />
+          <text x="1054" y="138" font-size="16.5" font-weight="800" fill="#7dd3fc">4B. Product Group &amp; Learn PR</text>
+          <text x="1054" y="162" font-size="14.5" fill="#bae6fd">Upstream engineering &amp; docs</text>
+
+          <rect x="1034" y="204" width="302" height="74" rx="11" fill="rgba(13,66,64,0.75)" stroke="#14b8a6" stroke-width="2.5" />
+          <text x="1054" y="234" font-size="16.5" font-weight="800" fill="#5eead4">4C. Field Playbook &amp; Kits</text>
+          <text x="1054" y="258" font-size="14.5" fill="#ccfbf1">Web Hub + White Paper + MIT CLI</text>
+        </g>
+
+        <g id="s3-e3">
+          <path d="M1336 145 H1394" stroke="#2dd4bf" stroke-width="2.8" fill="none" marker-end="url(#arr-cyan)" />
+          <path d="M1336 241 H1368 V168 H1394" stroke="#2dd4bf" stroke-width="2.6" fill="none" marker-end="url(#arr-cyan)" />
+        </g>
+
+        <!-- Stage 5 -->
+        <g id="s3-n4">
+          <rect x="1402" y="64" width="266" height="162" rx="14" fill="rgba(13,66,64,0.7)" stroke="#10b981" stroke-width="2.8" />
+          <text x="1422" y="102" font-size="18" font-weight="800" fill="#6ee7b7">5. 1:N FIELD REUSE</text>
+          <text x="1422" y="132" font-size="16" fill="#e2e8f0">ADS sessions, 3-wk scopes</text>
+          <text x="1422" y="156" font-size="16" fill="#e2e8f0">&amp; verified cutover outcomes</text>
+          <rect x="1422" y="180" width="170" height="28" rx="6" fill="rgba(16,185,129,0.22)" />
+          <text x="1434" y="199" font-size="13.5" font-weight="700" fill="#6ee7b7">[Repeatable Impact]</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="s3-cards">
+      <div id="s3-c0" class="s3-stage-card">
+        <div class="s3-stage-num">Stage 01</div>
+        <div class="s3-stage-title">Real Workload Proof</div>
+        <p class="s3-stage-desc">Every formula &amp; wire contract is battle-tested in production first.</p>
+      </div>
+      <div id="s3-c1" class="s3-stage-card">
+        <div class="s3-stage-num">Stage 02</div>
+        <div class="s3-stage-title">Zero Data Leakage</div>
+        <p class="s3-stage-desc">Scans Markdown, Vue, Python, KQL &amp; PDFs on every build.</p>
+      </div>
+      <div id="s3-c2" class="s3-stage-card">
+        <div class="s3-stage-num">Stage 03</div>
+        <div class="s3-stage-title">Evidence Discipline</div>
+        <p class="s3-stage-desc">Separates [M] product facts from [Arch] field patterns.</p>
+      </div>
+      <div id="s3-c3" class="s3-stage-card">
+        <div class="s3-stage-num">Stage 04</div>
+        <div class="s3-stage-title">Safe IP Disposition</div>
+        <p class="s3-stage-desc">Protects patentable mechanisms before public commits.</p>
+      </div>
+      <div id="s3-c4" class="s3-stage-card">
+        <div class="s3-stage-num">Stage 05</div>
+        <div class="s3-stage-title">Multi-Author Scale</div>
+        <p class="s3-stage-desc">Named CODEOWNERS &amp; co-author bylines across tracks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 04: PLAYBOOK 01 PROOF ==================== -->
+  <section id="scene-3" class="scene">
+    <div class="eyebrow">03 &middot; LIVE PLAYBOOK 01 &middot; GPT-5.6, GPT-6 &amp; GPT-6.1</div>
+    <h2 class="h-section">Prompt Caching, Prefix Architecture &amp; <span class="grad-text">Two-Regime PTU Math</span></h2>
+
+    <div class="s4-cols">
+      <!-- Left: Pos 1-6 Stack -->
+      <div id="s4-left" class="glass-card s4-panel">
+        <div class="s4-panel-head">
+          <div class="s4-panel-title">Scope &times; Volatility Prefix Order (Pos 1&ndash;6)</div>
+          <span class="s4-badge">80%+ KV CACHE HIT</span>
+        </div>
+        <div class="s4-stack">
+          <div id="s4-l0" class="s4-layer">
+            <span class="s4-pos">POS 01</span>
+            <div class="s4-layer-name"><code>response_format</code> + T0 Core System &amp; Skill Rules</div>
+            <span class="s4-badge">STATIC PREFIX</span>
+          </div>
+          <div id="s4-l1" class="s4-layer">
+            <span class="s4-pos">POS 02</span>
+            <div class="s4-layer-name">Canonically Sorted <code>tools[]</code> JSON Schemas</div>
+            <span class="s4-badge">BREAKPOINT #1</span>
+          </div>
+          <div id="s4-l2" class="s4-layer">
+            <span class="s4-pos">POS 03</span>
+            <div class="s4-layer-name">Static Domain &amp; Rubric Methodology (&ge;1,024 tok)</div>
+            <span class="s4-badge">CACHED</span>
+          </div>
+          <div id="s4-l3" class="s4-layer">
+            <span class="s4-pos">POS 04</span>
+            <div class="s4-layer-name"><code>L2</code> Workspace / Matter Context Card</div>
+            <span class="s4-badge">BREAKPOINT #2</span>
+          </div>
+          <div id="s4-l4" class="s4-layer">
+            <span class="s4-pos">POS 05</span>
+            <div class="s4-layer-name"><code>L1</code> User Persona + Append-Only Turn History</div>
+            <span class="s4-badge">APPEND-ONLY</span>
+          </div>
+          <div id="s4-l5" class="s4-layer volatile">
+            <span class="s4-pos">POS 06</span>
+            <div class="s4-layer-name">Live RAG / MCP Evidence, Request IDs &amp; Timestamps</div>
+            <span class="s4-badge">VOLATILE TAIL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Wire Controls + PTU Bars + Regulated -->
+      <div id="s4-right" class="glass-card s4-panel right">
+        <div>
+          <div class="s4-panel-head">
+            <div class="s4-panel-title">Wire Controls &amp; Verified Capacity Impact</div>
+            <span class="s4-badge" style="background:rgba(56,189,248,0.18);color:#7dd3fc;border-color:rgba(56,189,248,0.35);">TWO-REGIME SIZING</span>
+          </div>
+
+          <div id="s4-ctrls" class="s4-controls">
+            <div class="s4-ctrl-box">
+              <strong>&gt;15 RPM Key Sharding</strong>
+              <span><code>N = &lceil;PeakRPM &divide; 12&rceil;</code> deterministic <code>prompt_cache_key</code> shards prevent hot-cell eviction.</span>
+            </div>
+            <div class="s4-ctrl-box">
+              <strong>SKU-Aware APIM Spillover</strong>
+              <span>Strips breakpoints on <code>5.6 PTU-M</code>; overflows HTTP <code>429 Retry-After</code> cleanly to PAYG.</span>
+            </div>
+          </div>
+
+          <div id="s4-bars" class="s4-bars">
+            <div class="s4-bar-row">
+              <div class="s4-bar-lbl">
+                <span style="color:#fca5a5;">Un-Tuned Prompt (0% Cache Hit &middot; Early Timestamp)</span>
+                <span style="font-family:var(--font-mono);color:#f87171;font-weight:800;">435 PTUs (2.56&times; Spike)</span>
+              </div>
+              <div class="s4-bar-track">
+                <div id="s4-bar-bad" class="s4-bar-fill" style="width:100%;background:linear-gradient(90deg,#dc2626,#f97316);"></div>
+              </div>
+            </div>
+            <div class="s4-bar-row">
+              <div class="s4-bar-lbl">
+                <span style="color:#6ee7b7;">Playbook 01 Architecture (80%+ Cache Hit + PAYG Spillover)</span>
+                <span style="font-family:var(--font-mono);color:#34d399;font-weight:800;">170 PTUs &middot; 71% Peak TCO Saved</span>
+              </div>
+              <div class="s4-bar-track">
+                <div id="s4-bar-good" class="s4-bar-fill" style="width:39%;background:linear-gradient(90deg,#0078d4,#10b981);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="s4-reg" class="s4-reg-box">
+          <strong>Regulated Multi-Engagement &amp; Compliance Profile Included</strong>
+          <p>Posture A zero-client-cache ethical walls &bull; Out-of-band OTel cost-center chargeback &bull; <code>C-WP1&ndash;C-WP4</code> workpaper parity gates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 05: EXECUTABLE KITS ==================== -->
+  <section id="scene-4" class="scene">
+    <div class="eyebrow">04 &middot; DROP-IN ENGINEERING ACCELERATORS</div>
+    <h2 class="h-section">Runnable Guardrails &amp; ARB Kits &mdash; <span class="grad-text">Not Static Slideware</span></h2>
+
+    <div class="s5-bento">
+      <!-- Tile 1: Calculator -->
+      <div id="s5-t0" class="glass-card s5-tile">
+        <div>
+          <div class="s5-tile-top">
+            <span class="s5-kicker">01 &middot; LIVE SIZING WORKBENCH</span>
+            <span class="s5-pill">Vue Interactive</span>
+          </div>
+          <div class="s5-title">Two-Regime PTU &amp; Shard Calculator</div>
+          <p style="font-size:14.5px;color:#cbd5e1;line-height:1.44;margin-bottom:14px;">
+            Models both pre-GPT-6 (<code>0%</code> cached PTU draw) and GPT-6 / 6.1 normalized weights (<code>0.1x/0.05x</code> read, <code>1.25x</code> write, <code>5.0x</code> output).
+          </p>
+        </div>
+        <div class="calc-mock">
+          <div class="calc-stat"><b>170 PTU</b><span>Right-Sized Base</span></div>
+          <div class="calc-stat"><b>4 Shards</b><span>@ 48 Peak RPM</span></div>
+          <div class="calc-stat"><b style="color:#34d399;">&ge;10:1</b><span>R/W Break-Even</span></div>
+        </div>
+      </div>
+
+      <!-- Tile 2: pcr_lint.py -->
+      <div id="s5-t1" class="glass-card s5-tile">
+        <div>
+          <div class="s5-tile-top">
+            <span class="s5-kicker">02 &middot; LAYER 1 CI STATIC GATE</span>
+            <span class="s5-pill">MIT &middot; Zero-Dep CLI</span>
+          </div>
+          <div class="s5-title"><code>pcr_lint.py</code> AST &amp; Wire Scanner (PCR001&ndash;006)</div>
+        </div>
+        <div class="code-win">
+          <div><span class="c-dim">$</span> python docs/public/kits/pcr_lint.py ./src --strict</div>
+          <div><span class="c-kw">[PCR001]</span> Early timestamp / per-user key check ... <span class="c-ok">PASS</span></div>
+          <div><span class="c-kw">[PCR003]</span> Canonical sorted tools[] schema ... <span class="c-ok">PASS</span></div>
+          <div><span class="c-kw">[PCR005]</span> GPT-5.6 PTU-M breakpoint guard ... <span class="c-ok">PASS</span></div>
+          <div><span class="c-ok">&#10003; 0 prefix-breaking violations across 28 files</span></div>
+        </div>
+      </div>
+
+      <!-- Tile 3: KQL Gate -->
+      <div id="s5-t2" class="glass-card s5-tile">
+        <div>
+          <div class="s5-tile-top">
+            <span class="s5-kicker">03 &middot; LAYER 7 SRE &amp; FINOPS OBSERVABILITY</span>
+            <span class="s5-pill">App Insights KQL</span>
+          </div>
+          <div class="s5-title">Two-Regime Release Gate &amp; Saturation Query</div>
+        </div>
+        <div class="code-win">
+          <div><span class="c-kw">AzureDiagnostics</span> | <span class="c-fn">summarize</span> DeployPeakNormTPM,</div>
+          <div>&nbsp;&nbsp;HitRatePct = <span class="c-fn">round</span>(100.0 * CachedTok / PromptTok, 1)</div>
+          <div><span class="c-dim">// Live Cutover Telemetry Readout:</span></div>
+          <div><span class="c-ok">HitRate: 84.2% &middot; R/W: 18.4:1 &middot; GateStatus: PASS</span></div>
+        </div>
+      </div>
+
+      <!-- Tile 4: White Paper & Checklist -->
+      <div id="s5-t3" class="glass-card s5-tile">
+        <div>
+          <div class="s5-tile-top">
+            <span class="s5-kicker">04 &middot; CUSTOMER ARB &amp; CUTOVER SIGN-OFF</span>
+            <span class="s5-pill">CC BY 4.0 &middot; Print PDF</span>
+          </div>
+          <div class="s5-title">Printable White Paper &amp; <code>C1&ndash;C15</code> PR Checklist</div>
+          <p style="font-size:14.5px;color:#cbd5e1;line-height:1.45;">
+            Single-page consolidated architecture white paper with 1-click <code>@media print</code> PDF export for customer ARBs, paired with a copy-ready 15-point GitHub / Azure DevOps PR gate template.
+          </p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <span class="s2-chip blue">Single-Page ARB White Paper</span>
+          <span class="s2-chip">C1&ndash;C15 Release Record</span>
+          <span class="s2-chip">Ctrl+K Searchable</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 06: 3-WEEK DELIVERY & SERIES ==================== -->
+  <section id="scene-5" class="scene">
+    <div class="eyebrow">05 &middot; REPEATABLE PROACTIVE DELIVERY &amp; SERIES ROADMAP</div>
+    <h2 class="h-section">30-Minute Triage, <span class="grad-text">3-Week Engagement</span> &amp; Connected Series</h2>
+
+    <div class="s6-weeks">
+      <div id="s6-w0" class="glass-card s6-wk">
+        <div class="s6-wk-badge">Step 0 &middot; 30 Minutes</div>
+        <div class="s6-wk-title">Intake Scorecard</div>
+        <p class="s6-wk-desc">6 boundary questions score retiring models, SKU mix, &gt;15 RPM concurrency &amp; ethical walls live.</p>
+        <span class="s6-exit">Exit: Scoped Plan</span>
+      </div>
+      <div id="s6-w1" class="glass-card s6-wk">
+        <div class="s6-wk-badge">Week 01 &middot; Audit</div>
+        <div class="s6-wk-title">Baseline &amp; Lint Scan</div>
+        <p class="s6-wk-desc">Rank top prompt nodes by RPM&times;Tokens, run pcr_lint.py &amp; capture un-tuned miss baseline.</p>
+        <span class="s6-exit">Exit: Baseline Audit</span>
+      </div>
+      <div id="s6-w2" class="glass-card s6-wk">
+        <div class="s6-wk-badge">Week 02 &middot; Refactor</div>
+        <div class="s6-wk-title">Prefix &amp; APIM Policy</div>
+        <p class="s6-wk-desc">Enforce Pos 1&ndash;6 order, shard cache keys &amp; wire 429 Retry-After PAYG spillover in staging.</p>
+        <span class="s6-exit">Exit: Staging Policy</span>
+      </div>
+      <div id="s6-w3" class="glass-card s6-wk">
+        <div class="s6-wk-badge">Week 03 &middot; Sign-Off</div>
+        <div class="s6-wk-title">7-Layer Gate &amp; Sizing</div>
+        <p class="s6-wk-desc">Run 2-pass DeepEval suite, peak concurrency load test, KQL workbook &amp; PTU model sign-off.</p>
+        <span class="s6-exit">Exit: Signed C1&ndash;C15</span>
+      </div>
+    </div>
+
+    <div id="s6-series" class="glass-card s6-series">
+      <div class="s6-tracks">
+        <div class="s6-track live">
+          <div>
+            <div class="s6-track-name">Playbook 01 &middot; Prompt Caching, Prefix Taxonomy &amp; PTU Economics</div>
+            <div class="s6-track-sub">GPT-5.6 / 6 / 6.1 readiness, regulated ethical-wall profile, calculator &amp; MIT kits</div>
+          </div>
+          <span class="s6-status">LIVE v1.0</span>
+        </div>
+        <div class="s6-track">
+          <div>
+            <div class="s6-track-name">Playbook 02 &middot; Multi-Backend Foundry APIM Gateway &amp; Spillover</div>
+            <div class="s6-track-sub">Retry-After circuit breakers, SKU parameter stripping &amp; SSE streaming guards</div>
+          </div>
+          <span class="s6-status charter">CHARTERED &middot; CO-AUTHOR OPEN</span>
+        </div>
+        <div class="s6-track">
+          <div>
+            <div class="s6-track-name">Playbook 03 &middot; Multi-Region Foundry BCP, Residency &amp; Failover Drills</div>
+            <div class="s6-track-sub">Global vs. Data Zone vs. Regional PTU matrix &amp; game-day failover runbooks</div>
+          </div>
+          <span class="s6-status charter">CHARTERED &middot; CO-AUTHOR OPEN</span>
+        </div>
+      </div>
+
+      <div class="s6-outcome">
+        <h4>One Production Foundation</h4>
+        <ul>
+          <li><span style="color:#34d399;">&#10003;</span> Predictable PTU capacity &amp; TCO</li>
+          <li><span style="color:#34d399;">&#10003;</span> Zero-throttle burst overflow</li>
+          <li><span style="color:#34d399;">&#10003;</span> Verified regional resiliency</li>
+          <li><span style="color:#38bdf8;">&#9733;</span> Named Co-Author Bylines</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SCENE 07: CALL TO ACTION ==================== -->
+  <section id="scene-6" class="scene s7-center">
+    <div class="eyebrow" style="align-self:center;">06 &middot; CSA FORUM CALL TO ACTION</div>
+    <h1 class="h-hero" style="font-size:54px;max-width:1420px;">
+      Bring Industrialized Engineering Leverage to <span class="grad-text">Every Enterprise Account</span>
+    </h1>
+
+    <div class="s7-cards">
+      <div id="s7-c0" class="glass-card s7-card">
+        <span class="s7-num">ACTION 01 &middot; DELIVER</span>
+        <h3>Run Playbook 01 Today</h3>
+        <p>Open the 30-minute Intake Scorecard and PTU Calculator on your next GPT-5.6, GPT-6, or GPT-6.1 customer migration.</p>
+      </div>
+      <div id="s7-c1" class="glass-card s7-card">
+        <span class="s7-num">ACTION 02 &middot; CO-AUTHOR</span>
+        <h3>Lead Track 02 or Track 03</h3>
+        <p>Claim named Track Lead or Co-Author credit on Multi-Backend APIM Gateway (02) or Multi-Region Foundry BCP (03).</p>
+      </div>
+      <div id="s7-c2" class="glass-card s7-card">
+        <span class="s7-num">ACTION 03 &middot; INDUSTRIALIZE</span>
+        <h3>Scale Your Customer-Zero Win</h3>
+        <p>Route your toughest field breakthrough through the 5-stage sanitization, ARB, and IP pipeline to multiply 1:N impact.</p>
+      </div>
+    </div>
+
+    <div class="s7-mantra">
+      <div id="s7-m0" class="s7-pillar">Solve Once.</div>
+      <div id="s7-m1" class="s7-pillar" style="border-color:rgba(45,212,191,0.55);color:#5eead4;">Govern Cleanly.</div>
+      <div id="s7-m2" class="s7-pillar" style="border-color:rgba(167,139,250,0.55);background:linear-gradient(90deg,rgba(0,120,212,0.28),rgba(139,92,246,0.25));">Scale Everywhere.</div>
+    </div>
+
+    <div id="s7-url" class="s7-url-box">
+      <span>EXPLORE THE LIVE HUB</span>
+      <code>jluocsa.github.io/azure-ai-playbooks</code>
+    </div>
+  </section>
+
+  <!-- Bottom Progress & Metadata Chrome -->
+  <footer class="bottom-bar">
+    <div class="bottom-meta">
+      <div><strong>Enterprise Azure AI Architecture Playbooks</strong> &middot; Customer-Zero Validated &middot; 100% Sanitized &middot; Grounded in Microsoft Learn</div>
+      <div class="bottom-url">https://jluocsa.github.io/azure-ai-playbooks/</div>
+    </div>
+    <div class="seg-bar">
+      <div class="seg-track"><div id="seg-0" class="seg-fill"></div></div>
+      <div class="seg-track"><div id="seg-1" class="seg-fill"></div></div>
+      <div class="seg-track"><div id="seg-2" class="seg-fill"></div></div>
+      <div class="seg-track"><div id="seg-3" class="seg-fill"></div></div>
+      <div class="seg-track"><div id="seg-4" class="seg-fill"></div></div>
+      <div class="seg-track"><div id="seg-5" class="seg-fill"></div></div>
+      <div class="seg-track"><div id="seg-6" class="seg-fill"></div></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Default timeline fallback (overridden via window.initTimeline(timelineJson) during build)
+  window.TIMELINE = {
+    totalDuration: 144.00,
+    scenes: [
+      { index: 0, start: 0.00, end: 26.87, chapter: "01 / 07 · THE PRODUCTION CLIFF" },
+      { index: 1, start: 26.87, end: 44.57, chapter: "02 / 07 · SOLUTION INDUSTRIALIZATION HUB" },
+      { index: 2, start: 44.57, end: 64.26, chapter: "03 / 07 · 5-STAGE FACTORY" },
+      { index: 3, start: 64.26, end: 94.34, chapter: "04 / 07 · PLAYBOOK 01: CACHING & PTU" },
+      { index: 4, start: 94.34, end: 111.78, chapter: "05 / 07 · RUNNABLE ENGINEERING KITS" },
+      { index: 5, start: 111.78, end: 127.34, chapter: "06 / 07 · 3-WEEK SCOPE & SERIES" },
+      { index: 6, start: 127.34, end: 144.00, chapter: "07 / 07 · CSA FORUM CALL TO ACTION" }
+    ]
+  };
+
+  window.initTimeline = function (tl) {
+    if (tl && Array.isArray(tl.scenes)) {
+      window.TIMELINE = tl;
+    }
+  };
+
+  const CHAPTER_LABELS = [
+    "01 / 07 · THE PRODUCTION CLIFF",
+    "02 / 07 · SOLUTION INDUSTRIALIZATION HUB",
+    "03 / 07 · 5-STAGE INDUSTRIALIZATION FACTORY",
+    "04 / 07 · PLAYBOOK 01: CACHING & PTU MATH",
+    "05 / 07 · RUNNABLE CI, KQL & ARB KITS",
+    "06 / 07 · 3-WEEK DELIVERY & SERIES ROADMAP",
+    "07 / 07 · CSA FORUM CALL TO ACTION"
+  ];
+
+  // Deterministic math helpers
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(max, v));
+  }
+  function easeOutCubic(x) {
+    const c = clamp(x, 0, 1);
+    return 1 - Math.pow(1 - c, 3);
+  }
+  function easeOutExpo(x) {
+    const c = clamp(x, 0, 1);
+    return c === 1 ? 1 : 1 - Math.pow(2, -10 * c);
+  }
+  function easeOutBack(x) {
+    const c = clamp(x, 0, 1);
+    const c1 = 1.45;
+    const c3 = c1 + 1;
+    return 1 + c3 * Math.pow(c - 1, 3) + c1 * Math.pow(c - 1, 2);
+  }
+  function enterProgress(t, tStart, dur = 0.65) {
+    return easeOutCubic((t - tStart) / dur);
+  }
+
+  function applyReveal(el, p, dy = 26, scaleFrom = 0.975) {
+    if (!el) return;
+    const c = clamp(p, 0, 1);
+    const y = (1 - c) * dy;
+    const s = scaleFrom + (1 - scaleFrom) * c;
+    el.style.opacity = c.toFixed(4);
+    el.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${s.toFixed(4)})`;
+  }
+
+  function highlightCard(el, activeStrength, glowColor = "56, 189, 248") {
+    if (!el) return;
+    const a = clamp(activeStrength, 0, 1);
+    el.style.boxShadow = a > 0.02
+      ? `0 18px 44px rgba(0,0,0,0.45), 0 0 ${(28 * a).toFixed(1)}px rgba(${glowColor}, ${(0.42 * a).toFixed(3)})`
+      : `0 18px 44px rgba(0,0,0,0.42)`;
+  }
+
+  // Deterministic ambient particle & light-beam background
+  const canvas = document.getElementById("bg-canvas");
+  const ctx = canvas.getContext("2d");
+  const NODES = Array.from({ length: 34 }, (_, i) => ({
+    x0: ((i * 197 + 83) % 1920),
+    y0: ((i * 263 + 127) % 1080),
+    vx: ((i % 2 === 0 ? 1 : -1) * (11 + (i % 7) * 3.2)),
+    vy: ((i % 3 === 0 ? -1 : 1) * (7 + (i % 5) * 2.4)),
+    r: 1.6 + (i % 4) * 0.75
+  }));
+
+  function drawBackground(t, activeSceneIdx) {
+    ctx.clearRect(0, 0, 1920, 1080);
+
+    // Shifting volumetric spotlights per scene
+    const palettes = [
+      ["rgba(239, 68, 68, 0.13)", "rgba(0, 120, 212, 0.18)"],
+      ["rgba(0, 120, 212, 0.24)", "rgba(0, 183, 195, 0.18)"],
+      ["rgba(20, 184, 166, 0.20)", "rgba(0, 120, 212, 0.20)"],
+      ["rgba(0, 120, 212, 0.22)", "rgba(16, 185, 129, 0.18)"],
+      ["rgba(56, 189, 248, 0.19)", "rgba(139, 92, 246, 0.18)"],
+      ["rgba(20, 184, 166, 0.19)", "rgba(139, 92, 246, 0.19)"],
+      ["rgba(0, 120, 212, 0.25)", "rgba(20, 184, 166, 0.22)"]
+    ];
+    const pal = palettes[clamp(activeSceneIdx, 0, palettes.length - 1)];
+
+    const gx1 = 520 + Math.sin(t * 0.18) * 180;
+    const gy1 = 280 + Math.cos(t * 0.14) * 90;
+    const g1 = ctx.createRadialGradient(gx1, gy1, 20, gx1, gy1, 720);
+    g1.addColorStop(0, pal[0]);
+    g1.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g1;
+    ctx.fillRect(0, 0, 1920, 1080);
+
+    const gx2 = 1420 + Math.cos(t * 0.15) * 170;
+    const gy2 = 720 + Math.sin(t * 0.12) * 100;
+    const g2 = ctx.createRadialGradient(gx2, gy2, 20, gx2, gy2, 680);
+    g2.addColorStop(0, pal[1]);
+    g2.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, 1920, 1080);
+
+    // Subtle constellation nodes
+    const pts = NODES.map(n => {
+      let x = (n.x0 + n.vx * t) % 1920;
+      let y = (n.y0 + n.vy * t) % 1080;
+      if (x < 0) x += 1920;
+      if (y < 0) y += 1080;
+      return { x, y, r: n.r };
+    });
+
+    ctx.lineWidth = 1;
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < 240 * 240) {
+          const alpha = (1 - Math.sqrt(d2) / 240) * 0.085;
+          ctx.strokeStyle = `rgba(125, 211, 252, ${alpha.toFixed(4)})`;
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    for (const p of pts) {
+      ctx.fillStyle = "rgba(125, 211, 252, 0.24)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  window.renderAt = function (t) {
+    const tl = window.TIMELINE;
+    const scenes = tl.scenes;
+    let activeIdx = 0;
+    for (let i = 0; i < scenes.length; i++) {
+      if (t >= scenes[i].start) activeIdx = i;
+    }
+
+    drawBackground(t, activeIdx);
+
+    // Update top chapter indicator & bottom 7-segment bar
+    const chapEl = document.getElementById("chapter-indicator");
+    if (chapEl) chapEl.textContent = CHAPTER_LABELS[activeIdx] || CHAPTER_LABELS[0];
+
+    for (let i = 0; i < 7; i++) {
+      const seg = document.getElementById(`seg-${i}`);
+      if (!seg || !scenes[i]) continue;
+      const sc = scenes[i];
+      const pct = clamp((t - sc.start) / Math.max(0.1, sc.end - sc.start), 0, 1) * 100;
+      seg.style.width = `${pct.toFixed(2)}%`;
+    }
+
+    // Scene cross-dissolve envelopes
+    for (let i = 0; i < 7; i++) {
+      const el = document.getElementById(`scene-${i}`);
+      const sc = scenes[i];
+      if (!el || !sc) continue;
+      const fadeDur = 0.42;
+      let op = 0;
+      if (t >= sc.start - fadeDur && t <= sc.end + fadeDur) {
+        const fadeIn = i === 0 ? easeOutCubic(t / 0.55) : easeOutCubic((t - (sc.start - fadeDur * 0.5)) / fadeDur);
+        const fadeOut = i === scenes.length - 1 ? 1 : 1 - easeOutCubic((t - (sc.end - fadeDur * 0.5)) / fadeDur);
+        op = clamp(Math.min(fadeIn, fadeOut), 0, 1);
+      }
+      el.style.opacity = op.toFixed(4);
+      const subtleZoom = 0.992 + 0.008 * op;
+      el.style.transform = `scale(${subtleZoom.toFixed(4)})`;
+    }
+
+    // ---- Scene 01 Choreography (0.00 -> 26.87s) ----
+    if (t <= scenes[0].end + 0.6) {
+      applyReveal(document.getElementById("s1-eyebrow"), enterProgress(t, 0.15, 0.55), 18);
+      applyReveal(document.getElementById("s1-h1a"), enterProgress(t, 0.65, 0.65), 26);
+      applyReveal(document.getElementById("s1-h1b"), enterProgress(t, 3.25, 0.75), 28);
+      applyReveal(document.getElementById("s1-lead"), enterProgress(t, 4.10, 0.7), 20);
+
+      applyReveal(document.getElementById("s1-c0"), easeOutBack((t - 7.3) / 0.65), 32);
+      applyReveal(document.getElementById("s1-c1"), easeOutBack((t - 11.0) / 0.65), 32);
+      applyReveal(document.getElementById("s1-c2"), easeOutBack((t - 15.6) / 0.65), 32);
+      applyReveal(document.getElementById("s1-c3"), easeOutBack((t - 17.2) / 0.65), 32);
+
+      highlightCard(document.getElementById("s1-c1"), t >= 11.0 && t < 15.6 ? 1 : 0.25, "239, 68, 68");
+      highlightCard(document.getElementById("s1-c2"), t >= 15.6 && t < 19.4 ? 1 : 0.25, "239, 68, 68");
+
+      applyReveal(document.getElementById("s1-silo"), enterProgress(t, 19.5, 0.75), 26);
+    }
+
+    // ---- Scene 02 Choreography (26.87 -> 44.57s) ----
+    if (t >= scenes[1].start - 0.6 && t <= scenes[1].end + 0.6) {
+      const lt = t - scenes[1].start;
+      applyReveal(document.getElementById("s2-browser"), enterProgress(lt, 0.1, 0.8), 30, 0.965);
+      applyReveal(document.getElementById("s2-chips"), enterProgress(lt, 5.2, 0.7), 16);
+
+      const kpiStarts = [9.2, 10.6, 12.0, 13.4];
+      for (let k = 0; k < 4; k++) {
+        applyReveal(document.getElementById(`s2-k${k}`), easeOutBack((lt - kpiStarts[k]) / 0.65), 28);
+      }
+      const p1 = easeOutExpo((lt - 10.6) / 1.35);
+      const p2 = easeOutExpo((lt - 12.0) / 1.35);
+      document.getElementById("s2-v1").innerHTML = `${(1.0 + 1.56 * p1).toFixed(2)}&times;`;
+      document.getElementById("s2-v2").textContent = `${Math.round(71 * p2)}%`;
+    }
+
+    // ---- Scene 03 Choreography (44.57 -> 64.26s) ----
+    if (t >= scenes[2].start - 0.6 && t <= scenes[2].end + 0.6) {
+      const lt = t - scenes[2].start;
+      const nodeTimes = [4.0, 7.5, 12.2, 15.1, 17.5];
+      for (let n = 0; n < 5; n++) {
+        applyReveal(document.getElementById(`s3-n${n}`), enterProgress(lt, nodeTimes[n], 0.6), 18, 0.96);
+        applyReveal(document.getElementById(`s3-c${n}`), enterProgress(lt, nodeTimes[n] + 0.2, 0.6), 22);
+        if (n < 4) {
+          const edge = document.getElementById(`s3-e${n}`);
+          if (edge) edge.style.opacity = enterProgress(lt, nodeTimes[n] + 0.35, 0.45).toFixed(3);
+        }
+      }
+    }
+
+    // ---- Scene 04 Choreography (64.26 -> 94.34s) ----
+    if (t >= scenes[3].start - 0.6 && t <= scenes[3].end + 0.6) {
+      const lt = t - scenes[3].start;
+      applyReveal(document.getElementById("s4-left"), enterProgress(lt, 0.3, 0.7), 24);
+      for (let l = 0; l < 6; l++) {
+        applyReveal(document.getElementById(`s4-l${l}`), enterProgress(lt, 5.5 + l * 0.75, 0.52), 16);
+      }
+      applyReveal(document.getElementById("s4-right"), enterProgress(lt, 11.0, 0.75), 24);
+      applyReveal(document.getElementById("s4-ctrls"), enterProgress(lt, 11.4, 0.65), 18);
+      applyReveal(document.getElementById("s4-bars"), enterProgress(lt, 17.8, 0.65), 18);
+
+      const badBar = document.getElementById("s4-bar-bad");
+      const goodBar = document.getElementById("s4-bar-good");
+      const bp = easeOutExpo((lt - 18.2) / 1.4);
+      if (badBar) badBar.style.width = `${(100 * bp).toFixed(1)}%`;
+      if (goodBar) goodBar.style.width = `${(39 * easeOutExpo((lt - 19.4) / 1.4)).toFixed(1)}%`;
+
+      applyReveal(document.getElementById("s4-reg"), enterProgress(lt, 24.2, 0.7), 20);
+    }
+
+    // ---- Scene 05 Choreography (94.34 -> 111.78s) ----
+    if (t >= scenes[4].start - 0.6 && t <= scenes[4].end + 0.6) {
+      const lt = t - scenes[4].start;
+      const tileTimes = [3.2, 7.2, 10.2, 13.0];
+      for (let k = 0; k < 4; k++) {
+        const el = document.getElementById(`s5-t${k}`);
+        applyReveal(el, easeOutBack((lt - tileTimes[k]) / 0.65), 28, 0.96);
+        const active = lt >= tileTimes[k] && (k === 3 || lt < tileTimes[k + 1] + 0.4) ? 1 : 0.2;
+        highlightCard(el, active, k === 1 ? "16, 185, 129" : "56, 189, 248");
+      }
+    }
+
+    // ---- Scene 06 Choreography (111.78 -> 127.34s) ----
+    if (t >= scenes[5].start - 0.6 && t <= scenes[5].end + 0.6) {
+      const lt = t - scenes[5].start;
+      const wkTimes = [0.4, 1.8, 3.2, 4.6];
+      for (let w = 0; w < 4; w++) {
+        applyReveal(document.getElementById(`s6-w${w}`), easeOutBack((lt - wkTimes[w]) / 0.58), 24);
+      }
+      applyReveal(document.getElementById("s6-series"), enterProgress(lt, 6.6, 0.8), 28);
+    }
+
+    // ---- Scene 07 Choreography (127.34 -> 144.00s) ----
+    if (t >= scenes[6].start - 0.6) {
+      const lt = t - scenes[6].start;
+      applyReveal(document.getElementById("s7-c0"), easeOutBack((lt - 0.4) / 0.65), 28);
+      applyReveal(document.getElementById("s7-c1"), easeOutBack((lt - 2.6) / 0.65), 28);
+      applyReveal(document.getElementById("s7-c2"), easeOutBack((lt - 5.4) / 0.65), 28);
+
+      // Exact downbeat sync: "Solve once." (136.92s), "Govern cleanly." (137.94s), "Scale everywhere." (139.66s)
+      applyReveal(document.getElementById("s7-m0"), easeOutBack((t - 136.88) / 0.48), 22, 0.92);
+      applyReveal(document.getElementById("s7-m1"), easeOutBack((t - 137.90) / 0.48), 22, 0.92);
+      applyReveal(document.getElementById("s7-m2"), easeOutBack((t - 139.62) / 0.52), 22, 0.92);
+      applyReveal(document.getElementById("s7-url"), enterProgress(t, 140.45, 0.72), 20, 0.95);
+    }
+  };
+
+  // Render poster frame at t = 42.0s by default if opened directly in a browser
+  window.renderAt(42.0);
+</script>
+</body>
+</html>

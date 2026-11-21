@@ -8,6 +8,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "check:sanitized": "node scripts/check-sanitized.mjs",
+    "video:build": "node scripts/build-intro-video.mjs",
     "deploy:pages": "node scripts/deploy-gh-pages.mjs",
     "verify": "npm run check:sanitized && npm run docs:build"
   },
