@@ -23,9 +23,10 @@ export default defineConfig({
   },
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
-    ['link', { rel: 'icon', href: `${base}favicon.ico` }],
-      ['meta', { name: 'theme-color', content: '#0078d4' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg?v=2` }],
+    ['link', { rel: 'icon', sizes: '48x48 32x32 16x16', href: `${base}favicon.ico?v=2` }],
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: `${base}apple-touch-icon.png?v=2` }],
+    ['meta', { name: 'theme-color', content: '#0a2652' }],
     ['meta', { property: 'og:site_name', content: 'Enterprise Azure AI Playbooks' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
