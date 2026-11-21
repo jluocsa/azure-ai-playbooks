@@ -103,7 +103,7 @@ defineExpose({ playFromStart })
           <div class="ivs-actions">
             <a
               class="ms-btn ms-btn-secondary ivs-dl-btn"
-              :href="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4')"
+              :href="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4?v=2')"
               download="azure-ai-playbooks-csa-forum-intro.mp4"
             >
               <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
@@ -130,13 +130,13 @@ defineExpose({ playFromStart })
             @pause="isPlaying = false"
             @ended="isPlaying = false"
           >
-            <source :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.webm')" type="video/webm" />
-            <source :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4')" type="video/mp4" />
+            <source :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.webm?v=2')" type="video/webm" />
+            <source :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4?v=2')" type="video/mp4" />
             <track
               kind="captions"
               label="English (Synchronized Captions)"
               srclang="en"
-              :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.vtt')"
+              :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.vtt?v=2')"
               default
             />
             Your browser does not support HTML5 video.

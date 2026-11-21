@@ -1897,11 +1897,23 @@
       applyReveal(document.getElementById("s7-c1"), easeOutBack((lt - 2.6) / 0.65), 28);
       applyReveal(document.getElementById("s7-c2"), easeOutBack((lt - 5.4) / 0.65), 28);
 
-      // Exact downbeat sync: "Solve once." (136.92s), "Govern cleanly." (137.94s), "Scale everywhere." (139.66s)
-      applyReveal(document.getElementById("s7-m0"), easeOutBack((t - 136.88) / 0.48), 22, 0.92);
-      applyReveal(document.getElementById("s7-m1"), easeOutBack((t - 137.90) / 0.48), 22, 0.92);
-      applyReveal(document.getElementById("s7-m2"), easeOutBack((t - 139.62) / 0.52), 22, 0.92);
-      applyReveal(document.getElementById("s7-url"), enterProgress(t, 140.45, 0.72), 20, 0.95);
+      // Dynamic word-locked sync for closing triad ("Solve once." / "Govern cleanly." / "Scale everywhere.")
+      const s7Words = scenes[6].words || [];
+      const findWordStart = (target, fallback) => {
+        for (let i = s7Words.length - 1; i >= Math.max(0, s7Words.length - 10); i--) {
+          if (String(s7Words[i].text || "").toLowerCase().replace(/[^a-z]/g, "") === target) {
+            return s7Words[i].start - 0.04;
+          }
+        }
+        return fallback;
+      };
+      const tSolve = findWordStart("solve", 136.88);
+      const tGovern = findWordStart("govern", 137.90);
+      const tScale = findWordStart("scale", 139.62);
+      applyReveal(document.getElementById("s7-m0"), easeOutBack((t - tSolve) / 0.48), 22, 0.92);
+      applyReveal(document.getElementById("s7-m1"), easeOutBack((t - tGovern) / 0.48), 22, 0.92);
+      applyReveal(document.getElementById("s7-m2"), easeOutBack((t - tScale) / 0.52), 22, 0.92);
+      applyReveal(document.getElementById("s7-url"), enterProgress(t, tScale + 0.82, 0.72), 20, 0.95);
     }
   };
 

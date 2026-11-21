@@ -113,6 +113,14 @@ function findBrowser() {
   for (const c of winCandidates) {
     if (fs.existsSync(c)) return c
   }
+  const macCandidates = [
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
+    '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  ]
+  for (const c of macCandidates) {
+    if (fs.existsSync(c)) return c
+  }
   const unixCandidates = findExecutableOnPath(['google-chrome', 'microsoft-edge', 'chromium', 'chromium-browser'])
   if (unixCandidates) return unixCandidates
   throw new Error('Chromium/Chrome/Edge browser not found. Set BROWSER_PATH.')

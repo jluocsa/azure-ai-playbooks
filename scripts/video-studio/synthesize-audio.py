@@ -144,12 +144,13 @@ SCENES = [
             "Put Playbook Zero-One to work on your next cutover. "
             "Step up as a named Track Lead on Playbooks Two and Three. "
             "Or bring your own Customer-Zero breakthrough into the factory. "
-            "Solve once. Govern cleanly. Scale everywhere."
+            "Solve once, govern cleanly, scale everywhere."
         ),
     },
 ]
 
 CAPTION_REPLACEMENTS = [
+    (r"Solve once,\s*govern cleanly,\s*scale everywhere\.", "Solve once. Govern cleanly. Scale everywhere."),
     (r"\btwo-point-five-six-times\b", "2.56×"),
     (r"\bPlaybook Zero-One\b", "Playbook 01"),
     (r"\bPlaybooks Two and Three\b", "Playbooks 02 & 03"),
@@ -497,7 +498,7 @@ async def main() -> None:
 
     intro_lead = 0.80
     inter_scene_gap = 0.62
-    outro_hold = 2.20
+    outro_hold = 3.22
 
     cursor = intro_lead
     scene_records = []
