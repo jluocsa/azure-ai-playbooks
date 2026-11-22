@@ -6,6 +6,7 @@ const videoRef = ref<HTMLVideoElement | null>(null)
 const sectionRef = ref<HTMLElement | null>(null)
 const isPlaying = ref(false)
 const hasStarted = ref(false)
+const triedFallback = ref(false)
 
 function ensureAudible(el: HTMLVideoElement) {
   el.muted = false
@@ -17,12 +18,41 @@ function onTimeUpdate() {
   if (el && el.currentTime > 0.05) hasStarted.value = true
 }
 
+function onVideoError() {
+  const el = videoRef.value
+  if (!el) return
+  if (!triedFallback.value) {
+    triedFallback.value = true
+    const fallbackUrl = el.currentSrc.includes('.webm')
+      ? withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4?v=3')
+      : withBase('/video/azure-ai-playbooks-csa-forum-intro.webm?v=3')
+    const resumeTime = el.currentTime || 0
+    const shouldResume = hasStarted.value
+    el.src = fallbackUrl
+    el.load()
+    if (shouldResume) {
+      el.currentTime = resumeTime
+      ensureAudible(el)
+      el.play().catch(() => {
+        isPlaying.value = false
+        hasStarted.value = false
+      })
+    }
+    return
+  }
+  isPlaying.value = false
+  hasStarted.value = false
+}
+
 function playWithSound() {
   const el = videoRef.value
   if (!el) return
   hasStarted.value = true
   ensureAudible(el)
-  el.play().catch(() => {})
+  el.play().catch(() => {
+    isPlaying.value = false
+    hasStarted.value = false
+  })
 }
 
 function playFromStart() {
@@ -31,7 +61,10 @@ function playFromStart() {
   hasStarted.value = true
   ensureAudible(el)
   el.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  el.play().catch(() => {})
+  el.play().catch(() => {
+    isPlaying.value = false
+    hasStarted.value = false
+  })
 }
 
 onMounted(() => {
@@ -65,7 +98,7 @@ defineExpose({ playFromStart })
           <div class="ivs-actions">
             <a
               class="ms-btn ms-btn-secondary ivs-dl-btn"
-              :href="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4?v=2')"
+              :href="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4?v=3')"
               download="azure-ai-playbooks-csa-forum-intro.mp4"
             >
               <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
@@ -86,19 +119,26 @@ defineExpose({ playFromStart })
             controls
             playsinline
             preload="metadata"
-            :poster="withBase('/video/azure-ai-playbooks-csa-forum-intro-poster.png')"
+            :poster="withBase('/video/azure-ai-playbooks-csa-forum-intro-poster.png?v=3')"
             @timeupdate="onTimeUpdate"
             @play="isPlaying = true; hasStarted = true"
             @pause="isPlaying = false"
             @ended="isPlaying = false"
+            @error="onVideoError"
           >
-            <source :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.webm?v=2')" type="video/webm" />
-            <source :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4?v=2')" type="video/mp4" />
+            <source
+              :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.mp4?v=3')"
+              type='video/mp4; codecs="avc1.64002a, mp4a.40.2"'
+            />
+            <source
+              :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.webm?v=3')"
+              type='video/webm; codecs="vp9, opus"'
+            />
             <track
               kind="captions"
               label="English (Synchronized Captions)"
               srclang="en"
-              :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.vtt?v=2')"
+              :src="withBase('/video/azure-ai-playbooks-csa-forum-intro.vtt?v=3')"
               default
             />
             Your browser does not support HTML5 video.

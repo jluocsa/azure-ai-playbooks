@@ -9,8 +9,8 @@ Built with [VitePress](https://vitepress.dev/), enforced by an automated pre-pub
 ## CSA Forum Introduction Film (2:24 · 1080p HD with Studio Voiceover)
 
 <video controls playsinline preload="metadata" poster="./docs/public/video/azure-ai-playbooks-csa-forum-intro-poster.png" width="100%">
-  <source src="./docs/public/video/azure-ai-playbooks-csa-forum-intro.webm" type="video/webm" />
-  <source src="./docs/public/video/azure-ai-playbooks-csa-forum-intro.mp4" type="video/mp4" />
+  <source src="./docs/public/video/azure-ai-playbooks-csa-forum-intro.mp4" type='video/mp4; codecs="avc1.64002a, mp4a.40.2"' />
+  <source src="./docs/public/video/azure-ai-playbooks-csa-forum-intro.webm" type='video/webm; codecs="vp9, opus"' />
   <a href="https://jluocsa.github.io/azure-ai-playbooks/#csa-forum-video" title="Watch the 2:24 CSA Forum Studio Introduction Film with Voiceover, Chapters & Captions">
     <img src="./docs/public/video/readme-video-card.png" alt="Watch the 2:24 CSA Forum Studio Introduction Film (1080p HD with Voiceover, Score & Synchronized Captions)" width="100%" />
   </a>
