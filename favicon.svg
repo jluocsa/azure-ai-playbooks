@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Enterprise Azure AI Playbooks">
+  <defs>
+    <!-- Deep Sapphire-to-Foundry-Indigo Jewel Base -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#05152e"/>
+      <stop offset="50%" stop-color="#0a2652"/>
+      <stop offset="100%" stop-color="#20144d"/>
+    </linearGradient>
+
+    <!-- Studio Key-Light Ambient Wash -->
+    <radialGradient id="aura" cx="32%" cy="20%" r="76%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.46"/>
+      <stop offset="52%" stop-color="#2563eb" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#05152e" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Specular Jewel Bezel (pops on both light & dark browser tabs) -->
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.95"/>
+      <stop offset="48%" stop-color="#0284c7" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <!-- 3D Isometric Foundry Prism Facets -->
+    <linearGradient id="facetTop" x1="0" y1="0" x2="1" y2="0.75">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="42%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="facetLeft" x1="0" y1="0" x2="0.75" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="52%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="facetRight" x1="0.2" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <!-- Inner Core Bloom -->
+    <radialGradient id="coreBloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.55"/>
+      <stop offset="68%" stop-color="#6366f1" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#05152e" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Radiant AI Core Star -->
+    <linearGradient id="aiStar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f0f9ff"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Edge-to-Edge Jewel Squircle -->
+  <rect width="64" height="64" rx="14.5" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="14.5" fill="url(#aura)"/>
+  <rect x="1" y="1" width="62" height="62" rx="13.5" fill="none" stroke="url(#rim)" stroke-width="2"/>
+
+  <!-- 3-Faceted Isometric Foundry Hexagonal Ring (seam-overlapped for zero anti-alias gaps) -->
+  <!-- Right Violet-Indigo Pillar -->
+  <path d="M54.4 19.1 L54.4 44.9 L31.7 57.8 L31.7 46.3 L44.5 39.0 L44.5 24.6 Z" fill="url(#facetRight)"/>
+  <!-- Left Cyan-Azure Pillar -->
+  <path d="M9.6 19.1 L19.8 24.6 L19.8 39.0 L32.2 46.3 L32.2 57.8 L9.6 44.9 Z" fill="url(#facetLeft)"/>
+  <!-- Top Ice-Cyan Crown -->
+  <path d="M32 6.2 L54.4 19.1 L44.5 24.9 L32 17.7 L19.5 24.9 L9.6 19.1 Z" fill="url(#facetTop)"/>
+
+  <!-- Crisp Specular Ridge Highlights -->
+  <path d="M9.8 19.1 L32 6.3 L54.2 19.1" fill="none" stroke="#ffffff" stroke-opacity="0.65" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19.5 24.9 L32 17.7 L44.5 24.9" fill="none" stroke="#bae6fd" stroke-opacity="0.45" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Central Chamber Halo + Bold 4-Point AI Star -->
+  <circle cx="32" cy="32" r="14.5" fill="url(#coreBloom)"/>
+  <path d="M32 18.8 C33.85 26.85 37.15 30.15 45.2 32 C37.15 33.85 33.85 37.15 32 45.2 C30.15 37.15 26.85 33.85 18.8 32 C26.85 30.15 30.15 26.85 32 18.8 Z" fill="url(#aiStar)"/>
+</svg>
